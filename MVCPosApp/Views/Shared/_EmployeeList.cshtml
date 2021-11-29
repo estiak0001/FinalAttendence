@@ -1,0 +1,90 @@
+﻿@model BusinessLogic.Repository.ProductIndexView
+
+<div class="card-body pb-0">
+    <div class="row d-flex align-items-stretch" id="parentCard" onclick="getID(event)">
+        @{
+            if (Model != null)
+            {
+                foreach (var emp in Model.PaginatedEmployee())
+                {
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                        <div class="card bg-light">
+                            @*<div class="card-header text-muted border-bottom-0" style="background-color: whitesmoke;">
+                                    <label id="empId">ID# @emp.EmployeeID</label>
+                                </div>*@
+                            <div class="card-body pt-1" style="font-size:10px; padding:0px">
+                                <div class=" text-center">
+                                    <img src="@Url.Content(@emp.PhotoUrl)" alt="" class="img-circle img-fluid" />
+                                    <p style="text-overflow: ellipsis; display: block; width: 100%; overflow: hidden; white-space: nowrap; padding: 5px;" class="lead"><b>@emp.EmployeeName</b></p>
+                                </div>
+                                @*<ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class=""><span class="fa-li"><i class="fas fa-id-card"></i></span> @emp.EmployeeID </li>
+                                        <li class=""><span class="fa-li"><i class="fas fa-building"></i></span> @emp.DepartmentCode </li>
+                                    </ul>*@
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-left">
+                                    <a href="@Url.Action("AddOrEditEmployee", "Employee", new { empID = emp.EmployeeID })" style="font-size:10px" class="btn btn-sm btn-info">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @*<a href="#" style="font-size:5px" class="btn btn-sm bg-teal">
+                                            <i class="fas fa-download"></i>
+                                        </a>*@
+                                    <a href='@Url.Action("Index", "Dashboard", new { empID = emp.EmployeeID })' style="font-size:10px" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-user"></i>
+                                    </a>
+                                    @*<a href='@Url.Action("Index", "Dashboard", new { empID = emp.EmployeeID })' style="font-size:10px" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<!-- /.card-body -->
+<div class="card-footer">
+    <nav aria-label="Contacts Page Navigation">
+        @if (Model.Pager.EndPage > 1)
+        {
+            <ul class="pagination justify-content-center m-0">
+                @if (Model.Pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="~/Employee/Index">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="~/Employee/Index?page=@(Model.Pager.CurrentPage - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+
+                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    <li class="@(page == Model.Pager.CurrentPage ? "page-item active" : "page-item")">
+                        <a class="page-link" href="~/Employee/Index?page=@page">@page</a>
+                    </li>
+                }
+
+                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="~/Employee/Index?page=@(Model.Pager.CurrentPage + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="~/Employee/Index?page=@(Model.Pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </nav>
+</div>
+<!-- /.card-footer -->

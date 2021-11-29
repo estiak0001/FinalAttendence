@@ -1,0 +1,160 @@
+﻿@model BusinessLogic.Repository.Model_UserInfo
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/LoginDesign2/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/LoginDesign2/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/LoginDesign2/css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="~/LoginDesign2/css/style.css">
+
+    <title>Login</title>
+</head>
+<body>
+
+    <style>
+        .validation-summary-errors {
+            font-size: small;
+            color: coral;
+        }
+    </style>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/LoginDesign2/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            @*<div class="mb-4">
+                                <img src="~/LoginDesign/img/Infosyssss Logo 2020-01.png" class="img-circle" style="width: 100%;"/>
+                            </div>*@
+                            <div class="mb-4">
+                                <h3 style="text-align: center;">Sign In</h3>
+                            </div>
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken();
+                                @Html.ValidationSummary(true)
+                                <form action="#" method="post">
+
+                                    <div class="form-group first">
+                                        <h6 for="usernames">Username</h6>
+                                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", @type = "text", @name = "username", @style = "background: white; border-radius: 10px;padding: 10px;" })
+                                    </div>
+                                    <div class="form-group last mb-4">
+                                        <h6 for="passwords">Password</h6>
+                                        @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control", @type = "password", @name = "pass", @style = "background: white; border-radius: 10px;padding: 10px;" })
+                                    </div>
+
+                                    <div class="d-flex mb-5 align-items-center">
+                                        <label class="control control--checkbox mb-0">
+                                            <span class="caption">Remember me</span>
+                                            <input type="checkbox" />
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                        <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
+                                    </div>
+                                    <input type="submit" class="btn btn-block btn-primary" value="Login">
+
+                                    @*<span class="d-block text-left my-4 text-muted">&mdash; or login with &mdash;</span>*@
+                                </form>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/LoginDesign2/js/jquery-3.3.1.min.js"></script>
+    <script src="~/LoginDesign2/js/popper.min.js"></script>
+    <script src="~/LoginDesign2/js/bootstrap.min.js"></script>
+    <script src="~/LoginDesign2/js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Login</title>
+        <link href="~/LoginDesign/css/style.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <img class="wave" src="~/LoginDesign/img/wave.png">
+        <div class="container">
+            <div class="img">
+                <img src="~/LoginDesign/img/avater2nd.svg" />
+            </div>
+            <div class="login-content">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true)
+                <form method="post">
+                    <img src="~/LoginDesign/img/Infosys Logo 2020-01.png" class="img-circle" style="padding: 25px;" />
+                    <h3 class="title">Welcome</h3>
+                    <div class="input-div one" style="font-size:11px">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="div">
+                            <h5>Username</h5>
+                            @Html.TextBoxFor(model => model.username, new { @class = "input", @type = "text", @name = "username" })
+                        </div>
+                    </div>
+                    <div class="input-div pass" style="font-size:11px">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="div">
+                            <h5>Password</h5>
+                            @Html.PasswordFor(model => model.UserPassword, new { @class = "input", @type = "password", @name = "pass" })
+                        </div>
+                    </div>
+                    <a href="#">Forgot Password?</a>
+                    <input type="submit" class="btn" value="Login">
+                </form>
+                }
+                </div>
+        </div>
+
+
+        <script src="~/LoginDesign/js/main.js"></script>
+    </body>
+    </html>*@
+
+

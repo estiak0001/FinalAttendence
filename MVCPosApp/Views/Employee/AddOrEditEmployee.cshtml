@@ -1,0 +1,1409 @@
+﻿@model BusinessLogic.Repository.Model_GaneranAndOfficialEmployee
+@{
+    ViewBag.Title = "AddOrEditEmployee";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- Estiak -->
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+    textarea {
+        width: 100% !important;
+    }
+
+    .RedText {
+        color: red;
+    }
+
+    .field-validation-error {
+        color: red !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    /*    label {
+        color: #099269;
+    }*/
+
+    .row {
+        padding: 6px;
+    }
+
+    .btn-primary {
+        color: #fff !important;
+        background-color: #20c997 !important;
+        border-color: #20c997 !important;
+    }
+
+    #validationTxt {
+        color: red;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #556080;
+        border-color: #556080;
+        box-shadow: none;
+    }
+
+    button, input {
+        overflow: hidden;
+    }
+
+    .select2-selection--single {
+        color: #939ba2;
+        line-height: 28px;
+    }
+
+    .image-upload > input {
+        display: none;
+    }
+
+    .image-upload i {
+        cursor: pointer;
+    }
+    /*    .form-control:focus {
+            background: #fffeed;
+            box-shadow: 5px 10px ;
+        }
+    */
+    .select2-results {
+        display: block;
+        background-color: #fffeed;
+    }
+
+    input {
+        width: 100%;
+        height: 25px;
+        text-indent: 5px;
+        font-size: 12.6pt;
+        border-radius: 5px;
+        border: solid 1.5px #D3D3D3;
+        -webkit-transition: 1s; /* Safari */
+        transition: 1s;
+    }
+
+        input[type=text]:hover {
+            box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+            background: #fffeed;
+        }
+
+        input[type=text]:focus {
+            box-shadow: 0 0 5pt 2pt #D3D3D3;
+            outline-width: 0px;
+            background: #fffeed;
+        }
+
+    .select2-selection:focus {
+        box-shadow: 0 0 5pt 2pt #D3D3D3;
+        background: #fffeed;
+    }
+
+    data-val-required {
+        color: brown;
+    }
+
+    .user {
+        width: 140px;
+        height: 140px;
+        border-radius: 100%;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 0 8px 3px #B8B8B8;
+        position: relative;
+    }
+
+        .user img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+    .sign {
+        width: 100%;
+        height: 70px;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 0 8px 3px #B8B8B8;
+        position: relative;
+    }
+
+        .sign img {
+            height: 100%;
+            width: 100%;
+            border: 2px solid;
+        }
+
+    label.icon {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        background: #e2e2e2;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+        text-align: center;
+        color: #0000ff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    label.icon2 {
+        position: absolute;
+        top: 2px;
+        right: 0;
+        background: #e2e2e2;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+        text-align: center;
+        color: #0000ff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .card-body {
+        padding: 2px!important;
+    }
+    #lnkID {
+        /*color: blue;*/
+        cursor: pointer;
+        font-style: normal;
+    }
+    #lnkIDDelete {
+        /*color: blue;*/
+        cursor: pointer;
+        font-style: normal;
+        color: chocolate;
+    }
+    .tdclass {
+        text-align:center;
+    }
+
+    .lavelformat {
+        padding-left: 3px;
+    }
+    .inpurformat{
+        padding-left:0px;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+        background-color: transparent;
+    }
+    
+</style>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("AddOrEditEmployee", "Employee", FormMethod.Post, new { id = "myForm", enctype = "multipart/form-data" }))
+                {
+                    
+                <div class="container">
+                    <div style="margin-bottom: 4px;" class="card shadow-lg bg-white">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-m-5">
+                                            <div class="user">
+                                                @if (String.IsNullOrEmpty(@Model.general.PhotoUrl))
+                                                {
+                                                    <img class="main-profile-img" src="~/EmpImage/default.png" id="imgPreview" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="main-profile-img" src="@Url.Content(@Model.general.PhotoUrl)" id="imgPreview" />
+                                                }
+
+                                                <div class="image-upload ">
+                                                    <label class="icon" for="ImageBroswer"><i class="fa fa-edit"></i></label>
+                                                    @Html.TextBoxFor(model => model.general.Photo, new { @id = "ImageBroswer", @type = "file", @style = "background-color: #f4d47821;" })
+                                                </div>
+                                            </div>
+                                            @*<div class="text-center" style="font-size:10px">
+                                                @Html.ValidationMessageFor(model => model.Photo, string.Empty, new { id = "validationTxt" })
+                                            </div>*@
+                                        </div>
+                                        <div class="col-md-7" style="margin-top: 44px; padding-left: 30px;">
+                                            <h4 class="lead">@Model.EmployeeFullName</h4>
+                                            <h6>@Model.designationNAme</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow-lg rounded bg-white card-primary card-tabs">
+                        <div class="p-0 pt-1" style="background-color:cadetblue">
+                            <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">General Information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-one-contact-tab" data-toggle="pill" href="#custom-tabs-one-contact" role="tab" aria-controls="custom-tabs-one-contact" aria-selected="false">Contact Information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Official Information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Reference Info</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-one-tabContent">
+                                <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                    <section class="content">
+                                        <div class="container-fluid">
+                                            <div class="card-body">
+                                                @using (Html.BeginForm("AddOrEditEmployee", "Employee", FormMethod.Post, new { id = "myForm", enctype = "multipart/form-data" }))
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div>
+                                                                <div class="">
+                                                                    <div class="row">
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Company</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.DropDownListFor(model => model.CompanyCode, (SelectList)ViewBag.LoadCompany, "---- Select Company ----", new { @class = "selectpicker inpurformat", @id = "ddlCompany1" })
+                                                                            @Html.ValidationMessageFor(model => model.CompanyCode)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Employee ID</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.EmployeeID, new { @id = "txtEmployeeID", @class = "form-control inpurformat", @placeholder = "Employee ID", })
+                                                                            @Html.ValidationMessageFor(model => model.EmployeeID)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">First Name</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.FirstName, new { @id = "txtFirstName", @placeholder = "First Name", @class = "form-control inpurformat" })
+                                                                            @Html.ValidationMessageFor(model => model.general.FirstName)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Last Name</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.LastName, new { @id = "txtLastName", @class = "form-control inpurformat", @placeholder = "Last Name" })
+                                                                            @Html.ValidationMessageFor(model => model.general.LastName)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Father's Name</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.FatherName, new { @id = "txtFatherName", @class = "form-control inpurformat", @placeholder = "Father Name" })
+                                                                            @Html.ValidationMessageFor(model => model.general.FatherName)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Mother's Name</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.MotherName, new { @id = "txtMotherName", @class = "form-control inpurformat", @placeholder = "Mother Name" })
+                                                                            @Html.ValidationMessageFor(model => model.general.MotherName)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label for="inputName"  class="lavelformat"> Date Of Birth</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.DateOfBirthOrginal, new { @id = "txtDateOfBirthOrginal", @class = "EmpBirthDate form-control inpurformat", @placeholder = "Date of Birth" })
+                                                                            @Html.ValidationMessageFor(model => model.general.DateOfBirthOrginal)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Place Of Birth</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.PlaceOfBirth, new { @id = "txtPlaceOfBirth", @class = "form-control inpurformat", @placeholder = "Place of Birth" })
+                                                                            @Html.ValidationMessageFor(model => model.general.PlaceOfBirth)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Gender</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.DropDownListFor(model => model.general.SexCode, (SelectList)ViewBag.Sex, "---- Select Gender----", new { @class = "selectpicker" })
+                                                                            @Html.ValidationMessageFor(model => model.general.SexCode)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Blood Group</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.DropDownListFor(model => model.general.BloodGroupCode, (SelectList)ViewBag.BloodGroup, "---- Select Blood Group ----", new { @class = "selectpicker" })
+                                                                            @Html.ValidationMessageFor(model => model.general.BloodGroupCode)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Nationality</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.DropDownListFor(model => model.general.NationalityCode, (SelectList)ViewBag.LoadNationality, "----Nationality----", new { @class = "selectpicker" })
+                                                                            @Html.ValidationMessageFor(model => model.general.NationalityCode)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> National ID</label>
+                                                                            <span class="RedText">*</span>
+                                                                            @Html.TextBoxFor(model => model.general.NationalIDNO, new { @id = "txtNationalID", @class = "form-control inpurformat", @placeholder = "Enter National ID" })
+                                                                            @Html.ValidationMessageFor(model => model.general.NationalIDNO)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName"> Religion</label>
+                                                                            <span class="RedText"></span>
+                                                                            @Html.DropDownListFor(model => model.general.ReligionCode, (SelectList)ViewBag.Religion, "---- Select Religion ----", new { @class = "selectpicker" })
+                                                                            @Html.ValidationMessageFor(model => model.general.NationalityCode)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Marrital Status</label>
+                                                                            <span class="RedText"></span>
+                                                                            @Html.DropDownListFor(model => model.general.MaritalStatusCode, (SelectList)ViewBag.MaritalStatus, "----Marital Status----", new { @class = "selectpicker", @id="ddlMaritalStatus" })
+                                                                            @Html.ValidationMessageFor(model => model.general.MaritalStatusCode)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Personal Phone</label>
+                                                                            <span class="RedText"></span>
+                                                                            @Html.TextBoxFor(model => model.general.Telephone, new { @id = "txtMobileNo", @class = "form-control inpurformat", @placeholder = "Enter Personal Phone" })
+                                                                            @Html.ValidationMessageFor(model => model.general.Telephone)
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Personal Email</label>
+                                                                            <span class="RedText"></span>
+                                                                            @Html.TextBoxFor(model => model.general.PersonalEmail, new { @id = "txtEmail", @class = "form-control inpurformat", @placeholder = "Enter Personal Email", @type = "email" })
+                                                                            @Html.ValidationMessageFor(model => model.general.NationalityCode)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label class="lavelformat" for="inputName">Digital Signature</label>
+                                                                            <div class="sign">
+                                                                                @if (String.IsNullOrEmpty(@Model.general.SignatureImageUrl))
+                                                                                {
+                                                                                    <img class="" src="" id="imgPreview2" />
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <img class="" src="@Url.Content(@Model.general.SignatureImageUrl)" id="imgPreview2" />
+                                                                                }
+                                                                                <div class="image-upload ">
+                                                                                    <label class="icon2" for="ImageBroswer2"><i class="fa fa-edit"></i></label>
+                                                                                    @Html.TextBoxFor(model => model.general.Photo2, new { @id = "ImageBroswer2", @type = "file", @style = "background-color: #f4d47821;" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <a class="btn btn-info float-right" style="margin-left:5px" id="addoredit" href="@Url.Action("AddOrEditEmployee", "Employee")"><i class="fa fa-plus pr-2"></i> New</a>
+                                                        <a href='@Url.Action("Index", "Employee")' style="margin-left:5px" class="btn btn-dark float-right"><i class="fas fa-arrow-alt-circle-up">  Back To List</i></a>
+                                                        <button type="submit" style="margin-left:5px" id="btnSubmit" value="Save" class="btn btn-success float-right">Save</button>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-one-contact" role="tabpanel" aria-labelledby="custom-tabs-one-contact-tab">
+                                    @using (Html.BeginForm("AddOrEditEmployeeContactInfo", "Employee", FormMethod.Post, new { id = "myForm5", enctype = "multipart/form-data" }))
+                                    {
+                                        <div>
+                                            <div class="shadow-lg bg-white rounded">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label class="lavelformat" style="" for="inputName">Employee Id</label>
+                                                        <span class="RedText">*</span>
+                                                        @Html.DropDownListFor(model => model.EmployeeID, (SelectList)ViewBag.LoadEmployee, "---- Select Employee----", new { @class = "selectpicker", @id = "ddlEmpID9", @onchange = "GetEmployeeInfo4()" })
+                                                        @Html.ValidationMessageFor(model => model.EmployeeID)
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Employee Name</label>
+                                                        @Html.TextBoxFor(model => model.EmployeeFullName, new { @id = "lblEmployeeName", @class = "form-control inpurformat", @placeholder = "Employee Name", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Designation</label>
+                                                        @Html.TextBoxFor(model => model.designationNAme, new { @id = "lblDesignation", @class = "form-control inpurformat", @placeholder = "Designation", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Department</label>
+                                                        @Html.TextBoxFor(model => model.DepartmentName, new { @id = "lblDepartment", @class = "form-control inpurformat", @placeholder = "Department", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p style="margin: 5px; color: darkblue">Parmanent Address</p>
+                                            <hr style="margin: 0px;" />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Address</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.ParmanentAddress, new { @id = "txtPermanentAddress", @class = "form-control inpurformat", @placeholder = "Enter Address" })
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentAddress)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Post Office</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.ParmanentPostOffice, new { @id = "txtPermanentPostOffice", @class = "form-control inpurformat", @placeholder = "Enter Post Office" })
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentPostOffice)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Thana</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.ParmanentThana, new { @id = "txtPermanentThana", @class = "form-control inpurformat", @placeholder = "Enter Thana" })
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentThana)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Post Code</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.ParmanentPostCode, new { @id = "txtPermanentPC", @class = "form-control inpurformat", @placeholder = "Enter Post Code" })
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentPostCode)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">District</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.contact.ParmanentDistrict, (SelectList)ViewBag.District, "----Select District----", new { @class = "selectpicker", @id = "ddlDistrict" })
+                                                    
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentDistrict)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Phone</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.ParmanentPhone, new { @id = "txtPermanentPhone", @class = "form-control inpurformat", @placeholder = "Enter Phone" })
+                                                    @Html.ValidationMessageFor(model => model.contact.ParmanentPhone)
+                                                </div>
+                                            </div>
+                                            <p style="margin: 5px; color: darkblue">Present Address</p>
+                                            <hr style="margin: 0px;" />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Address</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.PresentAddress, new { @id = "txtPresentAddress", @class = "form-control inpurformat", @placeholder = "Enter Address" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentAddress)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Post Office</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.PresentPostOffice, new { @id = "txtPresentPostOffice", @class = "form-control inpurformat", @placeholder = "Enter Post Office" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentPostOffice)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Thana</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.PresentThana, new { @id = "txtPresentThana", @class = "form-control inpurformat", @placeholder = "Enter Thana" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentThana)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Post Code</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.PresentPostCode, new { @id = "txtPresentPC", @class = "form-control inpurformat", @placeholder = "Enter Post Code" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentPostCode)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">District</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.contact.PresentDistrict, (SelectList)ViewBag.District, "----Select District----", new { @class = "selectpicker", @id = "ddlPresentDistrict" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentDistrict)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Phone</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.PresentPhone, new { @id = "txtPresentPhone", @class = "form-control inpurformat", @placeholder = "Enter Phone" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentPhone)
+                                                </div>
+                                            </div>
+                                            <p style="margin: 5px; color: darkblue">Emergency Contact-1</p>
+                                            <hr style="margin: 0px;" />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Name</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactName1, new { @id = "txtEmContactName1", @class = "form-control inpurformat", @placeholder = "Enter Name" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactName1)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Relation</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactRelation1, new { @id = "txtEmContactRelation1", @class = "form-control inpurformat", @placeholder = "Enter Relation" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactRelation1)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Address</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactAddress1, new { @id = "txtEmContactAddress1", @class = "form-control inpurformat", @placeholder = "Enter Address" })
+                                                    @Html.ValidationMessageFor(model => model.contact.PresentThana)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Phone</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactPhone1, new { @id = "txtEmContactPhone1", @class = "form-control inpurformat", @placeholder = "Enter Phone" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactPhone1)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Email</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactEmail, new { @id = "txtEmContactEmail1", @class = "form-control inpurformat", @placeholder = "Enter Email" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactEmail)
+                                                </div>
+                                            </div>
+                                            <p style="margin: 5px; color: darkblue">Emergency Contact-2</p>
+                                            <hr style="margin: 0px;" />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Name</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactName2, new { @id = "txtEmContactName2", @class = "form-control inpurformat", @placeholder = "Enter Name" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactName1)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Relation</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactRelation2, new { @id = "txtEmContactRelation2", @class = "form-control inpurformat", @placeholder = "Enter Relation" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactRelation1)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Address</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactAddress2, new { @id = "txtEmContactAddress2", @class = "form-control inpurformat", @placeholder = "Enter Address" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactAddress2)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Phone</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactPhone2, new { @id = "txtEmContactPhone2", @class = "form-control inpurformat", @placeholder = "Enter Phone" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactPhone2)
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="lavelformat" for="inputName">Email</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.contact.EmContactEmai2, new { @id = "txtEmContactEmail2", @class = "form-control inpurformat", @placeholder = "Enter Email" })
+                                                    @Html.ValidationMessageFor(model => model.contact.EmContactEmai2)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <a class="btn btn-info float-right" style="margin-left:5px" id="addoredit" href="@Url.Action("AddOrEditEmployee", "Employee")"><i class="fa fa-plus pr-2"></i> New</a>
+                                                <a href='@Url.Action("Index", "Employee")' style="margin-left:5px" class="btn btn-dark float-right"><i class="fas fa-arrow-alt-circle-up">  Back To List</i></a>
+                                                <button type="submit" style="margin-left:5px" @*id="btnSubmit3"*@ value="Save" class="btn btn-success float-right">Save</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                                    @using (Html.BeginForm("AddOrEditEmployeeOfficialInfo", "Employee", FormMethod.Post, new { id = "myForm2", enctype = "multipart/form-data" }))
+                                    {
+                                        <div>
+                                            <div class="shadow-lg bg-white rounded">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label class="lavelformat" style="" for="inputName">Employee Id</label>
+                                                        <span class="RedText">*</span>
+                                                        @Html.DropDownListFor(model => model.EmployeeID, (SelectList)ViewBag.LoadEmployee, "---- Select Employee----", new { @class = "selectpicker", @id = "ddlEmpID", @onchange = "GetEmployeeInfo()" })
+                                                        @Html.ValidationMessageFor(model => model.EmployeeID)
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Employee Name</label>
+                                                        @Html.TextBoxFor(model => model.EmployeeFullName, new { @id = "lblEmployeeName", @class = "form-control inpurformat", @placeholder = "Employee Name", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Designation</label>
+                                                        @Html.TextBoxFor(model => model.designationNAme, new { @id = "lblDesignation", @class = "form-control inpurformat", @placeholder = "Designation", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="lavelformat" style="" for="inputName">Department</label>
+                                                        @Html.TextBoxFor(model => model.DepartmentName, new { @id = "lblDepartment", @class = "form-control inpurformat", @placeholder = "Department", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Company</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.CompanyCode, (SelectList)ViewBag.LoadCompany, "---- Select Company----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.CompanyCode)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Branch</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.BranchCode, (SelectList)ViewBag.LoadBranch, "---- Select Branch----", new { @class = "selectpicker" })
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Department</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.DepartmentCode, (SelectList)ViewBag.LoadDepartment, "---- Select Department----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.DepartmentCode)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Designation</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.DesignationCode, (SelectList)ViewBag.LoadDesignation, "---- Select Designation----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.DesignationCode)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Employee Type</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.EmpTypeCode, (SelectList)ViewBag.LoadEmpType, "---- Select Type----", new { @class = "selectpicker" })
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Employment Nature</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.EmploymentNatureId, (SelectList)ViewBag.LoadEmpNature, "---- Select Emmployee Nature----", new { @class = "selectpicker2" })
+                                                    @Html.ValidationMessageFor(model => model.EmploymentNatureId)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Grade No</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.GradeCode, (SelectList)ViewBag.Grade, "---- Select Grade No ----", new { @class = "selectpicker2" })
+                                                    @Html.ValidationMessageFor(model => model.GradeCode)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Gross Salary</label>
+                                                    <div class="input-group mb-3">
+                                                        @Html.TextBoxFor(model => model.GrossSalary, new { @id = "txtGrossSalary", @type = "text", @class = "form-control inpurformat", @placeholder = "Enter Gross Salary" })
+                                                        <div class="input-group-append">
+                                                            @Html.DropDownListFor(model => model.CurrencyCode, (SelectList)ViewBag.Currency, "Currency", new { @class = "form-control inpurformat" })
+                                                        </div>
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.GrossSalary)
+                                                    @Html.ValidationMessageFor(model => model.CurrencyCode)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Payment Period</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.PaymentPeriodID, (SelectList)ViewBag.PeriodList, "---- Select Period----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.PaymentPeriodID)
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Shift</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.ShiftCode, (SelectList)ViewBag.LoadShift, "---- Select Shift ----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.ShiftCode)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Immediate Supervisor</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.ReportingTo, (SelectList)ViewBag.LoadReportingTo, "---- Select Reporting To ----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.ReportingTo)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Head of Department</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.DropDownListFor(model => model.HOD, (SelectList)ViewBag.LoadHOD, "---- Select HOD ----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.HOD)
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Official Phone</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.MobileNo, new { @id = "txtMobileNO", @class = "form-control inpurformat", @placeholder = "Mobile No." })
+                                                    @Html.ValidationMessageFor(model => model.MobileNo)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Official Email</label>
+                                                    <span class="RedText"></span>
+                                                    @Html.TextBoxFor(model => model.Email, new { @id = "txtEmail", @class = "form-control inpurformat", @placeholder = "Email", @type = "email" })
+                                                    @Html.ValidationMessageFor(model => model.Email)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">	Employee Status</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.EmployeeStatus, (SelectList)ViewBag.LoadEmpStatus, "---- Select Status ----", new { @class = "selectpicker" })
+                                                    @Html.ValidationMessageFor(model => model.EmployeeStatus)
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Joining Date</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.TextBoxFor(model => model.JoiningDate, new { @id = "txtJoiningDate", @class = "JoiningDate form-control inpurformat", @placeholder = "Enter Joining Date" })
+                                                    @Html.ValidationMessageFor(model => model.JoiningDate)
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="lavelformat" for="inputName">Probation Period</label>
+                                                    <div class="input-group mb-3">
+                                                        @Html.TextBoxFor(model => model.ProbationPeriod, new { @id = "txPaymentPeriod", @class = "form-control inpurformat", @placeholder = "Enter Probation Period", @type="number" })
+                                                        <div class="input-group-append">
+                                                            @Html.DropDownListFor(model => model.ProbationPeriodType, (SelectList)ViewBag.PeriodList, "Period", new { @class = "form-control inpurformat" })
+                                                        </div>
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.ProbationPeriod)
+                                                    @Html.ValidationMessageFor(model => model.ProbationPeriodType)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <a class="btn btn-info float-right" style="margin-left:5px" id="addoredit" href="@Url.Action("AddOrEditEmployee", "Employee")"><i class="fa fa-plus pr-2"></i> New</a>
+                                            <a href='@Url.Action("Index", "Employee")' style="margin-left:5px" class="btn btn-dark float-right"><i class="fas fa-arrow-alt-circle-up">  Back To List</i></a>
+                                            <button type="submit" style="margin-left:5px" id="btnSubmit" value="Save" class="btn btn-success float-right">Save</button>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
+                                    <div style="padding-top: 2px;">
+                                        <div class="shadow-sm" style="background-color:#fff">
+                                            <div class="row inputboxPadding">
+                                                <div class="col-lg-6">
+                                                    <label class="lavelformat" style="" for="inputName">Employee Id</label>
+                                                    <span class="RedText">*</span>
+                                                    @Html.DropDownListFor(model => model.EmployeeID, (SelectList)ViewBag.LoadEmployee, "---- Select Employee----", new { @class = "selectpicker", @id = "ddlEmpID4", @onchange = "GetEmployeeInfo3()" })
+                                                    @Html.ValidationMessageFor(model => model.EmployeeID)
+
+                                                    <input id="refHiddenID" style="display:none" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="lavelformat" style="" for="inputName">Employee Name</label>
+                                                    @Html.TextBoxFor(model => model.EmployeeFullName, new { @id = "lblEmployeeName2", @class = "form-control inpurformat", @placeholder = "Employee Name", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                </div>
+                                            </div>
+                                            <div class="row inputboxPadding">
+                                                <div class="col-md-6">
+                                                    <label class="lavelformat" style="" for="inputName">Department</label>
+                                                    @Html.TextBoxFor(model => model.DepartmentName, new { @id = "lblDepartment3", @class = "form-control inpurformat", @placeholder = "Department", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="lavelformat" style="" for="inputName">Designation</label>
+                                                    @Html.TextBoxFor(model => model.designationNAme, new { @id = "lblDesignation4", @class = "form-control inpurformat", @placeholder = "Designation", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.NationalityCode)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:5px">
+                                            <div class="card-body shadow-lg rounded p-0">
+                                                <table style="width: 100%;" id="tblRefData" class="table table-sm">
+                                                    <thead>
+                                                        <tr style="background-color: #e8e7e7">
+                                                            <th style="text-align:left">Id</th>
+                                                            <th style="text-align:left">Name</th>
+                                                            <th style="text-align:left">Organization</th>
+                                                            <th style="text-align:left">Address</th>
+                                                            <th style="text-align:left">Relation</th>
+                                                            <th style="text-align:left">Mobile</th>
+                                                            <th style="text-align:left">Email</th>
+                                                            <th style="text-align:center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="lavelformat" for="inputName">Reference Name</label>
+                                                <span class="RedText">*</span>
+                                                @Html.TextBoxFor(model => model.refName, new { @id = "txtReferenceName", @class = "form-control inpurformat", @placeholder = "Enter Reference Name" })
+                                                @Html.ValidationMessageFor(model => model.NationalityCode)
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="lavelformat" for="inputName">Organization</label>
+                                                <span class="RedText">*</span>
+                                                @Html.TextBoxFor(model => model.REOrganization, new { @id = "txtOrganization", @class = "form-control inpurformat", @placeholder = "Enter Organization Name" })
+                                                @Html.ValidationMessageFor(model => model.NationalityCode)
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="lavelformat" for="inputName">Address</label>
+                                                <span class="RedText">*</span>
+                                                @Html.TextBoxFor(model => model.REaddress, new { @id = "txtAddress", @class = "form-control inpurformat", @placeholder = "Enter Address" })
+                                                @Html.ValidationMessageFor(model => model.NationalityCode)
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="lavelformat" for="inputName"> Relation</label>
+                                                <span class="RedText">*</span>
+                                                @Html.DropDownListFor(model => model.RelationID, (SelectList)ViewBag.Relation, "---- Select Relationship ----", new { @id = "dllRelationShip", @class = "selectpicker3" })
+                                                @Html.ValidationMessageFor(model => model.RelationshipCode)
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="lavelformat" for="inputName">Mobile</label>
+                                                <span class="RedText">*</span>
+                                                @Html.TextBoxFor(model => model.ReMobile, new { @id = "txtRefMobile", @class = "form-control inpurformat", @placeholder = "Enter Mobile" })
+                                                @Html.ValidationMessageFor(model => model.MobileNo)
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label class="lavelformat" for="inputName">Email</label>
+                                                <span class="RedText">*</span>
+                                                @Html.TextBoxFor(model => model.REemail, new { @id = "txtRefEmail", @class = "form-control inpurformat", @placeholder = "Enter Email" })
+                                                @Html.ValidationMessageFor(model => model.MobileNo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn btn-info float-right" style="margin-left:5px" id="addoredit" href="@Url.Action("AddOrEditEmployee", "Employee")"><i class="fa fa-plus pr-2"></i> New</a>
+                                        <a href='@Url.Action("Index", "Employee")' style="margin-left:5px" class="btn btn-dark float-right"><i class="fas fa-arrow-alt-circle-up">  Back To List</i></a>
+                                        <a style="margin-left:5px; color:white" id="btnSubmit2" value="Save" class="btn btn-success float-right">Save</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+<script src="~/FrontEnd/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type='text/javascript'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js" type='text/javascript'></script>
+
+@*<script src="~/scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="~/scripts/umd/popper.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+    <script src="~/scripts/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/scripts/select2.min.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type='text/javascript'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js" type='text/javascript'></script>*@
+
+<script type="text/javascript">
+    var EmployeID = "";
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'center',
+        showConfirmButton: true,
+        timer: 6000,
+    });
+    function GetEmployeeInfo() {
+        EmployeID = $("#ddlEmpID").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "Employee")',
+                data: { EmployeeID: EmployeID },
+                dataType: 'json',
+                success: function (data) {
+                    $("#lblEmployeeName").val(data.EmployeeFullName);
+                    $("#lblDepartment").val(data.DepartmentName);
+                    $("#lblDesignation").val(data.designationNAme);
+                }
+            });
+    };
+    function GetEmployeeInfo2() {
+        EmployeID = $("#ddlEmpID2").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "Employee")',
+                data: { EmployeeID: EmployeID },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#lblEmployeeName2").val(data.EmployeeFullName);
+                    $("#lblDepartment3").val(data.DepartmentName);
+                    $("#lblDesignation4").val(data.designationNAme);
+                }
+            });
+    };
+    function GetEmployeeInfo3() {
+        EmployeID = $("#ddlEmpID4").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "Employee")',
+                data: { EmployeeID: EmployeID },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#lblEmployeeName2").val(data.EmployeeFullName);
+                    $("#lblDepartment3").val(data.DepartmentName);
+                    $("#lblDesignation4").val(data.designationNAme);
+                }
+            });
+        LoadGrid(EmployeID);
+    };
+
+    function GetEmployeeInfo4() {
+        EmployeID = $("#ddlEmpID9").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "Employee")',
+                data: { EmployeeID: EmployeID },
+                dataType: 'json',
+                success: function (data) {
+                    $("#lblEmployeeName").val(data.EmployeeFullName);
+                    $("#lblDepartment").val(data.DepartmentName);
+                    $("#lblDesignation").val(data.designationNAme);
+                }
+            });
+    };
+
+    $(document).ready(function () {
+        $('.selectpicker').select2();
+        $('.selectpicker2').select2();
+        $('.selectpicker3').select2();
+
+        EmployeID = "";
+
+        LoadGrid(EmployeID);
+
+        //$("#custom-tabs-one-settings-tab").on("click", function () {
+        //    LoadGrid();
+        //});
+
+        $(document).on("click", "#lnkID", function () {
+            $("#divLoader").show();
+            var refID = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SingelData", "Employee")',
+                data: { refID: refID },
+                dataType: 'json',
+                success: function (data) {
+                    $('#refHiddenID').val(data.EmpReferenceID);
+                    $('#txtReferenceName').val(data.refName);
+                    $('#txtOrganization').val(data.REOrganization);
+                    $('#txtAddress').val(data.REaddress);
+                    $('#dllRelationShip').val(data.RelationID).change();
+                    $('#txtRefMobile').val(data.ReMobile);
+                    $('#txtRefEmail').val(data.REemail);
+                }
+            })
+        });
+
+        $(document).on("click", "#lnkIDDeleteee", function () {
+            var refID = $(this).text();
+            alert(refID);
+            @*$.ajax({
+                type: "GET",
+                url: '@Url.Action("SingelData", "Employee")',
+                data: { refID: refID },
+                dataType: 'json',
+                success: function (data) {
+                    $('#refHiddenID').val(data.EmpReferenceID);
+                    $('#txtReferenceName').val(data.refName);
+                    $('#txtOrganization').val(data.REOrganization);
+                    $('#txtAddress').val(data.REaddress);
+                    $('#dllRelationShip').val(data.RelationID).change();
+                    $('#txtRefMobile').val(data.ReMobile);
+                    $('#txtRefEmail').val(data.REemail);
+                }
+            })*@
+        });
+
+        $('#btnSubmit2').click(function (event) {
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#ddlEmpID4").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please Select Employee',
+                })
+                return;
+            }
+
+            if ($("#txtReferenceName").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please add reference name',
+                })
+                return;
+            }
+            if ($("#txtOrganization").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please add organization',
+                })
+                return;
+            }
+            if ($("#txtAddress").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please add address',
+                })
+                return;
+            }
+            if ($("#dllRelationShip").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please select Relationship',
+                })
+                return;
+            }
+
+            if ($("#txtRefMobile").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please enter mobile',
+                })
+                return;
+            }
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: '@Url.Action("AddOrEditEmployeeRefInfo", "Employee")',
+                data: {
+                    EmpReferenceID: $("#refHiddenID").val(),
+                    EmployeeID: $("#ddlEmpID4").val(), //Reading text box values using Jquery
+                    refName: $("#txtReferenceName").val(),
+                    REOrganization: $("#txtOrganization").val(),
+                    REaddress: $("#txtAddress").val(),
+                    RelationID: $("#dllRelationShip").val(),
+                    ReMobile: $("#txtRefMobile").val(),
+                    REemail: $("#txtRefEmail").val(),
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        Clear();
+                        LoadGrid($("#ddlEmpID4").val());
+                        Swal.fire("Success!", data.message, "success");
+                    }
+                    else {
+                        Swal.fire("Reference Info process failed!", data.message, "error");
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        });
+
+        $('#btnSubmit3').click(function (event) {
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#ddlEmpID9").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please Select Employee',
+                })
+                return;
+            }
+            $.ajax({
+                data: {
+                    ParmanentAddress: $("#txtPermanentAddress").val(),
+                    ParmanentPostOffice: $("#txtPermanentPostOffice").val(),
+                    ParmanentThana: $("#txtPermanentThana").val(),
+                    ParmanentPostCode: $("#txtPermanentPC").val(),
+                    ParmanentDistrict: $("#txtPermanentDistric").val(),
+                    ParmanentPhone: $("#txtPermanentPhone").val(),
+
+                    PresentAddress: $("#txtPresentAddress").val(),
+                    PresentPostOffice: $("#txtPresentPostOffice").val(),
+                    PresentThana: $("#txtPresentThana").val(),
+                    PresentPostCode: $("#txtPresentPC").val(),
+                    PresentDistrict: $("#txtPresentDistric").val(),
+                    PresentPhone: $("#txtPresentPhone").val(),
+
+                    EmContactName1: $("#txtEmContactName1").val(),
+                    EmContactRelation1: $("#txtEmContactRelation1").val(),
+                    EmContactAddress1: $("#txtEmContactAddress1").val(),
+                    EmContactPhone1: $("#txtEmContactPhone1").val(),
+                    EmContactEmail: $("#txtEmContactEmail1").val(),
+
+                    EmContactName2: $("#txtEmContactName2").val(),
+                    EmContactRelation2: $("#txtEmContactRelation2").val(),
+                    EmContactAddress2: $("#txtEmContactAddress2").val(),
+                    EmContactPhone2: $("#txtEmContactPhone2").val(),
+                    EmContactEmai2: $("#txtEmContactEmail2").val(),
+                },
+                async: true,
+                type: "POST",
+                url: '@Url.Action("AddOrEditEmployeeContactInfo", "Employee")',      
+                success: function (data) {
+                    if (data.success == true) {
+                        Clear();
+                        LoadGrid($("#ddlEmpID4").val());
+                        Swal.fire("Success!", data.message, "success");
+                    }
+                    else {
+                        Swal.fire("Contact Info process failed!", data.message, "error");
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        });
+
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+            if (strName == null) {
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+
+        $(function () {
+            var empID = '@TempData["InsertedEmployeeID"]';
+            if (empID) {
+                $("#ddlEmpID").attr("selectedIndex", 1);
+            }
+        });
+        $(function () {
+            var selector = '@TempData["ActiveTab"]';
+            if(selector)
+            {
+                $('#custom-tabs-one-tab a[href="#' + selector + '"]').tab('show');
+            }
+        });
+
+
+        $(function () {
+            $("#ImageBroswer").change(function () {
+                var file = getNameFromPath($(this).val());
+                if (file != null) {
+                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                    switch (extension) {
+                        case 'JPG':
+                        case 'jpg':
+                            flag = true;
+                            break;
+                        default:
+                            flag = false;
+                    }
+                }
+                if (flag == false) {
+                    //$("#validationTxt").text("You can upload only jpg,png,gif extension file");
+                    alert("You can upload only jpg,png,gif extension file");
+                    return false;
+                }
+                else if (this.files[0].size > 1048576) {
+                    //$("#validationTxt").text("Try to upload image less than 1MB!");
+                    alert("Try to upload image less than 1MB!");
+                    return false;
+                }
+                else {
+                    ShowSignaturePreview(event);
+                }
+            });
+        });
+
+        $(function () {
+            $("#ImageBroswer2").change(function () {
+                var file = getNameFromPath($(this).val());
+                if (file != null) {
+                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                    switch (extension) {
+                        case 'JPG':
+                        case 'jpg':
+                            flag = true;
+                            break;
+                        default:
+                            flag = false;
+                    }
+                }
+                if (flag == false) {
+                    //$("#validationTxt").text("You can upload only jpg,png,gif extension file");
+                    alert("You can upload only jpg extension file");
+                    return false;
+                }
+                else if (this.files[0].size > 1048576) {
+                    //$("#validationTxt").text("Try to upload image less than 1MB!");
+                    alert("Try to upload image less than 1MB!");
+                    return false;
+                }
+                else {
+                    ShowSignaturePreview2(event);
+                }
+            });
+        });
+    });
+
+    var ShowSignaturePreview = function (event) {
+        jQuery('#imgPreview').removeAttr('src');
+        var result = document.getElementById("imgPreview");
+        result.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var ShowSignaturePreview2 = function (event) {
+        jQuery('#imgPreview2').removeAttr('src');
+        var result = document.getElementById("imgPreview2");
+        result.src = URL.createObjectURL(event.target.files[0]);
+    };
+    function Clear() {
+        $("#refHiddenID").val("");
+        $("#txtReferenceName").val("");
+        $("#txtOrganization").val("");
+        $("#txtAddress").val("");
+        $("#dllRelationShip").val("").change();
+        $("#txtRefMobile").val("");
+        $("#txtRefEmail").val("");
+    }
+    $(function () {
+        $('input.EmpBirthDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2100',
+            maxDate: '87Y'
+        });
+    })
+    function Delete(id) {
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: '@Url.Action("DeleteData", "Employee")',
+                data: {
+                    EmpReferenceID: id
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        Clear();
+                        LoadGrid($("#ddlEmpID4").val());
+                        Swal.fire("Success!", data.message, "success");
+                    }
+                    else {
+                        Swal.fire("Leave Application process failed!", data.message, "error");
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        }
+    }
+    $(function () {
+        $('input.JoiningDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2100',
+            maxDate: '87Y'
+        });
+    })
+
+    function LoadGrid(EmployeID) {
+        var EmployeeID2 = $("#ddlEmpID").val();
+
+        if (EmployeeID2 != "") {
+            EmployeID = EmployeeID2;
+        }
+        //alert(EmployeID);
+        var dataTable;
+        dataTable = $('#tblRefData').DataTable({
+            "ajax": {
+                "url": '@Url.Action("GetEmployeeReef", "Employee")',
+                "type": "GET",
+                "data": { id: EmployeID },
+                "datatype": "json"
+            },
+            "columns": [
+                {
+                    "data": "EmpReferenceID", "render": function (data) {
+                        return "<a id='lnkID'>" + data + "</a>"
+                    }
+                },
+                { "data": "refName", "autowidth": true },
+                { "data": "REOrganization", "autowidth": true },
+                { "data": "REaddress", "autowidth": true },
+                { "data": "Relation", "autowidth": true },
+                { "data": "ReMobile", "autowidth": true },
+                { "data": "REemail", "autowidth": true },
+                {
+                    "data": "EmpReferenceID", "className": "tdclass", "render": function (data) {
+                        return '<a id="lnkIDDelete" onclick="Delete(\'' + data + '\')"><i class="fa fa-trash"></i></a>'
+                    }
+                },
+            ],
+            paging: false,
+            searching: false,
+            "bDestroy": true,
+            "bInfo": false,
+        });
+    }
+
+</script>
+

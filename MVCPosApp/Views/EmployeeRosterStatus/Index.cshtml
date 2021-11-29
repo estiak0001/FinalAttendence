@@ -1,0 +1,621 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<style>
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .fc-day-top {
+        background-color: #f7f4eb !important;
+        text-align: center;
+    }
+
+    .fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+        float: none !important;
+    }
+
+    .fc-day-number {
+        font-weight: bold;
+    }
+    /*    differ*/
+    .fc-day-header.fc-sun {
+        background-color: #CC99FF !important;
+    }
+
+    .fc-day-header.fc-mon {
+        background-color: #FF8080 !important;
+    }
+
+    .fc-day-header.fc-tue {
+        background-color: #FFCC99 !important;
+    }
+
+    .fc-day-header.fc-wed {
+        background-color: #FFFF99 !important;
+    }
+
+    .fc-day-header.fc-thu {
+        background-color: #CCFFCC !important;
+    }
+
+    .fc-day-header.fc-fri {
+        background-color: #99CCFF !important;
+    }
+
+    .fc-day-header.fc-sat {
+        background-color: #CCCCFF !important;
+    }
+
+    .fc-more {
+        background-color: #e1e418;
+        border-radius: 5px;
+        float: right;
+    }
+
+    .fc-time {
+        display: none !important;
+    }
+
+    .fc-content {
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .modal-header .close, .modal-header .mailbox-attachment-close {
+        padding: 23px;
+        margin: -1rem -1rem -1rem auto;
+        color: red;
+    }
+</style>
+<section class="content">
+    <div class="container-fluid" style="padding: 10px; background: center;">
+        <div class="card card-secondary" style="padding: 10px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Sort By</h4>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            @*<label for="inputName">Department</label>*@
+                            @Html.DropDownList("ddlDepartment", (SelectList)ViewBag.Department, "--All Department--", new { @class = "selectpicker form-control" })
+                        </div>
+                        <div class="col-lg-2">
+                            @*<label for="inputName">Employee</label>*@
+                            @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--All Employee--", new { @class = "selectpicker form-control" })
+                        </div>
+                        <div class="col-lg-2">
+                            @*<label for="inputName">Employee</label>*@
+                            @Html.DropDownList("ddltype", (SelectList)ViewBag.LoadreortTypeFormat, "--All type--", new { @class = "selectpicker form-control" })
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtFromDate" class="form-control" placeholder="From Date" style="width:100%; width: 100%; border-left: none;border-right: none;border-top: none;border-bottom-style: groove;" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtToDate" placeholder="To Date" class="form-control" style="width:100%; width: 100%; border-left: none;border-right: none;border-top: none;border-bottom-style: groove;" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="padding: 6px;">
+                    <button type="button" style="border-radius:18px; width: 84px;  font-size:13px; color:darkblue; border: 1px solid; height: 25px; padding: 3px; " id="btnSearch" class=" btn-shadow btn-wide btn btn-default waves-effect waves-light">
+                        <span class="btn-icon-wrapper pr-3 opacity-7"><i class="fas fa-search"></i></span>Search
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card card-secondary">
+            <div id="calender"></div>
+        </div>
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <button id="btnDelete" class="btn btn-default btn-sm pull-right" style="display:none">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button>
+                        <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;display:none">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                        <p id="pDetails"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalSave" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" style="padding: 22px;">&times;</button>
+                        <h4 class="modal-title">Save Event</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <input type="hidden" id="hdEventID" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <input type="text" id="txtSubject" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Start</label>
+                                        <div class="input-group date" id="dtp1">
+                                            <input type="text" id="txtStart" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" id="divEndDate" style="display:none">
+                                        <label>End</label>
+                                        <div class="input-group date" id="dtp2">
+                                            <input type="text" id="txtEnd" class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Theme Color</label>
+                                        <select id="ddThemeColor" class="form-control">
+                                            <option value="">Default</option>
+                                            <option value="red">Red</option>
+                                            <option value="blue">Blue</option>
+                                            <option value="black">Black</option>
+                                            <option value="green">Green</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="checkbox" style=" padding: 35px;">
+                                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+                    $(document).ready(function () {
+                        var events = [];
+                        var selectedEvent = null;
+                        var dateFrom ="";
+                        var dateTo = "";
+                        var department = "";
+                        var employee = "";
+                        var type = "";
+                        FetchEventAndRenderCalendar(dateFrom, dateTo, department, employee, type);
+
+
+                        function FetchEventAndRenderCalendar(dateFrom, dateTo, department, employee, type) {
+                            events = [];
+                            $.ajax({
+                                type: "GET",
+                                url: '@Url.Action("GetEvents", "EmployeeRosterStatus")',
+                                data: { FromDate: dateFrom, ToDate: dateTo, DepartmentID: department, EmployeeID: employee, Type: type},
+                                success: function (data) {
+                                    console.log(data.mergedList);
+                                    $.each(data.resultRoster, function (i, v) {
+                                        events.push({
+                                            eventID: v.EventID,
+                                            title: v.Subject,
+                                            description: v.Description,
+                                            start: moment(v.StartTime),
+                                            end: v.EndTime != null ? moment(v.EndTime) : null,
+                                            color: v.ThemeColor,
+                                            allDay: v.IsFullDay
+                                        });
+                                    });
+                                    $.each(data.resultLeave, function (i, v) {
+                                        events.push({
+                                            eventID: v.EventID,
+                                            title: v.Subject,
+                                            description: v.Description,
+                                            start: moment(v.StartTime),
+                                            end: v.EndTime != null ? moment(v.EndTime) : null,
+                                            color: v.ThemeColor,
+                                            allDay: v.IsFullDay
+                                        });
+                                    });
+                                    //$.each(data.events, function (i, v) {
+                                    //    events.push({
+                                    //        eventID: v.EventID,
+                                    //        title: v.Subject,
+                                    //        description: v.Description,
+                                    //        start: moment(v.StartTime),
+                                    //        end: v.EndTime != null ? moment(v.EndTime) : null,
+                                    //        color: v.ThemeColor,
+                                    //        allDay: v.IsFullDay
+                                    //    });
+                                    //});
+                                    $.each(data.evList, function (i, v) {
+                                        events.push({
+                                            eventID: v.EventID,
+                                            title: v.Subject,
+                                            description: v.Description,
+                                            start: moment(v.StartTime),
+                                            end: v.EndTime != null ? moment(v.EndTime) : null,
+                                            color: v.ThemeColor,
+                                            allDay: v.IsFullDay
+                                        });
+                                    });
+                                    GenerateCalender(events);
+                                    //$('#calender').fullCalendar('option', 'validRange', {
+                                    //    // Don't worry if user didn't provide *any* inputs.
+                                    //    start: $("#txtFromDate").val(),
+                                    //    end: $("#txtToDate").val()
+                                    //});
+                                    //$('.fc-prev-button').removeClass('fc-state-disabled');
+                                    //$('.fc-next-button').removeClass('fc-state-disabled');
+                                    filterByDateRange($("#txtFromDate").val(), $("#txtToDate").val(), 'MM/DD/YYYY');
+                                },
+                                error: function (error) {
+                                    alert('failed');
+                                }
+                            })
+                        }
+                        //$('.fc-button-next span').click(function () {
+                        //    alert('nextis clicked, do something');
+                        //});
+                        //$('body').on('click', 'button.fc-next-button', function () {
+                        //    var date = $("#calendar").fullCalendar('getDate');
+                        //    var month_int = date.getMonth();
+                        //    alert(month_int);
+                        //});
+
+                        $("#btnSearch").click(function () {
+                            var dateFrom = $("#txtFromDate").val();
+                            var dateTo = $("#txtToDate").val();
+                            department = $("#ddlDepartment").val();
+                            employee = $("#ddlEmployee").val(); 
+                            type = $("#ddltype").val();
+                            FetchEventAndRenderCalendar(dateFrom, dateTo, department, employee, type);
+                        });
+
+
+                        function GenerateCalender(events) {
+                            $('#calender').fullCalendar('destroy');
+                            $('#calender').fullCalendar({
+                                contentHeight: 900,
+                                defaultDate: new Date(),
+                                timeFormat: 'h(:mm)a',
+                                header: {
+                                    left: 'prev,next today',
+                                    center: 'title',
+                                    right: 'month,basicWeek,basicDay,agenda'
+                                },
+                                eventLimit: true,
+                                eventColor: '#378006',
+                                events: events,
+                                eventClick: function (calEvent, jsEvent, view) {
+                                    selectedEvent = calEvent;
+                                    $('#myModal #eventTitle').text(calEvent.title);
+                                    var $description = $('<div/>');
+                                    $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                                    if (calEvent.end != null) {
+                                        $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                                    }
+                                    $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                                    $('#myModal #pDetails').empty().html($description);
+
+                                    $('#myModal').modal();
+                                },
+                                //selectable: true,
+                                //select: function (start, end) {
+                                //    selectedEvent = {
+                                //        eventID: 0,
+                                //        title: '',
+                                //        description: '',
+                                //        start: start,
+                                //        end: end,
+                                //        allDay: false,
+                                //        color: ''
+                                //    };
+                                //    openAddEditForm();
+                                //    $('#calendar').fullCalendar('unselect');
+                                //},
+                                //editable: true,
+                                //eventDrop: function (event) {
+                                //    var data = {
+                                //        EventID: event.eventID,
+                                //        Subject: event.title,
+                                //        StartTime: event.start.format('DD/MM/YYYY HH:mm A'),
+                                //        EndTime: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
+                                //        Description: event.description,
+                                //        ThemeColor: event.color,
+                                //        IsFullDay: event.allDay
+                                //    };
+                                //    SaveEvent(data);
+                                //}
+                            })
+                        }
+
+                        //$('#btnEdit').click(function () {
+                        //    //Open modal dialog for edit event
+                        //    openAddEditForm();
+                        //})
+                        @*$('#btnDelete').click(function () {
+                            if (selectedEvent != null && confirm('Are you sure?')) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("DeleteEvent", "EmployeeRosterStatus")',
+                                    data: { 'eventID': selectedEvent.eventID },
+                                    success: function (data) {
+                                        if (data.status) {
+                                            //Refresh the calender
+                                            FetchEventAndRenderCalendar();
+                                            $('#myModal').modal('hide');
+                                        }
+                                    },
+                                    error: function () {
+                                        alert('Failed');
+                                    }
+                                })
+                            }
+                        })*@
+                        //$('#txtStart,#txtEnd').datetimepicker({
+
+                        //    format: 'DD/MM/YYYY HH:mm A',
+
+                        //});
+
+                        $('#chkIsFullDay').change(function () {
+                            if ($(this).is(':checked')) {
+                                $('#divEndDate').hide();
+                            }
+                            else {
+                                $('#divEndDate').show();
+                            }
+                        });
+                        //function openAddEditForm() {
+                        //    if (selectedEvent != null) {
+                        //        $('#hdEventID').val(selectedEvent.eventID);
+                        //        $('#txtSubject').val(selectedEvent.title);
+                        //        $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY HH:mm A'));
+                        //        $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+                        //        $('#chkIsFullDay').change();
+                        //        $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
+                        //        $('#txtDescription').val(selectedEvent.description);
+                        //        $('#ddThemeColor').val(selectedEvent.color);
+                        //    }
+                        //    $('#myModal').modal('hide');
+                        //    $('#myModalSave').modal();
+                        //}
+                        //$('#btnSave').click(function () {
+                        //    //Validation/
+                        //    if ($('#txtSubject').val().trim() == "") {
+                        //        alert('Subject required');
+                        //        return;
+                        //    }
+                        //    if ($('#txtStart').val().trim() == "") {
+                        //        alert('Start date required');
+                        //        return;
+                        //    }
+                        //    if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                        //        alert('End date required');
+                        //        return;
+                        //    }
+                        //    else {
+                        //        var startDate = moment($('#txtStart').val(), "DD/MM/YYYY HH:mm A").toDate();
+                        //        var endDate = moment($('#txtEnd').val(), "DD/MM/YYYY HH:mm A").toDate();
+                        //        if (startDate > endDate) {
+                        //            alert('Invalid end date');
+                        //            return;
+                        //        }
+                        //    }
+
+                        //    var data = {
+                        //        EventID: $('#hdEventID').val(),
+                        //        Subject: $('#txtSubject').val().trim(),
+                        //        StartTime: $('#txtStart').val().trim(),
+                        //        EndTime: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                        //        Description: $('#txtDescription').val(),
+                        //        ThemeColor: $('#ddThemeColor').val(),
+                        //        IsFullDay: $('#chkIsFullDay').is(':checked')
+                        //    }
+                        //    SaveEvent(data);
+                        //    // call function for submit data to the server
+                        //})
+                        @*function SaveEvent(data) {
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("SaveEvent", "EmployeeRosterStatus")',
+                                data: data,
+                                success: function (data) {
+                                    if (data.status) {
+                                        //Refresh the calender
+                                        FetchEventAndRenderCalendar();
+                                        $('#myModalSave').modal('hide');
+                                    }
+                                },
+                                error: function () {
+                                    alert('Failed');
+                                }
+                            })
+                        }*@
+
+                        $('.selectpicker').select2({
+                            language: {
+                                noResults: function () {
+                                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                                }
+                            },
+                            escapeMarkup: function (markup) {
+                                return markup;
+                            }
+                        });
+                        $('#txtFromDate').datepicker({
+                            dateFormat: 'mm/dd/yy',
+                            changeMonth: true,
+                            changeYear: true,
+                            todayHighlight: true,
+                            autoclose: true,
+                        });
+                        $('#txtToDate').datepicker({
+                            dateFormat: 'mm/dd/yy',
+                            changeMonth: true,
+                            changeYear: true,
+                            todayHighlight: true,
+                            autoclose: true,
+                        });
+
+                        function filterByDateRange(start_date, end_date, format) {
+                            if (start_date != "" && end_date != "") {
+                                var s = $.fullCalendar.moment(start_date),
+                                    e = $.fullCalendar.moment(end_date),
+                                    v = $('#calender').fullCalendar('getView'),
+                                    a, b;
+
+                                // Start date is invalid; set it to the start of the month.
+                                if (!s.isValid()) {
+                                    b = e.isValid();
+                                    s = b ? e.clone() : $.fullCalendar.moment();
+                                    s.date(1);
+                                    $('#txtFromDate').val(s.format(format));
+                                    a = true;
+                                }
+                                // End date is invalid; set it to the end of the month.
+                                if (!e.isValid()) {
+                                    b = s.isValid();
+                                    e = b ? s.clone() : $.fullCalendar.moment();
+                                    e.date(e.daysInMonth());
+                                    $('#txtToDate').val(e.format(format));
+                                    a = true;
+                                }
+
+                                // Start date is after end date; set it to a day before the end date.
+                                if (s.isAfter(e)) {
+                                    s = e.clone().add('-1', 'day');
+                                    $('#txtFromDate').val(s.format(format));
+                                    // End date is before start date; set it to a day after the start date.
+                                } else if (e.isBefore(s)) {
+                                    e = s.clone().add('1', 'day');
+                                    $('#txtToDate').val(e.format(format));
+                                }
+
+                                // Add 1 day so that `end_date` is inclusive.
+                                e = e.isValid() ? e.add('1', 'day') : e;
+
+                                $('#calender').fullCalendar('option', 'validRange', {
+                                    start: s.isValid() ? s : null,
+                                    end: e.isValid() ? e : null
+                                });
+
+                                a = a || s.isSame(e, 'month');
+                                // If months are different, switch to the year list.
+                                if ('listYear' !== v.name && !a) {
+                                    $('#calender').fullCalendar('changeView', 'listYear');
+                                    // Otherwise, switch back to month list, if needed.
+                                } else if ('listMonth' !== v.name) {
+                                    $('#calendr').fullCalendar('changeView', 'listMonth');
+                                }
+                            }
+                        }
+                    })
+    </script>
+}

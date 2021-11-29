@@ -1,0 +1,38 @@
+﻿
+@model BusinessLogic.Repository.Model_UserInfo
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Out</title>
+    <link href="~/LoginDesign/css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <img class="wave" src="~/LoginDesign/img/wave.png">
+    <div class="container">
+        <div class="img">
+
+            <img src="~/LoginDesign/img/avater2nd.svg" />
+        </div>
+        <div class="login-content">
+                <form>
+                    <img src="~/LoginDesign/img/Logo.svg" />
+                    <h3 style="color:red" class="title">Your session is time out please login again...</h3>
+                        <a href="@Url.Action("Index", "Home")" class="btn" style="color:#00203FFF;padding: 10px;
+                            text-align: center;">Login page</a>              
+                </form>
+        </div>
+    </div>
+
+
+    <script src="~/LoginDesign/js/main.js"></script>
+</body>
+</html>
+
+
+

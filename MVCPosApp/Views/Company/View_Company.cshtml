@@ -1,0 +1,566 @@
+﻿@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<!-- Estiak -->
+
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+    .ui-timepicker-container {
+        width: 150px !important;
+    }
+
+    .ui-timepicker {
+        width: 150px !important;
+    }
+
+    #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+
+    .linkbutton1 {
+        border: 1px solid #2c7cb0;
+        font-size: 9px;
+        padding: 5px;
+        text-decoration: none;
+        height: 50px;
+        width: 60px;
+        padding-top: 13px;
+        background-color: #2c7cb0;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    textarea {
+        width: 100% !important;
+    }
+
+    #lnkID{
+        cursor:pointer;
+    }
+    .inputName{
+        padding-top:10px;
+    }
+</style>
+
+
+<section class="content-header" style="padding:0px">
+    <div class="container-fluid">
+        <div class="callout callout-info" style="padding-top: 10px;">
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-md-12 row">
+                    <ul class="breadcrumb float-sm-right" id="mymenu">
+                        <li class="" style="margin-right: 5px; margin-left: 5px;"><a href='@Url.Action("View_Company", "Company")' class=" btn btn-sm btn-outline-secondary active" style="text-decoration:none"> Company </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Department", "Department")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Department </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Designation", "Designation")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Designation </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("AddOrEdit", "AttendenceType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Att. Type </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_RosterScheduleEntry", "RosterScheduleEntry")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Roster</a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vw_Shift", "Shift")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Shift </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_CompanyWeekend", "CompanyWeekend")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_SpecialWeekend", "SpecialWeekend")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none">Special Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_Holiday", "Holiday")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Holiday </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_LeaveType", "LeaveType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Leave Type </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Company Information</h6>
+                            </div>
+                            @Html.Partial("_ActionButton")
+                        </div>
+                    </div>
+                    <div class="card-body shadow-lg bg-white rounded" style="padding: 10px;">
+                        <div style="">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span id="message" cs></span>
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="inputName">Company Code</label>
+                                    <input type="text" id="txtCompanyCode" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.MaxComID ?? String.Empty)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Company Name</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="text" id="txtCompanyName" class="checkDuplicate form-control" placeholder="Company Name" style="width:100%" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Short Name</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtCompanyShortName" class="form-control" placeholder="Short Name" style="width:100%" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Address 1</label>
+                                    <textarea type="text" id="txtAddress1" class="form-control" placeholder="Address 1" style="width:100%" rows="2"></textarea>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Address 2</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <textarea type="text" id="txtAddress2" style="width:100%" class="form-control" placeholder="Address 2" rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Phone 1</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtPhone1" class="form-control" placeholder="Phone 2" style="width:100%" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Phone 2</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtPhone2" class="form-control" placeholder="Phone 2" style="width:100%" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Fax</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtFax" class="form-control" placeholder="Fax" style="width:100%" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Hotline</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtHotLine" class="form-control" placeholder="Hotline" style="width:100%" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Email</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtEmail" class="form-control" placeholder="Email" style="width:100%" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Url</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtURL" class="form-control" placeholder="Url" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-secondary" style="height: 577px;">
+                    <div class="card-body shadow-lg bg-white rounded" style=" padding: 10px; background-color: #fff;">
+                        <table id="tblDataList" class="table table-sm" style="width:100%;">
+                            <thead>
+                                <tr style="">
+                                    <th style="text-align:center;"><input id="chkAll" name="chkAll" value="1" type="checkbox"></th>
+                                    <th style="text-align:left">Company Code</th>
+                                    <th style="text-align:left">Company Name</th>
+                                    <th style="text-align:left">Address</th>
+                                    <th style="text-align:left">Phone</th>
+                                    <th style="text-align:left">Email</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+
+
+
+<script type="text/javascript">
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 6000,
+
+    });
+
+    $(document).ready(function () {
+        var rows_selected = [];
+        LoadGrid(rows_selected);
+
+
+        $("#txtCompanyName").keyup(function () {
+
+            $("#message").html("");
+        });
+
+        $(document).ready(function () {
+
+            $("input:text,form").attr("autocomplete", "off");
+        });
+
+        $(document).on("click", "#lnkID", function () {
+            var CompanyCode = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "Company")',
+                data: { CompanyCode: CompanyCode },
+                dataType: 'json',
+                success: function (data) {
+                    $('#txtCompanyCode').val(data.CompanyCode);
+                    $('#txtCompanyName').val(data.CompanyName);
+                    $('#txtCompanyShortName').val(data.CompanyShortName);
+                    $('#txtAddress1').val(data.Address1);
+                    $('#txtAddress2').val(data.Address2);
+                    $('#txtPhone1').val(data.Phone1);
+                    $('#txtPhone2').val(data.Phone2);
+                    $('#txtFax').val(data.Fax);
+                    $('#txtHotLine').val(data.HotLine);
+                    $('#txtEmail').val(data.Email);
+                    $('#txtURL').val(data.URL);
+                }
+            })
+        });
+
+
+        function Clear() {
+            //Reading text box values using Jquery
+            $('#txtCompanyName').val("");
+            $('#txtCompanyShortName').val("");
+            $('#txtAddress1').val("");
+            $('#txtAddress2').val("");
+            $('#txtPhone1').val("");
+            $('#txtPhone2').val("");
+            $('#txtFax').val("");
+            $('#txtHotLine').val("");
+            $('#txtEmail').val("");
+            $('#txtURL').val("");
+            $("#message").html("");
+        }
+
+
+        function MaxID() {
+            $("#txtCompanyCode").val("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("MaxID", "Company")',
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    var message = $("#message");
+                    if (response) {
+                        $("#txtCompanyCode").val(response);
+                    }
+                    else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Already Exists");
+                    }
+                }
+            });
+        }
+
+
+        $('#btnSubmit, #btnSubmit2').click(function (event) {
+
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#txtCompanyName").val() == "") {
+                Toast.fire({
+                    heading: 'Success',
+                    icon: 'error',
+                    title: '  Company Name is Required',
+                    width: 200,
+
+                })
+                return
+            }
+
+
+            $.ajax({
+
+                async: true,
+                type: "POST",
+                url: '@Url.Action("View_Company", "Company")',
+                data: { //Passing data
+                    CompanyCode: $("#txtCompanyCode").val(), //Reading text box values using Jquery
+                    CompanyName: $("#txtCompanyName").val(),
+                    CompanyShortName: $("#txtCompanyShortName").val(),
+                    Address1: $("#txtAddress1").val(),
+                    Address2: $("#txtAddress2").val(),
+                    Phone1: $("#txtPhone1").val(),
+                    Phone2: $("#txtPhone2").val(),
+                    Fax: $("#txtFax").val(),
+                    HotLine: $("#txtHotLine").val(),
+                    Email: $("#txtEmail").val(),
+                    URL: $("#txtURL").val()
+                },
+                success: function (data) {
+
+                    if (data.success == true) {
+                        MaxID();
+                        Clear();
+                        LoadGrid(rows_selected);
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.message
+                        })
+                    }
+                    else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.message
+                        })
+                    }
+                }
+
+            });
+
+        });
+
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            MaxID();
+            Clear();
+        });
+        $('#btnDelete').click(function (event) {
+            if ($('tbody input[type="checkbox"]').is(":checked")) {
+                if (confirm('Are you Sure to  Delete Data ?')) {
+                    event.preventDefault();
+                        DeleteMultiData();
+                }
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: "No Data Checked for Delete",
+                })
+            }
+        });
+
+        function DeleteMultiData() {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteMultiData", "Company")',
+                    data: { //Passing data
+                        AllID: rows_selected,
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            MaxID();
+                            Clear();
+                            LoadGrid(rows_selected);
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message,
+                            })
+                        }
+                        else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.message,
+                            })
+                        }
+                    }
+                });
+        }
+
+        $('#tblDataList tbody').on('click', 'input[type="checkbox"]', function (e) {
+            var $row = $(this).closest('tr');
+            var data = $('#tblDataList').DataTable().row($row).data();
+            var rowId = data["CompanyCode"];
+            var ar = {};
+            ar["CompanyCode"] = rowId;
+            var index = rows_selected.findIndex(x => x.CompanyCode === rowId)
+            if (this.checked && index === -1) {
+                rows_selected.push(ar);
+            } else if (!this.checked && index !== -1) {
+                rows_selected.splice(index, 1);
+            }
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+            console.log(rows_selected);
+            updateDataTableSelectAllCtrl();
+            e.stopPropagation();
+        });
+
+        $('#tblDataList thead input[name="chkAll"]').on('click', function (e) {
+            rows_selected = [];
+            if (this.checked) {
+                $('#tblDataList tbody input[type="checkbox"]:not(:checked)').trigger('click');
+            } else {
+                $('#tblDataList tbody input[type="checkbox"]:checked').trigger('click');
+            }
+            console.log(rows_selected);
+            e.stopPropagation();
+        });
+
+    });
+
+    //eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('4 j(){k 9;9=$(\'#l\').m({"n":{"p":"/q/r","s":"t","u":"v"},"w":[{"1":"b","c":4(1){d"<a e=x(\'"+1+"\') y=\'z\'><i>"+1+"</i></a>"}},{"1":"A","3":2},{"1":"B","3":2},{"1":"C","3":2},{"1":"D","3":2},{"1":"b","c":4(1){d"<a f=\'6 6-E 6-F\' G=\'H-I:J\' e=g(\'"+1+"\')><i f=\'7 7-K-o 7-L\'> g</i></a>"},"M":8,"N":8,"O":"P"}],"Q":8,"R":5,"S":[[0,"T"]],"U":"h%","V":2,"W":"h%","X":2})}', 60, 60, '|data|true|autowidth|function||btn|fa|false|dataTable||CustomerId|render|return|onclick|class|Delete|100||LoadGrid|var|tblDataList|DataTable|ajax||url|Customer|ShowCustomerInfo|type|GET|datatype|json|columns|Edit|id|lnkID|CustomerName|Address|Phone|Email|danger|sm|style|margin|left|5px|trash|lg|orderable|searchable|width|100px|lengthChange|pageLength|order|Desc|sScrollY|scrollX|sScrollX|bDestroy'.split('|'), 0, {}))
+    function updateDataTableSelectAllCtrl() {
+        var $table = $('#tblDataList').DataTable().table().node();
+        var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+        var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+        var chkbox_select_all = $('thead input[name="chkAll"]', $table).get(0);
+
+        if ($chkbox_checked.length === 0) {
+            chkbox_select_all.checked = false;
+
+        } else if ($chkbox_checked.length === $chkbox_all.length) {
+            chkbox_select_all.checked = true;
+        } else {
+            chkbox_select_all.checked = false;
+        }
+    };
+
+    function LoadGrid(rows_selected) {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowInfo", "Company")',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+            { "data": "CompanyCode", defaultContent: '' },
+            {
+                "data": "CompanyCode", "render": function (data) {
+                    return "<a class=''  id='lnkID'>" + data + "</a>"
+                }
+            },
+            { "data": "CompanyName", "autowidth": true },
+             { "data": "Address1", "autowidth": true },
+              { "data": "Phone1", "autowidth": true },
+               { "data": "Email", "autowidth": true }
+            ],
+            'columnDefs': [{
+                'targets': 0,
+                'searchable': false,
+                'orderable': false,
+                'width': '1%',
+                'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox">';
+                }
+            }],
+            'rowCallback': function (row, data, dataIndex) {
+                // Get row ID
+                var rowId = data[0];
+
+                // If row ID is in the list of selected row IDs
+                if ($.inArray(rowId, rows_selected) !== -1) {
+                    $(row).find('input[type="checkbox"]').prop('checked', true);
+                    $(row).addClass('selected');
+                }
+            },
+            "lengthChange": false,
+            "pageLength": 10,
+            "order": [[1, "Desc"]],
+
+            "bDestroy": true
+
+        });
+    }
+
+
+</script>
+
+<script>
+    $(document).on("blur", "input[name=CompanyName]",
+      function CheckAvailability() {
+          var CompanyName = $(this).val();
+          var CompanyCode = $('#txtCompanyCode').val();
+
+          $.ajax({
+              type: "POST",
+              url: '@Url.Action("CheckUsername", "Company")',
+              data: '{CompanyCode: "' + CompanyCode + '",CompanyName :"' + CompanyName + '"}',
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function (response) {
+                  var message = $("#message");
+                  if (response) {
+                  }
+                  else {
+
+                      Toast.fire({
+                          icon: 'error',
+                          title: 'Already Exists!'
+                      })
+                  }
+              }
+          });
+      });
+</script>
+
+
+
+

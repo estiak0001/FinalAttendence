@@ -1,0 +1,526 @@
+﻿
+@{
+    ViewBag.Title = "View_Useracess";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- Estiak -->
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />*@
+
+@*<link href="~/css/jquery.timepicker.min.css" rel="stylesheet" />*@
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    .RedText {
+        color: red;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+
+    textarea {
+        width: 100% !important;
+    }
+
+    .dataTables_filter {
+        margin-left: -80px !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+
+    #btnSubmit, #btnClear, #btnDelete, #btnPrint, #btnuserinfo, #btnaccesscode {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+</style>
+
+<section class="content-header" style="margin-left: -16px;margin-bottom: -14px; margin-right: -15px;">
+    <div class="container-fluid">
+
+        <div class="callout callout-info">
+
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-sm-6">
+                    <h5>User Information</h5>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">User Information</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+    <div class="card">
+        <div class="card-header p-2">
+            <div class="row" style="padding-top:5px; padding-bottom:9px">
+                <div class="col-lg-2">
+                    <a class="btn btn-success active" id="btnuserinfo" style="width:100%" href="@Url.Action("View_Useracess", "UserInfo")">User Info</a>
+                </div>
+                <div class="col-lg-2">
+                    <a class="btn btn-primary" id="btnaccesscode" style="width:100%" href="@Url.Action("View_AccessCode","AccessCode")">Access Code Info</a>
+                </div>
+            </div>
+        </div><!-- /.card-header -->
+
+        <div class="row" style="padding: 5px;">
+            <div class="col-md-7">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <i class="fas fa-save"></i>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" style="border-bottom:1px solid lightgray; padding-bottom: 7px; ">
+                            <div class="col-md-12" style="margin-top: -14px;">
+                                <div class="btn-group" style="float: right;">
+                                    <div class="row col-md-3">
+                                        <button type="button" style="border-radius:18px; font-size:14px; border: none; float:left " id="btnSubmit" class=" btn-shadow btn-wide btn btn-success waves-effect waves-light">
+                                            <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-plus"></i></span>Save
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" style="border-radius:18px;  font-size:14px; border: none;  " id="btnClear" class=" btn-shadow btn-wide btn btn-default waves-effect waves-light">
+                                            <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-sync"></i></span>Clear
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" style="border-radius:18px; font-size:14px; border: none; " id="btnDelete" class=" btn-shadow btn-wide btn btn-danger waves-effect waves-light">
+                                            <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-trash"></i></span>Delete
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" style="border-radius:18px; font-size:14px; border: none; " id="btnPrint" class=" btn-shadow btn-wide btn btn-dark waves-effect waves-light float-md-right">
+                                            <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-print"></i></span>Print
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 10px;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span id="message"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label id="hidValue" style="display:none"></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">                                   
+                                    <label for="inputName">Employee</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "selectpicker" })
+                                </div>
+                                <div class="col-lg-6">                                    
+                                    <label for="inputName">Name</label>
+                                    <label class="form-control" id="lblEmployeeName" style="width:100%; border:none" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">                                   
+                                    <label for="inputName">Department</label>
+                                    <label id="lblDepartment" class="form-control" style="width:100%; border:none" />
+                                </div>
+                                <div class="col-lg-6">                                  
+                                    <label for="inputName">Designation</label>
+                                    <label id="lblDesignation" class="form-control" style="width:100%; border:none" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="border: 1px solid #D9D9D9; margin-top: 10px; background-color: aliceblue;padding:15px">
+
+                            <div class="row">
+                                <div class="col-lg-6">                                    
+                                    <label for="inputName">User Name</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="text" class="form-control" id="txtusername" style="width:100%">
+                                </div>
+                                <div class="col-lg-6">                                    
+                                    <label for="inputName">Password</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="password"  class="form-control" id="txtpassword" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">                                    
+                                    <label for="inputName">Role</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlRole", (SelectList)ViewBag.LoadRoleType, "--Select Role--", new { @class = "selectpicker" })
+                                </div>
+                                <div class="col-lg-6">                                    
+                                    <label for="inputName">Access Code</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlAccessCode", (SelectList)ViewBag.LoadAccessCode, "--Select Access Code--", new { @class = "selectpicker" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row no-print" style="margin-top: 9px; padding: 5px;">
+                            <div class="col-12">
+                                <button type="button" style="border-radius:18px; font-size:15px; border: none; float:right " id="btnSubmit" class=" btn-shadow btn-wide btn btn-success waves-effect waves-light">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-plus"></i></span>Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <i class="fas fa-database"></i>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="tblDataList" class="table  table-condensed table-hover table-striped table-bordered display responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">Employee ID</th>
+                                    <th style="text-align:center">Name </th>
+                                    <th style="text-align:center">User Name</th>
+                                    <th style="text-align:center">Role</th>
+                                    <th style="text-align:center">Access Code</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:12px">
+            <div class="col-12">
+                <a href="#" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                <input type="submit" value="Home" class="btn btn-success float-right">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+    <script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+    <script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+    <link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+    <script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+    <!-- Bootstrap 4 -->
+    <script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/FrontEnd/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/FrontEnd/dist/js/demo.js"></script>
+
+
+    @*<script src="~/scripts/jquery.min.js" type="text/javascript"></script>
+        <script src="~/scripts/umd/popper.min.js" type="text/javascript"></script>
+
+        <script src="~/scripts/bootstrap.min.js" type="text/javascript"></script>
+        <script src="~/scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="~/scripts/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+        <script src="~/scripts/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="~/scripts/select2.min.js" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>*@
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        LoadGrid();
+        $("#txtusername").val(""); //Reading text box values using Jquery
+        $("#txtpassword").val("");
+
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            Clear();
+        });
+
+
+
+        function Clear() {
+
+            $("#lblEmployeeName").text("");
+            $("#lblDepartment").text("");
+            $("#lblDesignation").text("");
+            //Reading text box values using Jquery
+            $("#hidValue").text("");
+            $("#ddlEmployee").val("").change();
+            $("#ddlRole").val("").change();
+            $("#ddlAccessCode").val("").change();
+            $("#txtusername").val("");
+            $("#txtpassword").val("");
+
+            $("#message").html("");
+
+        }
+        //eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('4 j(){k 9;9=$(\'#l\').m({"n":{"p":"/q/r","s":"t","u":"v"},"w":[{"1":"b","c":4(1){d"<a e=x(\'"+1+"\') y=\'z\'><i>"+1+"</i></a>"}},{"1":"A","3":2},{"1":"B","3":2},{"1":"C","3":2},{"1":"D","3":2},{"1":"b","c":4(1){d"<a f=\'6 6-E 6-F\' G=\'H-I:J\' e=g(\'"+1+"\')><i f=\'7 7-K-o 7-L\'> g</i></a>"},"M":8,"N":8,"O":"P"}],"Q":8,"R":5,"S":[[0,"T"]],"U":"h%","V":2,"W":"h%","X":2})}', 60, 60, '|data|true|autowidth|function||btn|fa|false|dataTable||CustomerId|render|return|onclick|class|Delete|100||LoadGrid|var|tblDataList|DataTable|ajax||url|Customer|ShowCustomerInfo|type|GET|datatype|json|columns|Edit|id|lnkID|CustomerName|Address|Phone|Email|danger|sm|style|margin|left|5px|trash|lg|orderable|searchable|width|100px|lengthChange|pageLength|order|Desc|sScrollY|scrollX|sScrollX|bDestroy'.split('|'), 0, {}))
+        $('#btnSubmit').click(function (event) {
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#ddlEmployee").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Select Employee");
+                return;
+            }
+
+            if ($("#txtusername").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Enter User Name");
+                return;
+            }
+            if ($("#txtpassword").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Enter Password");
+                return;
+            }
+            if ($("#ddlRole").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Select Role");
+                return;
+            }
+            if ($("#ddlAccessCode").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Select Access Code");
+                return;
+            }
+
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: '@Url.Action("View_Useracess", "UserInfo")',
+                data: {
+                    EmployeeID: $("#ddlEmployee").val(),
+                    username: $("#txtusername").val(),
+                    password: $("#txtpassword").val(),
+                    Role: $("#ddlRole").val(),
+                    AccessCode: $("#ddlAccessCode").val()
+                },
+                success: function (data) {
+                    if (data.success == true) {
+
+                        Clear();
+                        LoadGrid();
+                        var message = $("#message");
+                        message.css("color", "red");
+                        message.html("Success");
+
+
+                    }
+                    else {
+
+                        var message = $("#message");
+                        message.css("color", "red");
+                        message.html("Error");
+                    }
+                }
+
+            });
+
+        });
+
+
+        $('#btnDelete').click(function (event) {
+            event.preventDefault();
+
+            var DeletedID = $('#ddlEmployee').val();
+            Delete(DeletedID);
+        });
+
+        // Start SelectPicker//
+
+
+
+
+        $("input:text,form").attr("autocomplete", "off");
+
+        function Delete(EmployeeID) {
+            if (confirm('Are you Sure to  Delete Data ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "UserInfo")/' + EmployeeID,
+
+                    success: function (data) {
+
+                        if (data.success == true) {
+
+                            Clear();
+                            LoadGrid();
+                            var message = $("#message");
+                            message.css("color", "red");
+                            message.html(data.message);
+
+                        }
+                        else {
+                        }
+                    }
+                });
+            }
+        }
+
+        $(document).on("click", "#lnkID", function () {
+            var EmployeeID = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "UserInfo")',
+                data: { EmployeeID: EmployeeID },
+                dataType: 'json',
+                success: function (data) {
+                    $('#txtusername').val(data.username);
+                    $('#hidValue').text(data.EmployeeID);
+                    $('#ddlEmployee').val(data.EmployeeID).change();
+                    GetEmployeeInfo();
+                    $('#ddlAccessCode').val(data.AccessCode).change();
+                    $('#ddlRole').val(data.Role).change();
+                   // $('#txtpassword').val(data.UserPassword);
+                }
+            })
+        });
+
+
+        $('.selectpicker').select2({
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+
+
+
+        $('#ddlEmployee').on('change', function () {
+
+            GetEmployeeInfo();
+        });
+
+        function GetEmployeeInfo() {
+            var EmployeeID = $("#ddlEmployee").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "UserInfo")',
+                data: { EmployeeID: EmployeeID },
+                dataType: 'json',
+                success: function (data) {
+                    $("#lblEmployeeName").text(data.EmployeeName);
+                    $("#lblDepartment").text(data.DepartmentCode);
+                    $("#lblDesignation").text(data.DesignationCode);
+                }
+            });
+        };
+        //  ClosseAttendence Type//
+
+
+    });
+
+
+    function LoadGrid() {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowInfo", "UserInfo")',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+            {
+                "data": "EmployeeID", "render": function (data) {
+                    return "<a  id='lnkID'><i>" + data + "</i></a>"
+                }
+            },
+            { "data": "EmployeeName", "autowidth": true },
+            { "data": "username", "autowidth": true },
+            { "data": "Role", "autowidth": true },
+            { "data": "AccessCode", "autowidth": true },
+            ],
+            "lengthChange": false,
+            "pageLength": 5,
+            "order": [[0, "Desc"]],
+            "sScrollY": "100%",
+            "scrollX": true,
+            "sScrollX": "100%",
+            "bDestroy": true
+
+        });
+    }
+
+
+
+
+    </script>
+
+
+
+

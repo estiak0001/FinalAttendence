@@ -1,0 +1,1027 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .btn-primary {
+        color: #000;
+        background-color: #ffffff;
+        border-radius: 20px;
+        font-size: 11px;
+    }
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.7rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        box-shadow: inset 0 0 0 transparent;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .select2-results {
+        display: block;
+        background-color: #fffeed;
+        font-size: 11px;
+    }
+
+    input {
+        width: 100%;
+        height: 25px;
+        text-indent: 5px;
+        font-size: 12.6pt;
+        border-radius: 5px;
+        border: solid 1.5px #D3D3D3;
+        -webkit-transition: 1s; /* Safari */
+        transition: 1s;
+    }
+
+        input[type=text]:hover {
+            box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+            background: #fffeed;
+        }
+
+        input[type=text]:focus {
+            box-shadow: 0 0 5pt 2pt #D3D3D3;
+            outline-width: 0px;
+            background: #fffeed;
+        }
+
+    .select2-selection:focus {
+        box-shadow: 0 0 5pt 2pt #D3D3D3;
+        background: #fffeed;
+    }
+
+    data-val-required {
+        color: brown;
+    }
+
+    
+    .products-list .product-info {
+        margin-left: 20px!important;
+    }
+    .badge-warning {
+        color: #1f2d3d;
+        background-color: #ffc107;
+        margin-left: 3px;
+    }
+</style>
+
+<!-- Main content -->
+<section class="content" style="padding-top:10px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img id="imgPreview" class="profile-user-img img-fluid img-circle"
+                                 alt="User profile picture">
+                        </div>
+
+                        <h3 class="profile-username text-center"><label id="lblEmployeeName"></label></h3>
+
+                        <p class="text-muted text-center"><label id="lblDesignation"></label></p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item text-center">
+                                @*<b>Total Present</b> <a class="float-right">1,322</a>*@
+                                @Html.Label("DateCreated", DateTime.Now.ToString("dd/MM/yyyy"), new { @readonly = "readonly" })
+                            </li>
+
+                        </ul>
+
+                        @*<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>*@
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">About Contract</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong><i class="fas fa-address-book mr-1"></i> Joining Date</strong>
+
+
+
+                        @*joining date*@
+
+                        <p class="text-muted">
+                            <label id="lblJoiningDate"></label>
+                        </p>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Leave Balance</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div id="divEmpLeeaveBalance" class="card-body p-0" style="">
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class=" p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Attendence Report</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Leave</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+                                <div style="padding-bottom:10px">
+                                    <input type="text" id="txtEmpID" style="display:none" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.LoadEmpID ?? String.Empty)">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="text" id="txtFromDate" placeholder="--Date Range From--" class="form-control" style="width:100%" />
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="text" id="txtToDate" placeholder="--To--" class="form-control" style="width:100%" />
+                                        </div>
+                                        <div class="col-lg-2" style="float:right">
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnSort"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-book fa-lg pr-3" aria-hidden="true"></span>&nbsp;Preview
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row child" style="padding-top: 0px;display:none">
+                                        <div class="col-lg-2">
+
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnAll"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;All
+                                            </button>
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnPresent"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;Present
+                                            </button>
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnAbsence"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;Absence
+                                            </button>
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnLate"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;Late
+                                            </button>
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnMovement"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;Movement
+                                            </button>
+                                        </div>
+                                        <div class="col-lg-2">
+
+                                            <button class="btn btn-primary" type="button" style="width:100%" id="btnPreview"
+                                                    aria-label="Left Align">
+                                                <span class="fa fa-print fa-lg" aria-hidden="true"></span>&nbsp;Job Card
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div style="margin-top:0px" class="card card-primary">
+                                            <div style="padding:10px" id="divReportViwer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Post -->
+                                <!-- /.post -->
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="timeline">
+
+                            </div>
+
+                        </div>
+
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- /.content -->
+<!-- jQuery -->
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script type="text/javascript">
+
+    // Start Temp Opeation JQuery//
+    function GetEmployeeInfo() {
+        var EmployeeID = $("#txtEmpID").val();
+
+      $.ajax({
+            type: "GET",
+            url: '@Url.Action("showEmployeeBasiciInfo", "Dashboard")',
+            data: { EmployeeID: EmployeeID },
+            dataType: 'json',
+            success: function (data) {
+                $("#lblEmployeeName").text(data.EmployeeName);
+                $("#lblJoiningDate").text(data.JoiningDate);
+                $("#lblDesignation").text(data.DesignationCode);
+                var y = data.PhotoUrl;
+                var res = y.substr(1, 21);
+                var t = "/MVC_HRM/" + res;
+                $('#imgPreview').prop('src', t);
+            }
+        });
+        };
+    $(document).ready(function () {
+
+        GetEmployeeInfo();
+
+
+
+        $('.selectpicker').select2({
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+
+    });
+
+
+</script>
+<script type="text/javascript">
+
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 6000,
+
+    });
+
+    // Start Temp Opeation JQuery//
+
+    $(document).ready(function () {
+        var date = new Date();
+        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        //var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var firstDayWithSlashes = (firstDay.getDate()) + '/' + (firstDay.getMonth() + 1) + '/' + firstDay.getFullYear();
+        var lastDayWithSlashes = (date.getDate()) + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+        JobCard(firstDayWithSlashes, lastDayWithSlashes);
+        DashboardEmployeeLeaveBalance();
+        $('#btnMovement').click(function (event) {
+            event.preventDefault();
+
+            if ($("#ddlEmployee").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Please Select Employee',
+                })
+                return;
+            }
+
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select From Date',
+                })
+                return;
+            }
+            if ($("#txtToDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz select To Date',
+                })
+                return;
+            }
+            var FromDate = $('#txtFromDate').val();
+            var ToDate = $('#txtToDate').val();
+            var EmployeeID = $('#ddlEmployee').val();
+            var url = '../ReportViewer/WbFromReportViwer.aspx?EMR=' + EmployeeID + '&FromDate=' + FromDate + '&ToDate=' + ToDate;
+            window.open(url);
+        });
+
+        $('#btnPresent').click(function (event) {
+            event.preventDefault();
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select  Date',
+                })
+                return;
+            }
+            var Date = $('#txtFromDate').val();
+            var DepartmentCOde = $('#ddlDepartment').val();
+            var url = '../ReportViewer/WbFromReportViwer.aspx?DAP=' + Date + '&Department=' + DepartmentCOde;
+            window.open(url);
+        });
+
+
+        $('#btnAbsence').click(function (event) {
+            event.preventDefault();
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select  Date',
+                })
+                return;
+            }
+            var Date = $('#txtFromDate').val();
+            var DepartmentCOde = $('#ddlDepartment').val();
+            var url = '../ReportViewer/WbFromReportViwer.aspx?DAA=' + Date + '&Department=' + DepartmentCOde;
+            window.open(url);
+        });
+        $('#btnLate').click(function (event) {
+            event.preventDefault();
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select  Date',
+                })
+                return;
+            }
+            var Date = $('#txtFromDate').val();
+            var DepartmentCOde = $('#ddlDepartment').val();
+            var url = '../ReportViewer/WbFromReportViwer.aspx?DAL=' + Date + '&Department=' + DepartmentCOde;
+            window.open(url);
+        });
+        //$('#btnAll').click(function (event) {
+        //    event.preventDefault();
+        //    if ($("#txtFromDate").val() == "") {
+        //        Toast.fire({
+        //            icon: 'error',
+        //            title: 'Plz Select  Date',
+        //        })
+        //        return;
+        //    }
+        //    var Date = $('#txtFromDate').val();
+        //    var DepartmentCOde = $('#ddlDepartment').val();
+        //    var url = '../ReportViewer/WbFromReportViwer.aspx?DALL=' + Date + '&Department=' + DepartmentCOde;
+        //    window.open(url);
+        //});
+
+        $('#btnPreview').click(function (event) {
+            event.preventDefault();
+
+            if ($("#ddlEmployee").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Please Select Employee',
+                })
+                return;
+            }
+
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select From Date',
+                })
+                return;
+            }
+            if ($("#txtToDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz select To Date',
+                })
+                return;
+            }
+            var FromDate = $('#txtFromDate').val();
+            var ToDate = $('#txtToDate').val();
+            var EmployeeID = $('#ddlEmployee').val();
+            var url = '../ReportViewer/WbFromReportViwer.aspx?DARE=' + EmployeeID + '&FromDate=' + FromDate + '&ToDate=' + ToDate;
+            window.open(url);
+        });
+
+        $('.selectpicker').select2({
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+
+        $('#txtFromDate').datepicker({
+            onSelect: function (date) {
+                var FromDate = $('#txtFromDate').val();
+                $('#txtToDate').val(FromDate);
+
+                $("#txtToDate").datepicker('option', 'minDate', FromDate);
+            },
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2010:2100',
+            maxDate: '87Y'
+        });
+
+        $('#txtToDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2010:2100',
+            maxDate: '87Y'
+        });
+
+
+
+        $("input:text,form").attr("autocomplete", "off");
+
+        //////////////////////////////////////////////////////////////////////////////////////
+
+        //work strat from here
+
+
+        $('#btnAll').click(function (event) {
+            event.preventDefault();
+
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Plz Select  Date',
+                })
+                return;
+            }
+            var AttendenceDate = $('#txtFromDate').val();
+            var DepartmentCode = $('#ddlDepartment').val();
+            var html = "";
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ShowEmpAllList", "AllAttenRe")',
+                data: { AttendenceDate: AttendenceDate, DepartmentCode: DepartmentCode },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data != 0) {
+                        jQuery("#divReportViwer").html('');
+
+                        html += "<table style='width:100%;margin-left: 17px;margin-right: 17px;margin-top: 10px;margin-bottom: 10px;' border = '1'>";
+                        html += "<tr>";
+                        html += "<td style='text-align:center;font-size:15px'font-family:Book Antiqua; colspan='9'>";
+                        html += "Employee Attendence List";
+                        html += "</td>";
+                        html += "</tr>";
+
+
+                        var arr = [];
+                        for (var k = 0; k < data.length; k++) {
+                            if (arr.indexOf(data[k]["DepartmentName"]) == -1) {
+                                arr.push(data[k]["DepartmentName"]);
+                            }
+
+                        }
+                        for (var k = 0; k < arr.length; k++) {
+
+                            var Department = arr[k];
+
+                            html += "<tr>";
+                            html += "<td style='text-align:center;font-size:20px'font-family:Book Antiqua; colspan='1'>";
+                            html += "Department";
+                            html += "</td>";
+                            html += "<td style='text-align:left;font-size:20px'font-family:Book Antiqua; colspan='8'>";
+                            html += Department;
+                            html += "</td>";
+                            html += "</tr>";
+
+
+                            html += "<tr>";
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Sl";
+                            html += "</td>";
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Employee ID";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='2'>";
+                            html += "Employee Name";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Designation";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "In Time";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Late";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Out Time";
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                            html += "Status";
+                            html += "</td>";
+                            html += "</tr>";
+
+
+                            for (var i = 0; i < data.length; i++) {
+                                var EmployeeID = data[i]["EmployeeID"];
+                                var FirstName = data[i]["FirstName"];
+                                var DesignationName = data[i]["DesignationName"];
+
+                                var InTime = data[i]["InTime"];
+                                var LateCount = data[i]["LateCount"];
+                                var Outtime = data[i]["Outtime"];
+                                var EmpStatus = data[i]["EmpStatus"];
+                                var EpDepartment = data[i]["DepartmentName"];
+                                if (Department == EpDepartment) {
+                                    html += "<tr>";
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += EmployeeID;
+                                    html += "</td>";
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += EmployeeID;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='2'>";
+                                    html += FirstName;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += DesignationName;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += InTime;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += LateCount;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += Outtime;
+                                    html += "</td>";
+
+                                    html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:15px' colspan='1'>";
+                                    html += EmpStatus;
+                                    html += "</td>";
+                                    html += "</tr>";
+
+                                }
+                            }
+                        }
+                        html += "</table>";
+                        html += "</div>";
+                        $("#divReportViwer").append(html);
+
+
+                    }
+                    else {
+                        jQuery("#divReportViwer").html('');
+
+                        html += "<table style='width:100%;;margin-left: 17px;margin-right: 17px;margin-top: 10px;margin-bottom: 10px;' border = '1'>";
+                        html += "<tr>";
+                        html += "<td style='text-align:center;font-size:20px'font-family:Book Antiqua; colspan='9'>";
+                        html += "No data to preview!";
+                        html += "</td>";
+                        html += "</tr>";
+                        html += "</table>";
+                        html += "</div>";
+                        $("#divReportViwer").append(html);
+                    }
+
+                },
+
+                error: function (response) {
+                    var message = $("#message");
+                    message.css("color", "red");
+                    message.html("error");
+                }
+            });
+            //if ($("#txtFromDate").val() == "") {
+            //    Toast.fire({
+            //        icon: 'error',
+            //        title: 'Plz Select  Date',
+            //    })
+            //    return;
+            //}
+            //var Date = $('#txtFromDate').val();
+            //var DepartmentCOde = $('#ddlDepartment').val();
+            //var url = '../ReportViewer/WbFromReportViwer.aspx?DALL=' + Date + '&Department=' + DepartmentCOde;
+            //window.open(url);
+        });
+
+
+        $('#btnSort').click(function (event) {
+            event.preventDefault();
+
+            if ($("#txtFromDate").val() == "") {
+                Toast.fire({
+                    heading: 'Success',
+                    icon: 'error',
+                    title: '  From Date is Required',
+                    width: 200,
+                })
+                return;
+            }
+            if ($("#txtToDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: ' To Date is Required',
+                })
+                return;
+            }
+            firstDayWithSlashes = $("#txtFromDate").val();
+            lastDayWithSlashes = $("#txtToDate").val();
+            JobCard(firstDayWithSlashes, lastDayWithSlashes);
+        });
+
+    });
+
+    function JobCard(firstDayWithSlashes, lastDayWithSlashes) {
+            //var FromDate = $('#txtFromDate').val();
+            //var ToDate = $('#txtToDate').val();
+            //var EmployeeID = $('#ddlEmployee').val();
+
+        var FromDate = firstDayWithSlashes;
+        var ToDate = lastDayWithSlashes;
+        //var EmployeeID = $("#lblEmployeeName").text();
+        var EmployeeID = $("#txtEmpID").val();
+            var html = "";
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ShowEmpJobCard", "AllAttenRe")',
+                data: { FromDate: FromDate, ToDate: ToDate, EmployeeID: EmployeeID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data != 0) {
+                        jQuery("#divReportViwer").html('');
+
+                        html += "<table class='tale table-sm table-striped' style='width:100%;'>";
+                        html += "<tr style='background-color: #8cbcf1;'>";
+                        html += "<td style='text-align:center;font-size:15px'font-family:Book Antiqua; colspan='9'>";
+                        html += "Employee Job Card";
+                        html += "</td>";
+                        html += "</tr>";
+
+                        var EmployeeID = data[0]["EmployeeID"];
+                        var FirstName = data[0]["FirstName"];
+                        var Department = data[0]["DepartmentName"];
+                        var DesignationName = data[0]["DesignationName"];
+
+                        html += "<tr style='border:none'>";
+
+                        html += "<td style='font-weight: bold;font-size:11px'font-family:Book Antiqua; colspan='1'>";
+                        html += "Employee Name :";
+                        html += "</td>";
+                        html += "<td style='text-align:left;font-size:11px'font-family:Book Antiqua; colspan='3'>";
+                        html += FirstName;
+                        html += "</td>";
+
+
+
+                        html += "<td style='font-weight: bold;font-size:11px'font-family:Book Antiqua; colspan='2'>";
+                        html += "Employee ID :";
+                        html += "</td>";
+                        html += "<td style='text-align:left;font-size:11px'font-family:Book Antiqua; colspan='3'>";
+                        html += EmployeeID;
+                        html += "</td>";
+
+                        html += "</tr>";
+
+                        html += "<tr style='border-left:none;border-right:none'>";
+
+                        html += "<td style='font-weight: bold;font-size:11px'font-family:Book Antiqua; colspan='1'>";
+                        html += "Department :";
+                        html += "</td>";
+                        html += "<td style='text-align:left;font-size:11px'font-family:Book Antiqua; colspan='3'>";
+                        html += Department;
+                        html += "</td>";
+
+                        html += "<td style='font-weight: bold;font-size:11px'font-family:Book Antiqua; colspan='2'>";
+                        html += "Designation :";
+                        html += "</td>";
+                        html += "<td style='text-align:left;font-size:11px'font-family:Book Antiqua; colspan='3'>";
+                        html += DesignationName;
+                        html += "</td>";
+
+                        html += "</tr>";
+
+
+                        html += "<tr style='background-color: #b9b9b9;'>";
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Date";
+                        html += "</td>";
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Days Name";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Shift In Time";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "In Time";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Late";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Shift Out Time";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Out Time";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Working Hours";
+                        html += "</td>";
+
+                        html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                        html += "Status";
+                        html += "</td>";
+
+                        html += "</tr>";
+
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            var DateData = data[i]["DateData"];
+                            var DaysName = data[i]["DaysName"];
+                            var ShiftStartTime = data[i]["ShiftStartTime"];
+                            var InTime = data[i]["InTime"];
+                            var LateCount = data[i]["LateCount"];
+                            var ShiftEndTime = data[i]["ShiftEndTime"];
+                            var OutTime = data[i]["OutTime"];
+                            var WorkingHour = data[i]["WorkingHour"];
+                            var EmoStatus = data[i]["EmoStatus"];
+
+                            html += "<tr>";
+                            html += "<td style='text-align:center;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += DateData;
+                            html += "</td>";
+                            html += "<td style='text-align:center;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += DaysName;
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += ShiftStartTime;
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += InTime;
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += LateCount;
+                            html += "</td>";
+
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += ShiftEndTime;
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += OutTime;
+                            html += "</td>";
+
+                            html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                            html += WorkingHour;
+                            html += "</td>";
+                            if (EmoStatus == "A") {
+                                html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua;color: #ff0404; font-size:11px' colspan='1'>";
+                                html += EmoStatus;
+                                html += "</td>";
+                            }
+                            else if (EmoStatus == "W") {
+                                html += "<td style='text-align:center;color: #7300f1;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                                html += EmoStatus;
+                                html += "</td>";
+                            }
+                            else if (EmoStatus == "Le") {
+                                html += "<td style='text-align:center;color: #c5b53b;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                                html += EmoStatus;
+                                html += "</td>";
+                            }
+                            else {
+                                html += "<td style='text-align:center;font-weight:bold;font-family:Book Antiqua; font-size:11px' colspan='1'>";
+                                html += EmoStatus;
+                                html += "</td>";
+                            }
+                            html += "</tr>";
+                        }
+                        html += "</table>";
+                        html += "</div>";
+                        $("#divReportViwer").append(html);
+
+
+                    }
+                    else {
+                        jQuery("#divReportViwer").html('');
+
+                        html += "<table style='width:100%;;margin-left: 17px;margin-right: 17px;margin-top: 10px;margin-bottom: 10px;' border = '1'>";
+                        html += "<tr>";
+                        html += "<td style='text-align:center;font-size:20px'font-family:Book Antiqua; colspan='9'>";
+                        html += "No data to preview!";
+                        html += "</td>";
+                        html += "</tr>";
+                        html += "</table>";
+                        html += "</div>";
+                        $("#divReportViwer").append(html);
+                    }
+
+                },
+
+                error: function (response) {
+                    var message = $("#message");
+                    message.css("color", "red");
+                    message.html("error");
+                }
+            });
+            //if ($("#ddlEmployee").val() == "") {
+            //    Toast.fire({
+            //        icon: 'error',
+            //        title: 'Please Select Employee',
+            //    })
+            //    return;
+            //}
+
+            //if ($("#txtFromDate").val() == "") {
+            //    Toast.fire({
+            //        icon: 'error',
+            //        title: 'Plz Select From Date',
+            //    })
+            //    return;
+            //}
+            //if ($("#txtToDate").val() == "") {
+            //    Toast.fire({
+            //        icon: 'error',
+            //        title: 'Plz select To Date',
+            //    })
+            //    return;
+            //}
+            //var FromDate = $('#txtFromDate').val();
+            //var ToDate = $('#txtToDate').val();
+            //var EmployeeID = $('#ddlEmployee').val();
+            //var url = '../ReportViewer/WbFromReportViwer.aspx?DARE=' + EmployeeID + '&FromDate=' + FromDate + '&ToDate=' + ToDate;
+            //window.open(url);
+
+    }
+
+    function DashboardEmployeeLeaveBalance() {
+        var EmployeeID = $("#txtEmpID").val();
+        var html = "";
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ShowEmployeeLeaveBalance", "Dashboard")',
+            data: { EmployeeID: EmployeeID },
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    jQuery("#divEmpLeeaveBalance").html('');
+
+                    for (var k = 0; k < data.length; k++) {
+                        html += "<ul class='products-list product-list-in-card pl-2 pr-2'>";
+                        html +="<li class='item'>";
+                        html +="<div class='product-img'>";
+                        html += "<i style='font-size: 13px;' class='fas fa-medkit mr-1'></i>";
+                        html +="</div>";
+                        html +="<div class='product-info'>";
+                        html +="<a href='javascript:void(0)' class='product-title' style='font-size: 11px;'>";
+                        html += data[k]["ShortName"];
+                        html += "<span class='badge badge-warning float-right' style='font-size: 10px;'>";
+                        html += 'Balance: ' + data[k]["Balance"];
+                        html += "</span>";
+                        html += "<span class='badge badge-warning float-right' style='font-size: 10px;'>";
+                        html += 'Taken: ' + data[k]["Taken"];
+                        html += "</span>";
+                        html += "<span class='badge badge-warning float-right' style='font-size: 10px;'>";
+                        html += 'YL: ' + data[k]["NoOfDay"];
+                        html += "</span>";
+                        html +="</a>";
+                        html +="</div>";
+                        html += "</li>";
+                        html += "</ul>";
+                        }
+                    $("#divEmpLeeaveBalance").append(html);
+                }
+            },
+            error: function (response) {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("error");
+            }
+        });
+    }
+</script>

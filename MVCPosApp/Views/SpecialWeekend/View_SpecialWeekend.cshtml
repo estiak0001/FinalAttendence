@@ -1,0 +1,808 @@
+﻿@model BusinessLogic.Repository.Model_CompannyWeekend
+@{
+    ViewBag.Title = "View_CompanyWeekend";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+    .ui-timepicker-container {
+        width: 150px !important;
+    }
+
+    .ui-timepicker {
+        width: 150px !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #2f384a;
+        /* border: 1px solid #aaa; */
+        border-radius: 4px;
+        cursor: default;
+        float: left;
+        margin-right: 5px;
+        margin-top: 5px;
+        padding: 0 5px;
+    }
+
+    .linkbutton1 {
+        border: 1px solid #2c7cb0;
+        font-size: 9px;
+        padding: 5px;
+        text-decoration: none;
+        height: 50px;
+        width: 60px;
+        padding-top: 13px;
+        background-color: #2c7cb0;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+
+    textarea {
+        width: 100% !important;
+    }
+
+    .dataTables_filter {
+        margin-left: -80px !important;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    .table-borderless td,
+    .table-borderless th {
+        border: 0;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 2px 10px;
+    }
+
+    #lnkID {
+        color:black;
+        font-weight:bolder;
+        cursor:pointer;
+    }
+
+    .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 31px !important;
+        width: 100% !important;
+    }
+
+    .table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+        background-color: #ffffff;
+        border-radius: 50px;
+    }
+
+    #tblDataList_info {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    #tblDataList_paginate {
+        font-size: 8px;
+        padding: 5px;
+    }
+
+    .dt-body-center {
+        text-align: center;
+    }
+    .inputName {
+        padding-top: 10px;
+    }
+</style>
+
+
+<section class="content-header" style="padding:0px">
+    <div class="container-fluid">
+        <div class="callout callout-info" style="padding-top: 10px;">
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-md-12 row">
+                    <ul class="breadcrumb float-sm-right" id="mymenu">
+                        <li class="" style="margin-right: 5px; margin-left: 5px;"><a href='@Url.Action("View_Company", "Company")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Company </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Department", "Department")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Department </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Designation", "Designation")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Designation </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("AddOrEdit", "AttendenceType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Att. Type </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_RosterScheduleEntry", "RosterScheduleEntry")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Roster</a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vw_Shift", "Shift")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Shift </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_CompanyWeekend", "CompanyWeekend")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_SpecialWeekend", "SpecialWeekend")' class=" btn btn-sm btn-outline-secondary active" style="text-decoration:none">Special Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_Holiday", "Holiday")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Holiday </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_LeaveType", "LeaveType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Leave Type </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary ">
+                    <div class="card-body shadow-lg bg-white rounded" style="padding: 10px; height:733px">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="inputName">Company</label>
+                                @Html.DropDownList("ddlCompany", (SelectList)ViewBag.LoadCompany, new { @class = "select22 form-control form-control-sm" })
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="inputName">Branch</label>
+                                @Html.DropDownList("ddlBranch", (SelectList)ViewBag.LoadBranch, "--Select Branch--", new { @class = "select22 form-control form-control-sm" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="inputName">Department</label>
+                                @Html.DropDownList("ddlDepartment", (SelectList)ViewBag.LoadDepartment, "--Select Department--", new { @class = "select22 form-control form-control-sm" })
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="inputName">Designation</label>
+                                @Html.DropDownList("ddlDesignation", (SelectList)ViewBag.LoadDesignation, "--Select Designation--", new { @class = "select22 form-control form-control-sm" })
+                            </div>
+                        </div>
+                        <div style=" padding-top: 17px; border-top: 1px solid black; margin-top: 15px;">
+                            <table id="tblRosterEmployee" class="table  table-sm" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="padding-left:18px"><input id="chkAll" name="chkAll" value="1" type="checkbox"></th>
+                                        <th style="text-align:left">Employee ID</th>
+                                        <th style="text-align:left">Employee Name</th>
+                                        <th style="text-align:left">Department</th>
+                                        @*<th style="text-align:center">Designation</th>*@
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span id="message"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label id="hidValue" style="display:none"></label>
+                            </div>
+                        </div>
+
+                        <div class="row no-print" style="margin-top: 9px; display:none;">
+                            <div class="col-12">
+                                <button type="button" style="border-radius:18px; font-size:12px; border: none; float:right " id="btnSubmit2" class=" btn-shadow btn-wide btn btn-success waves-effect waves-light">
+                                    <span class="btn-icon-wrapper pr-2 opacity-7"><i class="fas fa-plus"></i></span>Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-secondary" style="">
+                    <div class="" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Employee Weekend</h6>
+                            </div>
+                            @Html.Partial("_ActionButton")
+                        </div>
+                    </div>
+                    <div class="card-body shadow-lg bg-white rounded" style="padding: 10px;">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span id="message" cs></span>
+                            </div>
+                            <div class="col-lg-6">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label class="inputName">Employee WeekEnd Code</label>
+                                <input type="text" id="txtCompanyWeekendCode" class="form-control form-control-sm" readonly="readonly"
+                                       value="@(ViewBag.MaxWeekendID ?? String.Empty)">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-lg-8">
+                                <label class="inputName">Weekend</label>
+                                <span class="RedText">&nbsp;*</span>
+                                <select class="selectpicker select2 form-control form-control-sm" id="weekendInfo" multiple="multiple" placeholder="Short Name" name="WeekendInfo">
+                                    <option value="Saturday">Saturday</option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label class="inputName">Effect Date</label>
+                                <span class="RedText">&nbsp;*</span>
+                                <input type="text" id="txtEffectDate" placeholder="Effect Date" class="form-control form-control-sm" style="width:100%">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6" style="padding:15px">
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-secondary" style=" height: 471px;">
+                    <div class="card-body shadow-lg bg-white rounded" style=" padding: 0px;">
+                        <table id="tblDataList" class="table table-sm" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:start;padding-left:18px"><input id="chkAll" name="chkAll" value="1" type="checkbox"></th>
+                                    <th style="text-align:start">ID</th>
+                                    <th style="text-align:left">Emp. Name</th>
+                                    <th style="text-align:left">Weekend</th>
+                                    <th style="text-align:left">Effective Date</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:12px">
+            <div class="col-12">
+                <a href="#" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-up"></i></a>
+                <input type="submit" value="Home" class="btn btn-success float-right">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+
+
+
+<script type="text/javascript">
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 6000,
+
+    });
+
+    $(document).ready(function () {
+        var rows_selected = [];
+        var rows_selected2 = [];
+        var list = [];
+
+        var CompanyCode = "";
+        var DepartmentCode = "";
+        var DesignationCode = "";
+        var BranchCode = "";
+        LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, BranchCode, rows_selected);
+        LoadGrid(rows_selected2);
+
+
+        $("#txtCompanyName").keyup(function () {
+
+            $("#message").html("");
+        });
+
+        $(document).ready(function () {
+
+            $("input:text,form").attr("autocomplete", "off");
+        });
+
+        $(document).on("click", "#lnkID", function () {
+            var CompanyWeekEndCode = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "SpecialWeekend")',
+                data: { CompanyWeekendCode: CompanyWeekEndCode },
+                dataType: 'json',
+
+                success: function (data) {
+                    //var arr = [];
+                    if (data.Weekend != "" || data.Weekend == undefined) {
+                        var week = data.Weekend.split(',');
+                        //console.log(week);
+                        //for (var i = 0; i < week.length; i++) {
+                        //    if (week[i] == "Saturday") {
+                        //        arr.push(1);
+                        //    }
+                        //    else if (week[i] == "Sunday") {
+                        //        arr.push(2);
+                        //    }
+                        //    else if (week[i] == "Monday") {
+                        //        arr.push(3);
+                        //    }
+                        //    else if (week[i] == "Tuesday") {
+                        //        arr.push(4);
+                        //    }
+                        //    else if (week[i] == "Wednesday") {
+                        //        arr.push(5);
+                        //    }
+                        //    else if (week[i] == "Thursday") {
+                        //        arr.push(6);
+                        //    }
+                        //    else if (week[i] == "Friday") {
+                        //        arr.push(7);
+                        //    }
+                        //}
+                        //console.log(arr);
+                        $('#weekendInfo').val(week).trigger('change');
+                    }
+
+                    $('#txtCompanyWeekendCode').val(data.CompanyWeekEndCode);
+                    $('#txtEffectDate').val(data.EffectiveDate);
+
+
+                }
+            })
+        });
+
+
+        function Clear() {
+            //Reading text box values using Jquery
+            $('#txtEffectDate').val("");
+            $("#weekendInfo").val("").trigger('change');
+
+        }
+        $(".btngroup").click(function () {
+            $(".btn-group > .btn").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        function MaxID() {
+            $("#txtCompanyWeekendCode").val("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("MaxID", "SpecialWeekend")',
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    var message = $("#message");
+                    if (response) {
+                        $("#txtCompanyWeekendCode").val(response);
+                    }
+                    else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Already Exists");
+                    }
+                }
+            });
+        }
+
+
+        $('#btnSubmit').click(function (event) {
+
+            event.preventDefault();
+            //This prevents the default action
+            list = [];
+            var selected = $("#weekendInfo option:selected");
+
+            selected.each(function () {
+                var arr = {};
+                arr["CompanyWeekEndCode"] = $(this).text()
+                list.push (arr);
+            });
+
+
+
+            $.ajax({
+
+                async: true,
+                type: "POST",
+                url: '@Url.Action("View_SpecialWeekend", "SpecialWeekend")',
+
+                data: { //Passing data
+                    CompanyWeekEndCode: $("#txtCompanyWeekendCode").val(),
+                    WeekendLists: list,
+                    Empids: rows_selected,
+                    EffectiveDate: $("#txtEffectDate").val()
+
+                },
+                success: function (data) {
+
+                    if (data.success == true) {
+                        MaxID();
+                        Clear();
+                        LoadGrid(rows_selected2);
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.message
+                        })
+                    }
+                    else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.message
+                        })
+                    }
+                }
+
+            });
+
+        });
+
+        $('.select22').select2({
+            theme: "classic"
+        });
+
+        $('.selectpicker').select2({
+            placeholder: "--Select Weekend Day--",
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+        $('#txtEffectDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '2010:2100',
+            maxDate: '87Y'
+        });
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            MaxID();
+            Clear();
+        });
+        $('#btnDelete').click(function (event) {
+
+            if ($('tbody input[type="checkbox"]').is(":checked")) {
+                console.log(rows_selected);
+                if (confirm('Are you Sure to  Delete Data ?')) {
+                    event.preventDefault();
+                        DeleteMultiData();
+                }
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: "No Data Checked for Delete",
+                })
+            }
+        });
+
+        function DeleteMultiData() {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteMultiData", "SpecialWeekend")',
+                    data: { //Passing data
+                        WeekendLists: rows_selected,
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            MaxID();
+                            Clear();
+                            LoadGrid(rows_selected2);
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message,
+                            })
+                        }
+                        else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: data.message,
+                            })
+                        }
+                    }
+                });
+        }
+
+        $('#tblDataList tbody').on('click', 'input[type="checkbox"]', function (e) {
+            var $row = $(this).closest('tr');
+            var data = $('#tblDataList').DataTable().row($row).data();
+            var rowId = data["CompanyWeekEndCode"];
+            var ar = {};
+            ar["CompanyWeekEndCode"] = rowId;
+            var index = rows_selected.findIndex(x => x.CompanyWeekEndCode === rowId)
+            if (this.checked && index === -1) {
+                rows_selected.push(ar);
+            } else if (!this.checked && index !== -1) {
+                rows_selected.splice(index, 1);
+            }
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+            console.log(rows_selected);
+            updateDataTableSelectAllCtrl();
+            e.stopPropagation();
+        });
+
+        $('#tblDataList thead input[name="chkAll"]').on('click', function (e) {
+            rows_selected = [];
+            if (this.checked) {
+                $('#tblDataList tbody input[type="checkbox"]:not(:checked)').trigger('click');
+            } else {
+                $('#tblDataList tbody input[type="checkbox"]:checked').trigger('click');
+            }
+            console.log(rows_selected);
+            e.stopPropagation();
+        });
+
+        $('#ddlCompany').on('change', function () {
+
+            var DepartmentCode = "";
+            var CompanyCode = $("#ddlCompany").val();
+            var DesignationCode = "";
+            LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, BranchCode, rows_selected);
+        });
+
+        $('#ddlDepartment').on('change', function () {
+            var CompanyCode = "";
+            var DepartmentCode = $("#ddlDepartment").val();
+            var DesignationCode = "";
+            LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, BranchCode, rows_selected);
+        });
+
+        $('#ddlDesignation').on('change', function () {
+            var CompanyCode = "";
+            var DepartmentCode = "";
+            var DesignationCode = $("#ddlDesignation").val();
+            LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, BranchCode, rows_selected);
+        });
+
+        $('#ddlBranch').on('change', function () {
+            var CompanyCode = "";
+            var DepartmentCode = "";
+            var DesignationCode = "";
+            var branch = $("#ddlBranch").val();
+            LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, branch, rows_selected);
+        });
+
+        $('#tblRosterEmployee tbody').on('click', 'input[type="checkbox"]', function (e) {
+            var $row = $(this).closest('tr');
+            var data = $('#tblRosterEmployee').DataTable().row($row).data();
+            var rowId = data["EmployeeID"];
+            var ar = {};
+            ar["EmployeeID"] = rowId;
+            var index = rows_selected.findIndex(x => x.EmployeeID === rowId)
+            if (this.checked && index === -1) {
+                rows_selected.push(ar);
+            } else if (!this.checked && index !== -1) {
+                rows_selected.splice(index, 1);
+            }
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+            console.log(rows_selected);
+            updateDataTableSelectAllCtrl();
+            e.stopPropagation();
+        });
+
+        $('#tblRosterEmployee thead input[name="chkAll"]').on('click', function (e) {
+            rows_selected = [];
+            if (this.checked) {
+                $('#tblRosterEmployee tbody input[type="checkbox"]:not(:checked)').trigger('click');
+            } else {
+                $('#tblRosterEmployee tbody input[type="checkbox"]:checked').trigger('click');
+            }
+            console.log(rows_selected);
+            e.stopPropagation();
+        });
+    });
+
+    //eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('4 j(){k 9;9=$(\'#l\').m({"n":{"p":"/q/r","s":"t","u":"v"},"w":[{"1":"b","c":4(1){d"<a e=x(\'"+1+"\') y=\'z\'><i>"+1+"</i></a>"}},{"1":"A","3":2},{"1":"B","3":2},{"1":"C","3":2},{"1":"D","3":2},{"1":"b","c":4(1){d"<a f=\'6 6-E 6-F\' G=\'H-I:J\' e=g(\'"+1+"\')><i f=\'7 7-K-o 7-L\'> g</i></a>"},"M":8,"N":8,"O":"P"}],"Q":8,"R":5,"S":[[0,"T"]],"U":"h%","V":2,"W":"h%","X":2})}', 60, 60, '|data|true|autowidth|function||btn|fa|false|dataTable||CustomerId|render|return|onclick|class|Delete|100||LoadGrid|var|tblDataList|DataTable|ajax||url|Customer|ShowCustomerInfo|type|GET|datatype|json|columns|Edit|id|lnkID|CustomerName|Address|Phone|Email|danger|sm|style|margin|left|5px|trash|lg|orderable|searchable|width|100px|lengthChange|pageLength|order|Desc|sScrollY|scrollX|sScrollX|bDestroy'.split('|'), 0, {}))
+    function updateDataTableSelectAllCtrl() {
+        var $table = $('#tblDataList').DataTable().table().node();
+        var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+        var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+        var chkbox_select_all = $('thead input[name="chkAll"]', $table).get(0);
+
+        if ($chkbox_checked.length === 0) {
+            chkbox_select_all.checked = false;
+
+        } else if ($chkbox_checked.length === $chkbox_all.length) {
+            chkbox_select_all.checked = true;
+        } else {
+            chkbox_select_all.checked = false;
+        }
+    };
+
+    function LoadRosterEmployee(CompanyCode, DepartmentCode, DesignationCode, BranchCode, rows_selected) {
+
+        var table = $('#tblRosterEmployee').DataTable({
+                "ajax": {
+                "url": '@Url.Action("ShowRosterEmployee", "RosterScheduleEntry")',
+                "type": "GET",
+                "data": { CompanyCode: CompanyCode, DepartmentCode: DepartmentCode, DesignationCode: DesignationCode, BranchCode: BranchCode },
+
+                "datatype": "json"
+            },
+                "columns": [
+                { "data": "EmployeeID", defaultContent: '' },
+            { "data": "EmployeeID", "autowidth": true },
+                { "data": "FirstName", "autowidth": true },
+                { "data": "DepartmentName", "autowidth": true }
+                //{ "data": "DesignationName", "autowidth": true }
+             ],
+                'columnDefs': [{
+                    'targets': 0,
+                    'searchable': false,
+                    'orderable': false,
+                    'width': '1%',
+                    'className': 'dt-body-center',
+                    'render': function (data, type, full, meta){
+                        return '<input type="checkbox">';
+                    }
+                }],
+            'order': [[1, 'asc']],
+            "pageLength": 12,
+                'rowCallback': function (row, data, dataIndex) {
+                    // Get row ID
+                    var rowId = data[0];
+
+                    // If row ID is in the list of selected row IDs
+                    if ($.inArray(rowId, rows_selected) !== -1) {
+                        $(row).find('input[type="checkbox"]').prop('checked', true);
+                        $(row).addClass('selected');
+                    }
+                },
+                "lengthChange": true,
+            "pageLength": 10,
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "bDestroy": true,
+            });
+    }
+
+    function LoadGrid(rows_selected2) {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("showInfo", "SpecialWeekend")',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "CompanyWeekEndCode", defaultContent: '' },
+            {
+                "data": "CompanyWeekEndCode", "render": function (data) {
+                    return "<a class=''  id='lnkID'>" + data + "</a>"
+                }
+                },
+                
+                { "data": "EmployeeName", "autowidth": true },
+            { "data": "Weekend", "autowidth": true },
+             { "data": "EffectiveDate", "autowidth": true }
+            ],
+            'columnDefs': [{
+                'targets': 0,
+                'searchable': false,
+                'orderable': false,
+                'width': '1%',
+                'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox">';
+                }
+            }],
+            'rowCallback': function (row, data, dataIndex) {
+                // Get row ID
+                var rowId = data[0];
+
+                // If row ID is in the list of selected row IDs
+                if ($.inArray(rowId, rows_selected2) !== -1) {
+                    $(row).find('input[type="checkbox"]').prop('checked', true);
+                    $(row).addClass('selected');
+                }
+            },
+            "lengthChange": false,
+            "pageLength": 10,
+            "order": [[1, "Desc"]],
+
+            "bDestroy": true
+
+        });
+    }
+
+
+</script>
+
+@*<script>
+        $(document).on("blur", "input[name=CompanyName]",
+          function CheckAvailability() {
+              var CompanyName = $(this).val();
+              var CompanyCode = $('#txtCompanyWeekendCode').val();
+
+              $.ajax({
+                  type: "POST",
+                  url: '@Url.Action("CheckUsername", "Company")',
+                  data: '{CompanyCode: "' + CompanyCode + '",CompanyName :"' + CompanyName + '"}',
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  success: function (response) {
+                      var message = $("#message");
+                      if (response) {
+                      }
+                      else {
+
+                          Toast.fire({
+                              icon: 'error',
+                              title: 'Already Exists!'
+                          })
+                      }
+                  }
+              });
+          });
+    </script>*@
+
+

@@ -1,0 +1,1588 @@
+﻿
+@{
+    ViewBag.Title = "View_Leave";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<link href="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+    .RedText {
+        color: red;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+
+    textarea {
+        width: 100% !important;
+    }
+    /*.select2 {
+        width: 100% !important;
+    }
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: calc(1.7rem + 2px) !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 21px;
+        font-size: 11px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        display: block;
+        width: 100%;
+        height: calc(1.7rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        box-shadow: inset 0 0 0 transparent;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    .select2-results {
+        display: block;
+        background-color: #fffeed;
+        font-size: 11px;
+    }
+    .select2-selection:focus {
+        box-shadow: 0 0 5pt 2pt #D3D3D3;
+        background: #fffeed;
+    }*/
+    #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+
+    .dataTables_filter {
+        margin-left: -80px !important;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    /*.table-borderless td,
+    .table-borderless th {
+        border: 0;
+    }*/
+
+    /*table.dataTable tbody th, table.dataTable tbody td {
+        padding: 0px 10px;
+        vertical-align: middle;
+    }*/
+
+    #lnkID {
+        color:blue;
+        cursor:pointer;
+    }
+    .tdclass{
+        text-align:center;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        white-space: nowrap;
+        padding-left: 10px;
+    }
+
+    /*.table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+        background-color: #ffffff;
+        border-radius: 50px;
+    }*/
+    /*#tblDataList_info, #tblEmployeeApprovedLeave_info, #tblLeaveStockBalance_info {
+        color: #9e8e12;
+        padding: 15px;
+    }*/
+    /*#tblDataList_paginate, #tblEmployeeApprovedLeave_paginate, #tblLeaveStockBalance_paginate {
+        font-size: 8px;
+        padding: 5px;
+    }*/
+    .dt-body-center {
+        text-align: center;
+    }
+
+    .even {
+        background-color: #f9fafb;
+    }
+
+    #status {
+        color: #ffffff;
+        background-color: #009844;
+        width: 80px;
+        border-radius: 50px;
+        height: 31px;
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: -webkit-baseline-middle;
+    }
+
+    #status2 {
+        color: #000000;
+        background-color: #ff8d8d;
+        width: 80px;
+        border-radius: 50px;
+        height: 31px;
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: -webkit-baseline-middle;
+    }
+
+    #status3 {
+        color: #000000;
+        background-color: #f9e345;
+        width: 80px;
+        border-radius: 50px;
+        height: 31px;
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: -webkit-baseline-middle;
+    }
+
+    .truncate {
+        float: right;
+        padding-right: 5px;
+        background-color: #d8d7d4;
+        border-radius: 15px;
+        border: none;
+    }
+
+    .center-div {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+
+    .spinner {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: Black;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+        -moz-opacity: 0.8;
+    }
+
+    .loader {
+        margin: auto;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #15a0ec;
+        border-bottom: 16px solid #15a0ec;
+        width: 20px;
+        height: 80px;
+    }
+
+    .inner-div {
+        background-color: white;
+        border-radius: 15px;
+        margin: auto;
+        padding: 2%;
+        width: 150px;
+    }
+
+    .event a {
+        background-color: #178a6a !important;
+        background-image: none !important;
+        color: #ffffff !important;
+    }
+
+    .calenderclass .ui-datepicker {
+        width: 100%;
+        padding: 20px;
+        display: none;
+        height: 100%;
+        border:none;
+    }
+
+        .calenderclass .ui-datepicker td {
+            border: 0;
+            padding: 3px;
+        }
+
+    .calenderclass element.style {
+        display: block;
+        background-color: ghostwhite;
+    }
+
+    .calenderclass .ui-datepicker .ui-datepicker-header {
+        position: relative;
+        padding: .2em 0;
+        border-radius: 40px;
+        background-color: #69d75f;
+        color: black;
+    }
+
+    .calenderclass .ui-datepicker .ui-datepicker-prev {
+        left: 2px;
+        border-radius: 50%;
+        padding: 7px;
+    }
+
+    .calenderclass .ui-datepicker .ui-datepicker-next {
+        right: 2px;
+        border-radius: 50%;
+        padding: 7px;
+    }
+    /*    .calenderclass .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+        border: 1px solid #4fa0df;
+        background: #f6f6f6;
+        font-weight: normal;
+        color: #000000;
+    }*/
+    .calenderclass .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+        background: #fff;
+        font-weight: normal;
+        color: #454545;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    /*.calenderclass .ui-datepicker td span, .ui-datepicker td a {
+        display: block;
+        padding: .2em;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 20px;
+    }*/
+    .calenderclass .ui-datepicker td span, .ui-datepicker td a {
+        display: block;
+        padding: .2em;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    button, input {
+        overflow: hidden;
+    }
+
+    .inputboxPadding {
+        padding: 10px;
+    }
+
+/*    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.7rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        line-height: 1.8;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        box-shadow: inset 0 0 0 transparent;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }*/
+
+    #ui-datepicker-div {
+        width: 292px;
+    }
+
+    input {
+        width: 100%;
+        height: 25px;
+        text-indent: 5px;
+        font-size: 12.6pt;
+        border-radius: 5px;
+        border: solid 1.5px #D3D3D3;
+        -webkit-transition: 1s; /* Safari */
+        transition: 1s;
+    }
+
+        input[type=text]:hover {
+            box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+            background: #fffeed;
+        }
+
+        input[type=text]:focus {
+            box-shadow: 0 0 5pt 2pt #D3D3D3;
+            outline-width: 0px;
+            background: #fffeed;
+        }
+
+
+
+    data-val-required {
+        color: brown;
+    }
+    
+    .ui-datepicker td.ui-state-disabled > span {
+        background: #2626273d;
+    }
+
+    .ui-datepicker td.ui-state-disabled {
+        opacity: 100;
+    }
+
+    .swal2-popup.swal2-toast {
+        flex-direction: row;
+        align-items: center;
+        width: auto;
+        padding: .625em;
+        overflow-y: hidden;
+        background: #f8f9fa;
+        box-shadow: 0 0 0.8em #000000b0;
+        height: 85px;
+    }
+
+        .swal2-popup.swal2-toast .swal2-title {
+            flex-grow: 1;
+            justify-content: flex-start;
+            margin: 0 .6em;
+            font-size: 1.1em;
+            color: #f27474;
+        }
+
+    .callout.callout-danger {
+        border-left-color: #5f9ea0;
+        padding-top: 9px;
+        padding-bottom: 4px;
+    }
+    .inputName{
+        padding-top: 5px;
+    }
+</style>
+
+
+<section class="content-header" style="padding:0px">
+    <div class="container-fluid">
+        <div class="callout callout-info" style="padding-top: 10px;">
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-md-6">
+                    <i class="fas fa-save" style="font-size:20px; color:black"> Leave Application Entry</i>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Leave Application Entry</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        @*<div id="divLoader" style="display:none;"> </div>*@
+        <div id="divLoader" class="spinner" style="display:none">
+            <div class="center-div">
+                <div class="inner-div">
+                    <div class="spinner-border d-flex justify-content-center text-primary loader"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card card-secondary shadow-lg bg-white rounded" style="padding: 0px; height: 700px;">
+                    <div class="" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Leave Info</h6>
+                            </div>
+                            @Html.Partial("_ActionButton")
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding:0px">
+                        <div class="shadow-lg bg-white rounded" style="padding:10px; margin-bottom:10px">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span id="message"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label id="hidValue" style="display:none"></label>
+                                    <input type="text" style="display:none" id="txtAccessCode" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.AccessCode ?? String.Empty)">
+                                    <input type="text" style="display:none" id="txtWeekend" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.LoadWeekend ?? String.Empty)">
+                                </div>
+                            </div>
+                            <div class="row" style="display:none">
+                                <div class="col-lg-6">
+                                    <label class="inputName">ID</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="text" id="txtLeaveAppEntryId" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.MaxComID ?? String.Empty)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label style="" class="inputName">Employee ID</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @if (ViewBag.AccessCode != "001")
+                                    {
+                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownList("ddlEmployee", (SelectList)ViewBag.LoadEmployee, "--Select Employee--", new { @class = "form-control form-control-sm select2" })
+                                    }
+                                </div>
+                                <div class="col-lg-6">
+                                    <label style="" class="inputName">Name</label>
+                                    @*<label id="lblEmployeeName" class="form-control " style="width:100%;" />*@
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblEmployeeName" placeholder="Name" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label style="" class="inputName">Department</label>
+                                    @*<label id="lblDepartment" class="form-control" style="width:100%;" />*@
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblDepartment" placeholder="Department" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label style="" class="inputName">Designation</label>
+                                    @*<label id="lblDesignation" class="form-control" style="width:100%;" />*@
+                                    <input type="text" class="form-control form-control-sm" readonly="readonly" id="lblDesignation" placeholder="Designation" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Immediate Supervisor</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlBossEmpAutoId", (SelectList)ViewBag.LoadIS, "--Select Immediate Supervisor--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Head of Department</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlHOD", (SelectList)ViewBag.LoadHOD, "--Select Head of Department--", new { @class = "form-control form-control-sm", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding:10px">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Apply Leave Format</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlApplyLeaveFormat", (SelectList)ViewBag.LoadLeaveFormat, "--Select Leave Format--", new { @class = "form-control form-control-sm" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Leave Type</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    @Html.DropDownList("ddlLeaveTypeId", (SelectList)ViewBag.LoadLeaveType, "--Select Leave Type--", new { @class = "form-control form-control-sm" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label class="inputName">Date From</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtStartDate" placeholder="Date From" />
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label class="inputName">To</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtEndDate" placeholder="To" />
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="inputName">Day(s)</label>
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control form-control-sm" readonly="readonly" id="txtNoOfDay" placeholder="Total Days" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divleaveformat" class="row" style="display:none;">
+                                <div class="col-lg-4">
+                                    <label class="inputName">From Time</label>
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control form-control-sm timepicker" id="fromTime" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="inputName">To</label>
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control form-control-sm timepicker" id="toTime" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="inputName">Time(s)</label>
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control form-control-sm" readonly="readonly" id="totalTime" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="inputName">Reason</label>
+                                    <textarea id="txtReason" rows="3" placeholder="Reason Entry"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="inputName">File Attachment</label>
+                                    <span class="RedText">&nbsp;(PDF/Word file Only)</span>
+                                    <input type="file" class="form-control form-control-sm" id="fileUpload" style="padding:1px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card card-secondary">
+                    <div class="" style="padding:0px;">
+                        <h5 style=" margin: 3px; text-align: center;">Leave Balance</h5>
+                    </div>
+                    <div class="card-body" style=" padding: 10px; background-color: #ffffff;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table id="tblLeaveStockBalance" class="table table-sm table-striped  table-hover" style="width:100%; ">
+                                    <thead>
+                                        <tr style="">
+                                            <th style="text-align:left">Leave Type</th>
+                                            <th style="text-align:center">Yearly Leave</th>
+                                            <th style="text-align:center">Leave Taken</th>
+                                            <th style="text-align:center">Ballence</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <div style="">
+                    <div class="card card-secondary" style="height: 466px;">
+                        <div style="" class="calenderclass" id="datepicker"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-secondary">
+            <div class="card-body" style=" padding: 0px; background-color: #F9FBFE;">
+                <table id="tblDataList" class="table" style="width:100%; font-size: 14px;">
+                    <thead>
+                        <tr style=" background-color: #69d75f; border-radius: 50px; color: black">
+                            <th style="text-align:left">ID</th>
+                            <th style="text-align:left">Emp. ID</th>
+                            <th style="text-align:left">Name</th>
+                            <th style="text-align:left">Apply Date</th>
+                            <th style="text-align:left">Start Date</th>
+                            <th style="text-align:left">End Date</th>
+                            <th style="text-align: left">No. Day(s)</th>
+                            <th style="text-align: left">Leave Type</th>
+                            <th style="text-align: left">Status</th>
+                            <th style="">Reason</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+<script type="text/javascript">
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'center',
+        showConfirmButton: true,
+        timer: 6000,
+    });
+    $(document).ready(function () {
+        var EmployeeID = "";
+        LoadGrid(EmployeeID);
+        var AccessCode = $("#txtAccessCode").val();
+        var weekend = $("#txtWeekend").val();
+        var weekSplit = weekend.split(",").map(Number);
+        var WeekendDays = [];
+        var leavedate = [];
+        var dates;
+        var LeaveIDForFile;
+        for (var i = 0; i < weekSplit.length; i++) {
+            WeekendDays.push(weekSplit[i]);
+            }
+        var EmployeeID = "";
+        LoadEmployeeLeaveBalance(EmployeeID);
+        console.log(WeekendDays);
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            Clear();
+        });
+        $('.select2').select2();
+        function addDate(date) {
+            console.log(date);
+            if (jQuery.inArray(date, dates) < 0) {
+                //var formatedDate = formats(date);
+                dates.push(date);
+                //$('#txtStartDate').val(formatedDate);
+                //$('#txtEndDate').val(formatedDate);
+            }
+        }
+
+        function removeDate(index) {
+            dates.splice(index, 1);
+        }
+        // Adds a date if we don't have it yet, else remove it
+        function addOrRemoveDate(date) {
+            var index = jQuery.inArray(date, dates);
+            if (index >= 0) {
+                removeDate(index);
+                var StartDate = $('#txtStartDate').val();
+                var EndDate = $('#txtEndDate').val();
+                var fd = new Date(StartDate.split("/").reverse().join("-"));
+                var Fdd = fd.getDate();
+                var Fmm = fd.getMonth() + 1;
+                var Fyy = fd.getFullYear();
+                var newFromdate = Fyy + "/" + Fmm + "/" + Fdd;
+                var fd2 = new Date(EndDate.split("/").reverse().join("-"));
+                var Fdd2 = fd2.getDate();
+                var Fmm2 = fd2.getMonth() + 1;
+                var Fyy2 = fd2.getFullYear();
+                var newTomdate = Fyy2 + "/" + Fmm2 + "/" + Fdd2;
+                if (new Date(newFromdate).toDateString() === new Date(date).toDateString()) {
+                    if (dates.length != 0) {
+                        var newFromdates = IncrementDate(date);
+                        $('#txtStartDate').val(newFromdates);
+                    }
+                    else {
+                        $("#txtStartDate").val("");
+                        $("#txtNoOfDay").val("");
+                        $("#txtEndDate").val("");
+                        $('#datepicker').val("");
+                    }
+                }
+                if (new Date(newTomdate).toDateString() === new Date(date).toDateString()) {
+
+                    if (dates.length != 0) {
+                        var newTodates = DecremntDate(date);
+                        $('#txtEndDate').val(newTodates);
+                    }
+                    else {
+                        $("#txtStartDate").val("");
+                        $("#txtNoOfDay").val("");
+                        $("#txtEndDate").val("");
+                        $('#datepicker').val("");
+                    }
+                }
+            }
+            else {
+                addDate(date);
+                var StartDate = $('#txtStartDate').val();
+                var EndDate = $('#txtEndDate').val();
+                var fd = new Date(StartDate.split("/").reverse().join("-"));
+                var Fdd = fd.getDate();
+                var Fmm = fd.getMonth() + 1;
+                var Fyy = fd.getFullYear();
+                var newFromdate = Fyy + "/" + Fmm + "/" + Fdd;
+                var fd2 = new Date(EndDate.split("/").reverse().join("-"));
+                var Fdd2 = fd2.getDate();
+                var Fmm2 = fd2.getMonth() + 1;
+                var Fyy2 = fd2.getFullYear();
+                var newTomdate = Fyy2 + "/" + Fmm2 + "/" + Fdd2;
+                if (new Date(newFromdate) > new Date(date)) {
+                    var newFromdates = formats(date);
+                    $('#txtStartDate').val(newFromdates);
+                }
+                if (new Date(newTomdate) < new Date(date)) {
+                    var newTodates = formats(date);
+                    $('#txtEndDate').val(newTodates);
+                }
+            }
+        }
+
+        // Takes a 1-digit number and inserts a zero before it
+        function padNumber(number) {
+            var ret = new String(number);
+            if (ret.length == 1) ret = "0" + ret;
+            return ret;
+        }
+
+        $("#datepicker").datepicker({
+            onSelect: function (dateText, inst) {
+                if ($("#ddlApplyLeaveFormat").val() == 'FullLeave') {
+                    addOrRemoveDate(dateText);
+                }
+                $('#txtNoOfDay').val(dates.length);
+            },
+            beforeShowDay: function (date) {
+                var year = date.getFullYear();
+                // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
+                var month = padNumber(date.getMonth() + 1);
+                var day = padNumber(date.getDate());
+                // This depends on the datepicker's date format
+                var dateString = month + "/" + day + "/" + year;
+
+                var gotDate = jQuery.inArray(dateString, dates);
+                var lvDate = jQuery.inArray(dateString, leavedate);
+                var weekendDay = jQuery.inArray(date.getDay(), WeekendDays);
+
+                if (weekendDay >= 0) {
+                    // Enable date so it can be deselected. Set style to be highlighted
+                    return [false, "", "Weekend"];
+                }
+                if (gotDate >= 0) {
+                    return [true, "event", 'Selected for Leave Apply!'];
+                }
+                if (lvDate >= 0) {
+                    return [false, "event", 'Selected for Leave Apply!'];
+                }
+                // Dates not in the array are left enabled, but with no extra style
+
+                return [true, ""];
+            },
+            //yearRange: '2010:2100',
+            //maxDate: '87Y',
+            //minDate: '0',
+        });
+
+        //end
+
+
+        ///New
+        if (AccessCode != "001") {
+            //$('#ddlEmployee').val(1).trigger('change.select2');
+            $("#ddlEmployee").prop("selectedIndex", 1);
+            $("#ddlBossEmpAutoId").prop("selectedIndex", 1);
+            $("#ddlHOD").prop("selectedIndex", 1);
+            GetEmployeeInfo();
+            var EmployeeID = $("#ddlEmployee").val();
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ShowLevaeDatesForEmployee", "LeaveApply")',
+                    data: { EmployeeID: EmployeeID },
+                    dataType: "json",
+                    success: function (data) {
+                        doWork(data);
+                    }
+                });
+        }
+
+        function MaxID() {
+            $("#txtLeaveAppEntryId").val("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("MaxNo", "LeaveApply")',
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var message = $("#message");
+                    if (response) {
+                        $("#txtLeaveAppEntryId").val(response);
+                    }
+                    else {
+
+                        message.css("color", "red");
+                        message.html("Already Exists");
+                    }
+                }
+            });
+        }
+        //estiak start
+        $('#ddlApplyLeaveFormat').on('change', function () {
+            //alert($("#ddlApplyLeaveFormat").val());
+            if ($("#ddlApplyLeaveFormat").val() == 'FullLeave') //I'm supposing the "Other" option value is 0.
+                {
+                $("#divleaveformat").hide();
+                $("#txtEndDate").datepicker("option", "disabled", false);
+                }
+            else if ($("#ddlApplyLeaveFormat").val() == 'ShortLeave') {
+                $("#divleaveformat").show();
+                $("#txtEndDate").datepicker("option", "disabled", true);
+            }
+            else {
+                $("#divleaveformat").hide();
+                $("#txtEndDate").datepicker("option", "disabled", false);
+            }
+
+        });
+//estiak end
+
+        function Clear() {
+            MaxID();
+            $("#lblEmployeeName").val("");
+            $("#lblDepartment").val("");
+            $("#lblDesignation").val("");
+            //Reading text box values using Jquery
+            $("#hidValue").text("");
+            $("#ddlEmployee").val("").change();
+            $("#ddlBossEmpAutoId").val("").change();
+            $("#ddlHOD").val("").change();
+            $("#ddlApplyLeaveFormat").val("").change();
+            $("#ddlLeaveTypeId").val("").change();
+            $("#txtStartDate").val("");
+            $("#txtNoOfDay").val("");
+            $("#txtEndDate").val("");
+            $("#txtReason").val("");
+            $("#message").html("");
+            dates = "";
+            $("#datepicker").datepicker("refresh");
+            $("#fileUpload").val("");
+        }
+        $('.timepicker').datetimepicker({
+            format: 'hh:mm A',
+            stepping: 1,
+            icons:
+            {
+                up: 'fa fa-angle-up',
+                down: 'fa fa-angle-down'
+            }
+        });
+
+        //eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('4 j(){k 9;9=$(\'#l\').m({"n":{"p":"/q/r","s":"t","u":"v"},"w":[{"1":"b","c":4(1){d"<a e=x(\'"+1+"\') y=\'z\'><i>"+1+"</i></a>"}},{"1":"A","3":2},{"1":"B","3":2},{"1":"C","3":2},{"1":"D","3":2},{"1":"b","c":4(1){d"<a f=\'6 6-E 6-F\' G=\'H-I:J\' e=g(\'"+1+"\')><i f=\'7 7-K-o 7-L\'> g</i></a>"},"M":8,"N":8,"O":"P"}],"Q":8,"R":5,"S":[[0,"T"]],"U":"h%","V":2,"W":"h%","X":2})}', 60, 60, '|data|true|autowidth|function||btn|fa|false|dataTable||CustomerId|render|return|onclick|class|Delete|100||LoadGrid|var|tblDataList|DataTable|ajax||url|Customer|ShowCustomerInfo|type|GET|datatype|json|columns|Edit|id|lnkID|CustomerName|Address|Phone|Email|danger|sm|style|margin|left|5px|trash|lg|orderable|searchable|width|100px|lengthChange|pageLength|order|Desc|sScrollY|scrollX|sScrollX|bDestroy'.split('|'), 0, {}))
+        $('#btnSubmit').click(function (event) {
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#ddlEmployee").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please Select Employee',
+                })
+                return;
+            }
+
+            if ($("#ddlApplyLeaveFormat").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please Select Leave Format',
+                })
+                return;
+            }
+            if ($("#ddlLeaveTypeId").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please select Leave Type',
+                })
+                return;
+            }
+            if ($("#txtStartDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please select Start Date',
+                })
+                return;
+            }
+            if ($("#txtEndDate").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please select End date',
+                })
+                return;
+            }
+            if ($("#txtNoOfDay").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '...Please select Start Date & End Date',
+                })
+                return;
+            }
+            var reson = $("#txtReason").val();
+            if (reson == "") {
+                reson = "Reason not submited!"
+            }
+            LeaveIDForFile = $("#txtLeaveAppEntryId").val();
+            if ($("#fileUpload").val() != "") {
+                uploadFile(LeaveIDForFile);
+            }
+            console.log(dates);
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: '@Url.Action("View_Leave", "LeaveApply")',
+                data: { //Passing data
+
+                    LeaveAppEntryId: $("#txtLeaveAppEntryId").val(),
+                    EmployeeId: $("#ddlEmployee").val(), //Reading text box values using Jquery
+                    BossEmpAutoId: $("#ddlBossEmpAutoId").val(),
+                    HOD: $("#ddlHOD").val(),
+                    ApplyLeaveFormat: $("#ddlApplyLeaveFormat").val(),
+                    LeaveTypeId: $("#ddlLeaveTypeId").val(),
+                    StartDate: $("#txtStartDate").val(),
+                    NoOfDay: $("#txtNoOfDay").val(),
+                    EndDate: $("#txtEndDate").val(),
+                    Reason: reson,
+                    ShortLeaveFrom: $("#fromTime").val(),
+                    ShortLeaveTo: $("#toTime").val(),
+                    ShortLeaveTime: $("#totalTime").val(),
+                    LeaveDaysList: dates
+                    //ProfileImageUpload: fileData
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        Clear();
+                        LoadGrid(EmployeeID);
+                        Swal.fire("Success!", data.message, "success");
+                        //Toast.fire({
+                        //    icon: 'success',
+                        //    title: '    Data Save Successfully!'
+                        //})
+                    }
+                    else {
+                        Swal.fire("Leave Application process failed!", data.message, "error");
+                        //Toast.fire({
+                        //    icon: 'error',
+                        //    title: data.message,
+                        //})
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        });
+
+        function uploadFile(LeaveIDForFile) {
+
+            // Checking whether FormData is available in browser
+            if (window.FormData !== undefined) {
+                var fileUpload = $("#fileUpload").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    var streetaddress = files[i].name.split('.')[1];
+                    var t = LeaveIDForFile + "." + streetaddress;
+                    //alert(t);
+                    fileData.append(files[i].name, files[i], t);
+                }
+
+                // Adding one more key to FormData object
+                //fileData.append('username', 'Manas');
+
+                $.ajax({
+                    url: '@Url.Action("UploadFiles", "LeaveApply")',
+                    type: "POST",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: fileData,
+                    success: function (result) {
+                        //alert(result);
+                    },
+                    error: function (err) {
+                        //alert(err.statusText);
+                    }
+                });
+            } else {
+                alert("FormData is not supported.");
+            }
+        };
+
+        function getNameFromPath(strFilepath) {
+            var objRE = new RegExp(/([^\/\\]+)$/);
+            var strName = objRE.exec(strFilepath);
+            if (strName == null) {
+                return null;
+            }
+            else {
+                return strName[0];
+            }
+        }
+
+        //$("#fileUpload").change(function () {
+        //    var fileExtension = ['pdf', 'PDF', 'DOCX', 'docx'];
+        //    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        //        alert("Only formats are allowed : " + fileExtension.join(', '));
+        //        //return false;
+        //    }
+        //});
+
+        $(function () {
+            $("#fileUpload").change(function () {
+                var file = getNameFromPath($(this).val());
+                if (file != null) {
+                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                    switch (extension) {
+                        case 'PDF':
+                        case 'DOCX':
+                        case 'pdf':
+                        case 'docx':
+                            flag = true;
+                            break;
+                        default:
+                            flag = false;
+                    }
+                }
+                if (flag == false) {
+                    alert("You can upload only 'Pdf' or 'Word' file");
+                    //$("#validationTxt").text("You can upload only jpg,png,gif extension file");
+                    $("#fileUpload").val("");
+                    return false;
+                }
+            });
+        });
+
+        $('#btnDelete').click(function (event) {
+            event.preventDefault();
+
+            var DeletedID = $('#txtLeaveAppEntryId').val();
+            Delete(DeletedID);
+        });
+
+        // Start SelectPicker//
+
+        function getDiff() {
+
+
+        }
+
+        function timeobject(t) {
+            a = t.replace('AM', '').replace('PM', '').split(':');
+            h = parseInt(a[0]);
+            m = parseInt(a[1]);
+            ampm = (t.indexOf('AM') !== -1) ? 'AM' : 'PM';
+            return { hour: h, minute: m, ampm: ampm };
+        }
+
+        function timediff(s, e) {
+            s = timeobject(s);
+            e = timeobject(e);
+            e.hour = (e.ampm === 'PM' && s.ampm !== 'PM' && e.hour < 12) ? e.hour + 12 : e.hour;
+            hourDiff =  Math.abs(e.hour - s.hour);
+            minuteDiff = (e.minute - s.minute);
+
+            if (minuteDiff < 0) {
+                minuteDiff = Math.abs(60 + minuteDiff);
+                hourDiff = hourDiff - 1;
+            }
+
+            //var e = hourDiff + ':' + Math.abs(minuteDiff) + ' ' + ampm;
+            var e = hourDiff + ':' + Math.abs(minuteDiff);
+            var h;
+            var m;
+            var r = e.split(':');
+
+            if (parseInt(r[0]) < 10) {
+                h = "0" + parseInt(r[0]);
+            }
+            else {
+                h = r[0];
+            }
+            if (parseInt(r[1]) < 10) {
+                m = "0" + parseInt(r[1]);
+            }
+            else {
+                m = r[1];
+            }
+            //var hours = parseInt(e.split(':')[0], 10) - parseInt(s.split(':')[0], 10);
+
+            //// if negative result, add 24 hours
+            //if (hours < 0) hours = 24 + hours;
+            //$('#totalTime').val(hours + ':' + '00');
+
+            $('#totalTime').val(h+ ':' + m);
+        }
+
+        $("#fromTime").on("dp.change", function (e) {
+            $('#toTime').data("DateTimePicker").minDate(e.date);
+            var a = $("#fromTime").val();
+            var b = $("#toTime").val();
+            timediff(b, a);
+        });
+        $("#toTime").on("dp.change", function (e) {
+            var a = $("#fromTime").val();
+            var b = $("#toTime").val();
+            timediff(b, a);
+        });
+
+        $('#txtStartDate').datepicker({
+
+            onSelect: function (date) {
+                var FromDate = $('#txtStartDate').val();
+                $('#txtEndDate').val(FromDate);
+                var fd = new Date(FromDate.split("/").reverse().join("-"));
+                var Fdd = fd.getDate();
+                var Fmm = fd.getMonth() + 1;
+                var Fyy = fd.getFullYear();
+                var newFromdate = Fyy + "/" + Fmm + "/" + Fdd;
+                var EndDate = $('#txtEndDate').val();
+                var ed = new Date(EndDate.split("/").reverse().join("-"));
+                var Edd = ed.getDate();
+                var Emm = ed.getMonth() + 1;
+                var Eyy = ed.getFullYear();
+                var newEnddate = Eyy + "/" + Emm + "/" + Edd;
+                const oneDay = 24 * 60 * 60 * 1000;
+                const firstDate = new Date(newFromdate);
+                const secondDate = new Date(newEnddate);
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                //$('#txtNoOfDay').val(diffDays + 1);
+                var d1 = new Date(newFromdate);
+                var d2 = new Date(newEnddate);
+                dates = getDateArray(d1, d2, WeekendDays, leavedate);
+                $('#txtNoOfDay').val(dates.length);
+                $("#datepicker").datepicker("refresh");
+            },
+            beforeShowDay: function (date) {
+                var year = date.getFullYear();
+                // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
+                var month = padNumber(date.getMonth() + 1);
+                var day = padNumber(date.getDate());
+                // This depends on the datepicker's date format
+                var dateString = month + "/" + day + "/" + year;
+                var weekendDay = jQuery.inArray(date.getDay(), WeekendDays);
+                var lvDate = jQuery.inArray(dateString, leavedate);
+                if (weekendDay >= 0) {
+                    // Enable date so it can be deselected. Set style to be highlighted
+                    return [false, "", "Weekend"];
+                }
+                if (lvDate >= 0) {
+                    return [false, "event", 'Selected for Leave Apply!'];
+                }
+                // Dates not in the array are left enabled, but with no extra style
+                return [true, ""];
+            },
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            //yearRange: '2010:2100',
+            //maxDate: '87Y',
+            //minDate: '0',
+        });
+        $('#txtEndDate').datepicker({
+            onSelect: function (date) {
+                var FromDate = $('#txtStartDate').val();
+                var fd = new Date(FromDate.split("/").reverse().join("-"));
+                var Fdd = fd.getDate();
+                var Fmm = fd.getMonth() + 1;
+                var Fyy = fd.getFullYear();
+                var newFromdate = Fyy + "/" + Fmm + "/" + Fdd;
+                var EndDate = $('#txtEndDate').val();
+                var ed = new Date(EndDate.split("/").reverse().join("-"));
+                var Edd = ed.getDate();
+                var Emm = ed.getMonth() + 1;
+                var Eyy = ed.getFullYear();
+                var newEnddate = Eyy + "/" + Emm + "/" + Edd;
+                const oneDay = 24 * 60 * 60 * 1000;
+                const firstDate = new Date(newFromdate);
+                const secondDate = new Date(newEnddate);
+                const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+                //$('#txtNoOfDay').val(diffDays + 1);
+                var d1 = new Date(newFromdate);
+                var d2 = new Date(newEnddate);
+                dates = getDateArray(d1, d2, WeekendDays, leavedate);
+                console.log(dates);
+                $('#txtNoOfDay').val(dates.length);
+                $("#datepicker").datepicker("refresh");
+            },
+            beforeShowDay: function (date) {
+                var year = date.getFullYear();
+                // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
+                var month = padNumber(date.getMonth() + 1);
+                var day = padNumber(date.getDate());
+                // This depends on the datepicker's date format
+                var dateString = month + "/" + day + "/" + year;
+                var weekendDay = jQuery.inArray(date.getDay(), WeekendDays);
+                var lvDate = jQuery.inArray(dateString, leavedate);
+                if (weekendDay >= 0) {
+                    // Enable date so it can be deselected. Set style to be highlighted
+                    return [false, "", "Weekend"];
+                }
+                if (lvDate >= 0) {
+                    return [false, "event", 'Selected for Leave Apply!'];
+                }
+                // Dates not in the array are left enabled, but with no extra style
+                return [true, ""];
+            },
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            //yearRange: '2010:2100',
+            //maxDate: '87Y'
+        });
+
+
+        $("input:text,form").attr("autocomplete", "off");
+        function Delete(LeaveAppEntryId) {
+            if (confirm('Are you Sure to  Delete Data ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "LeaveApply")/' + LeaveAppEntryId,
+                    success: function (data) {
+                        if (data.success == true) {
+                            Clear();
+                            LoadGrid(EmployeeID);
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message,
+                            })
+                        }
+                        else {
+                        }
+                    }
+                });
+            }
+        }
+
+        $(document).on("click", "#lnkID", function () {
+            $("#divLoader").show();
+            var LeaveAppEntryId = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "LeaveApply")',
+                data: { LeaveAppEntryId: LeaveAppEntryId },
+                dataType: 'json',
+                success: function (data) {
+                    $('#txtLeaveAppEntryId').val(data.LeaveAppEntryId);
+                    $('#hidValue').text(data.LeaveAppEntryId);
+                    $('#ddlEmployee').val(data.EmployeeID).change();
+                    GetEmployeeInfo();
+                    LoadEmployeeLeaveBalance(data.EmployeeID);
+                    //LoadEmployeeApprovedGrid(data.EmployeeID);
+                    $('#ddlBossEmpAutoId').val(data.BossEmpAutoId).change();
+                    $('#ddlHOD').val(data.HOD).change();
+                    $('#ddlApplyLeaveFormat').val(data.ApplyLeaveFormat).change();
+                    $('#ddlLeaveTypeId').val(data.LeaveTypeId).change();
+                    $('#txtStartDate').val(data.StartDate);
+                    $('#txtNoOfDay').val(data.NoOfDay);
+                    $('#txtEndDate').val(data.EndDate);
+                    $('#txtReason').val(data.Reason);
+                    $('#fromTime').val(data.ShortLeaveFrom);
+                    $('#toTime').val(data.ShortLeaveTo);
+                    $('#totalTime').val(data.ShortLeaveTime);
+                    $("#divLoader").hide();
+
+                    // date load
+                    dates = new Array();
+                    var FromDate = $('#txtStartDate').val();
+                    var fd = new Date(FromDate.split("/").reverse().join("-"));
+                    var Fdd = fd.getDate();
+                    var Fmm = fd.getMonth() + 1;
+                    var Fyy = fd.getFullYear();
+                    var newFromdate = Fyy + "/" + Fmm + "/" + Fdd;
+                    var EndDate = $('#txtEndDate').val();
+                    var ed = new Date(EndDate.split("/").reverse().join("-"));
+                    var Edd = ed.getDate();
+                    var Emm = ed.getMonth() + 1;
+                    var Eyy = ed.getFullYear();
+                    var newEnddate = Eyy + "/" + Emm + "/" + Edd;
+                    var de = new Date(newFromdate);
+                    var dp = new Date(newEnddate);
+                    dates = getDateArray(de, dp, WeekendDays, leavedate);
+                    $("#datepicker").datepicker("refresh");
+                    console.log(dates);
+
+                },
+                error: function (xhr) {
+                    $("#divLoader").hide();
+                }
+            })
+        });
+
+
+        //$('.selectpicker').select2({
+        //    language: {
+        //        noResults: function () {
+        //            //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+        //        }
+        //    },
+        //    escapeMarkup: function (markup) {
+        //        return markup;
+        //    }
+        //});
+
+        $('#ddlEmployee').on('change', function () {
+            GetEmployeeInfo();
+            var EmployeeID = $("#ddlEmployee").val();
+            LoadGrid(EmployeeID);
+            LoadEmployeeLeaveBalance(EmployeeID);
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ShowLevaeDatesForEmployee", "LeaveApply")',
+                    data: { EmployeeID: EmployeeID },
+                    dataType: "json",
+                    success: function (data) {
+                        doWork(data);
+                    }
+                });
+
+        });
+        function doWork(data) {
+            leavedate = new Array();
+            for (var i = 0; i < data.length; i++) {
+                leavedate.push(convert(data[i]["datelist"]));
+            }
+            $("#datepicker").datepicker("refresh");
+            $("#txtStartDate").datepicker("refresh");
+            $("#txtEndDate").datepicker("refresh");
+        }
+
+        function GetEmployeeInfo() {
+            var EmployeeID = $("#ddlEmployee").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "LeaveApply")',
+                data: { EmployeeID: EmployeeID },
+                dataType: 'json',
+                success: function (data) {
+                    $("#ddlEmployee").val(data.EmployeeID);
+                    $("#lblEmployeeName").val(data.EmployeeName);
+                    $("#lblDepartment").val(data.DepartmentCode);
+                    $("#lblDesignation").val(data.DesignationCode);
+                    $('#ddlBossEmpAutoId').val(data.ReportingTo).change();
+                    $('#ddlHOD').val(data.HeadOfDep).change();
+                }
+            });
+        };
+
+        //Get Data From Database//
+        //  ClosseAttendence Type//
+        $('.timepicker').datetimepicker({
+            format: 'hh:mm A',
+        });
+    });
+
+    function LoadGrid(EmployeeID) {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowInfo", "LeaveApply")',
+                "type": "GET",
+                "datatype": "json",
+                "data": { EmployeeID: EmployeeID }
+            },
+            "columns": [
+            {
+                "data": "LeaveAppEntryId", "render": function (data) {
+                    return "<a class=''  id='lnkID'>" + data + "</a>"
+                }
+                },
+                { "data": "EmployeeID", "autowidth": true },
+                { "data": "EmployeeName", "autowidth": true },
+              { "data": "ApplyDate", "autowidth": true },
+              { "data": "StartDate", "autowidth": true },
+              { "data": "EndDate", "autowidth": true },
+                { "data": "NoOfDay", "autowidth": true},
+                { "data": "LeaveType", "autowidth": true, },
+                {
+                    data: "HRApprovalStatus",
+                    render: function (data, type, row) {
+                        if (data === "Pending") {
+                            return "<a class='label' id='status3'>" + data + "</a>";
+                        }
+                        else if (data === "Approved") {
+                            return "<a class='label' id='status'>" + data + "</a>";
+                        }
+                        else if (data === "Canceled") {
+                            return "<a class='label' id='status2'>" + data + "</a>";
+                        }
+                        else {
+                            return "<a class='label' id='status2'>" + data + "</a>";
+                        }
+                    }
+                },
+                { "data": "Reason", "width": "15%" }
+            ],
+
+            "columnDefs": [{
+                targets: [9],
+                createdCell: function (cell) {
+                    var $cell = $(cell);
+                    $(cell).contents().wrapAll("<div title='See more..'  class='content'></div>");
+                    var $content = $cell.find(".content");
+
+                    $content.css({
+                        "height": "20px",
+                        "overflow": "hidden",
+                        "text-overflow": "ellipsis",
+                        "cursor": "pointer"
+                    })
+                    $cell.data("isLess", true);
+                    $cell.click(function () {
+                        var isLess = $cell.data("isLess");
+                        $content.css("height", isLess ? "auto" : "20px")
+                        /*$(this).html(isLess ? "<i class='fas fa-arrow-alt-circle-up'></i>" : "<i class='fas fa-eye'></i>")*/
+                        $cell.data("isLess", !isLess)
+                    })
+                }
+            }],
+            "lengthChange": false,
+            "pageLength": 10,
+            "order": [[0, "Desc"]],
+            "sScrollY": "100%",
+            "scrollX": true,
+            "sScrollX": "100%",
+            "bDestroy": true
+        });
+    }
+        function LoadEmployeeLeaveBalance(EmployeeID) {
+        var dataTable;
+        dataTable = $('#tblLeaveStockBalance').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowEmployeeLeaveBalance", "LeaveApply")',
+                "type": "GET",
+                "data": { EmployeeID: EmployeeID },
+                "datatype": "json",
+                "async": false
+            },
+            "columns": [
+            { "data": "ShortName", "autowidth": true },
+                { "data": "NoOfDay", "className": "tdclass", "autowidth": true },
+                { "data": "Taken", "className": "tdclass", "autowidth": true },
+                { "data": "Balance", "className": "tdclass", "autowidth": true }
+            ],
+            "lengthChange": false,
+            "paging": false,
+            "pageLength": 10,
+            "order": [[0, "Desc"]],
+            "sScrollY": "100%",
+            "scrollX": true,
+            "sScrollX": "100%",
+            "bDestroy": true,
+            "searching": false,
+            "info": false,
+        });
+    }
+
+    var getDateArray = function (start, end, WeekendDays, leavedate) {
+        var arr = new Array();
+        var dt = new Date(start);
+
+        //var weekendDay = jQuery.inArray(dt.getDay(), WeekendDays);
+        //console.log(weekendDay);
+        while (dt <= end) {
+            var year = dt.getFullYear();
+            // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
+            var month = padNumber2(dt.getMonth() + 1);
+            var day = padNumber2(dt.getDate());
+            // This depends on the datepicker's date format
+            var dateString = month + "/" + day + "/" + year;
+            if (jQuery.inArray(dt.getDay(), WeekendDays) == -1) {
+                if (jQuery.inArray(dateString, leavedate) == -1) {
+                    arr.push(convert(dt));
+                }
+            }
+            dt.setDate(dt.getDate() + 1);
+        }
+        return arr;
+    }
+    function padNumber2(number) {
+        var ret = new String(number);
+        if (ret.length == 1) ret = "0" + ret;
+        return ret;
+    }
+    function convert(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [mnth, day, date.getFullYear()].join("/");
+    }
+    function formats(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("/");
+    }
+    function IncrementDate(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + (date.getDate() + 1)).slice(-2);
+        return [day, mnth, date.getFullYear()].join("/");
+    }
+    function DecremntDate(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + (date.getDate()-1)).slice(-2);
+        return [day, mnth, date.getFullYear()].join("/");
+    }
+
+    //function validate(file) {
+    //    var ext = file.split(".");
+    //    ext = ext[ext.length - 1].toLowerCase();
+    //    var arrayExtensions = ["docx"];
+
+    //    if (arrayExtensions.lastIndexOf(ext) == -1) {
+    //        alert("Wrong extension type.");
+    //        $("#image").val("");
+    //    }
+    //}
+    @*function getExistingleavedays(EmployeeID) {
+        var leavearr = [];
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ShowLevaeDatesForEmployee", "LeaveApply")',
+            data: { EmployeeID: EmployeeID },
+            dataType: "json",
+            success: function (data) {
+                doWork(data);
+            }
+        });
+    }
+    function doWork(data) {
+        t = new Array();
+        for (var i = 0; i < data.length; i++) {
+            alert(data[i]["datelist"]);
+            t.push(data[i]["datelist"]);
+        }
+        $("#datepicker").datepicker("refresh");
+    }*@
+</script>
+
+
+
+
+

@@ -1,0 +1,331 @@
+﻿@model BusinessLogic.Repository.Model_HRM_EmployeeOfficialInfo
+
+@{
+    ViewBag.Title = "AddOrEditEmployee";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+    textarea {
+        width: 100% !important;
+    }
+
+    .RedText {
+        color: red;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+    .field-validation-error{
+        color:red !important;
+    }
+
+    #btnSubmit, #btnClear, #btnDelete, #btnPrint {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+</style>
+@using (Html.BeginForm("AddOrEditEmployee", "EmployeeOfficial", FormMethod.Post, new { id = "myForm", enctype = "multipart/form-data" }))
+{
+    <section class="content-header">
+        <div class="container-fluid">
+
+            <div class="callout callout-info">
+
+                <div class="row mb-2" style="height: 19px;">
+                    <div class="col-sm-6">
+                        <h5>Employee Official Info</h5>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Employee Official Info</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Attendence Report</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Leave</a></li>
+                    </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="timeline">
+
+                        </div>
+
+                    </div>
+
+                </div><!-- /.card-body -->
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <i class="fas fa-save"></i>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="border-bottom:1px solid lightgray; padding-bottom: 7px; ">
+                                <div class="col-md-12" style="margin-top: -14px;">
+                                    <div class="btn-group" style="float: right;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 10px;">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        Employee<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.EmployeeID, (SelectList)ViewBag.LoadEmployee, "---- Select Employee----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.EmployeeID)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Company<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.CompanyCode, (SelectList)ViewBag.LoadCompany, "---- Select Company----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.CompanyCode)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Branch<span class="RedText"></span>
+                                        @Html.DropDownListFor(model => model.BranchCode, (SelectList)ViewBag.LoadBranch, "---- Select Branch----", new { @class = "selectpicker" })
+
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-lg-4">
+                                        Department<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.DepartmentCode, (SelectList)ViewBag.LoadDepartment, "---- Select Department----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.DepartmentCode)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Designation<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.DesignationCode, (SelectList)ViewBag.LoadDesignation, "---- Select Designation----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.DesignationCode)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Shift<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.ShiftCode, (SelectList)ViewBag.LoadShift, "---- Select Shift ----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.ShiftCode)
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-lg-4">
+                                        Employee Type<span class="RedText"></span>
+                                        @Html.DropDownListFor(model => model.EmpTypeCode, (SelectList)ViewBag.LoadEmpType, "---- Select Type----", new { @class = "selectpicker" })
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Nature<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.EmploymentNatureId, (SelectList)ViewBag.LoadEmpNature, "---- Select Emmployee Nature ----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.EmploymentNatureId)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Gross Salary<span class="RedText"></span>
+                                        @Html.TextBoxFor(model => model.GrossSalary, new { @id = "txtGrossSalary" })
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-lg-4">
+                                        Reporting To<span class="RedText"></span>
+                                        @Html.DropDownListFor(model => model.ReportingTo, (SelectList)ViewBag.LoadReportingTo, "---- Select Reporting To ----", new { @class = "selectpicker" })
+                                    </div>
+                                    <div class="col-lg-4">
+                                        HOD<span class="RedText"></span>
+                                        @Html.DropDownListFor(model => model.HOD, (SelectList)ViewBag.LoadHOD, "---- Select HOD ----", new { @class = "selectpicker" })
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Joining Date<span class="RedText">*</span>
+                                        @Html.TextBoxFor(model => model.JoiningDate, new { @id = "txtJoiningDate", @class = "JoiningDate" })
+                                        @Html.ValidationMessageFor(model => model.JoiningDate)
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        Status<span class="RedText">*</span>
+                                        @Html.DropDownListFor(model => model.EmployeeStatus, (SelectList)ViewBag.LoadEmpStatus, "---- Select Status ----", new { @class = "selectpicker" })
+                                        @Html.ValidationMessageFor(model => model.EmployeeStatus)
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Mobile No<span class="RedText"></span>
+                                        @Html.TextBoxFor(model => model.MobileNo, new { @id = "txtMobileNO" })
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Email<span class="RedText"></span>
+                                        @Html.TextBoxFor(model => model.Email, new { @id = "txtEmail" })
+                                    </div>
+
+                                </div>
+                                <div class="row" style="padding-top:10px">
+
+                                </div>
+                                <div class="row">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <a href='@Url.Action("Index", "EmployeeOfficial")' class="btn btn-success" style="width:100%">Back To List</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" id="btnSubmit" value="Save" class="btn btn-primary" style="width:100%" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+}
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+
+<script src="~/scripts/jquery.min.js" type="text/javascript"></script>
+<script src="~/scripts/umd/popper.min.js" type="text/javascript"></script>
+<script src="@Url.Content("~/scripts/bootstrap.min.js")"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" type='text/javascript'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js" type='text/javascript'></script>
+
+
+<script type="text/javascript">
+
+
+    function ShowSignaturePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgPreview').prop('src', e.target.result)
+                    .width(150)
+                    .height(150);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+
+    $(document).ready(function () {
+
+        $('.selectpicker').select2({
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+    });
+
+    $(function () {
+        $('input.JoiningDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2100',
+            maxDate: '87Y'
+        });
+    })
+
+
+</script>
+
+
+
+
+

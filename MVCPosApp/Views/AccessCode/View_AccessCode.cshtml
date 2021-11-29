@@ -1,0 +1,750 @@
+﻿
+@{
+    ViewBag.Title = "View_AccessCode";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- Estiak -->
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />*@
+
+@*<link href="~/css/jquery.timepicker.min.css" rel="stylesheet" />*@
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    .RedText {
+        color: red;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+
+    textarea {
+        width: 100% !important;
+    }
+    .linkbutton1 {
+        background-color: white;
+        color: black;
+        border: 1px solid #4CAF50;
+    }
+
+    #tblMenTab tr td:nth-child(1) {
+        text-align: center !important;
+    }
+
+    #tblMenTab tr td:nth-child(3) {
+        text-align: center !important;
+    }
+
+    #tblMenTab tr td:nth-child(4) {
+        text-align: center !important;
+    }
+
+    #tblMenTab tr td:nth-child(5) {
+        text-align: center !important;
+    }
+
+    #tblMenTab tr td:nth-child(6) {
+        text-align: center !important;
+    }
+
+    #tblMenTab tr td:nth-child(8) {
+        display: none !important;
+    }
+
+    #tblMenTab tr td:nth-child(7) {
+        display: none !important;
+    }
+
+    #tblMenTab tr td:nth-child(9) {
+        display: none !important;
+    }
+
+    #tblMenTab tr td:nth-child(10) {
+        display: none !important;
+    }
+
+    #tblMenTab tr td:nth-child(11) {
+        display: none !important;
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #80bdff;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        height: 37px !important;
+        width: 100% !important;
+    }
+
+
+    #btnSubmit, #btnClear, #btnDelete, #btnPrint, #btnuserinfo, #btnaccesscode {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+
+    .dataTables_filter {
+        margin-left: -80px !important;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    .table-borderless td,
+    .table-borderless th {
+        border: 0;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 2px 10px;
+    }
+
+    #lnkID2 {
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+        background-color: #ffffff;
+        border-radius: 50px;
+    }
+
+    #tblMenTabt_info, #tblDataList_info {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    #tblMenTab_paginate, #tblDataList_paginate {
+        font-size: 8px;
+        padding: 5px;
+    }
+
+    .dt-body-center {
+        text-align: center;
+    }
+</style>
+
+<section class="content-header" style="padding:0px">
+    <div class="container-fluid">
+        <div class="callout callout-info" style="padding-top: 10px;">
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-md-8 row">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="" style="margin-right: 5px; margin-left: 5px;"><a href='@Url.Action("View_Useracess", "UserAccess")' class="linkbutton1 btn btn-success" style="font-size:13px; text-decoration: none;">User Info</a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_AccessCode","AccessCode")' class="linkbutton1 btn btn-success" style="font-size:13px; text-decoration: none;">Access Code Info</a></li>
+                    </ol>
+                </div>
+                <div class="col-md-4">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Access Code Information</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-secondary">
+                    <div class="" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>User Info</h6>
+                            </div>
+                            @Html.Partial("_ActionButton")
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 8px;background-color: #F9FBFE;">
+                        <div style="padding-top: 10px;">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span id="message"></span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label id="hidValue" style="display:none"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="inputName">Access Code ID</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="text" readonly="readonly" class="form-control"
+                                           value="@(ViewBag.MaxComID ?? String.Empty)" id="txtAccessCodeID" style="width:100%">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="inputName">Access Code Name</label>
+                                    <span class="RedText">&nbsp;*</span>
+                                    <input type="text" class="form-control" id="txtName" style="width:100%" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table id="tblMenTab" class="table table-striped  table-hover table-borderless  display" style="width:100%; font-size: 14px;">
+                                        <thead>
+                                            <tr style=" background-color: aliceblue; border-radius:50px">
+                                                <th style="text-align:center">
+                                                    Select
+                                                    <input type="checkbox" class="chkAll" />
+                                                </th>
+                                                <th style="text-align:center">Title</th>
+                                                <th style="text-align:center">Add</th>
+                                                <th style="text-align:center">Edit</th>
+                                                <th style="text-align:center">Delete</th>
+                                                <th style="text-align:center">Print</th>
+                                                <th style="text-align:center;">Icon</th>
+                                                <th style="text-align:center;display:none">Menu ID</th>
+                                                <th style="text-align:center;display:none">Parent ID</th>
+                                                <th style="text-align:center;display:none">Order By</th>
+                                                <th style="text-align:center;display:none">Controller</th>
+                                                <th style="text-align:center;display:none">View</th>
+                                            </tr> 
+                                        </thead>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-secondary">
+                    <div class="card-body"style="padding: 0px;background-color: #F9FBFE">
+                        <table id="tblDataList" class="table table-sm " style="width:100%; font-size: 14px;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:start">Access Code ID</th>
+                                    <th style="text-align:start">Access Code Name</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/FrontEnd/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+@*<script src="~/scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="~/scripts/umd/popper.min.js" type="text/javascript"></script>
+
+    <script src="~/scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/scripts/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="~/scripts/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/scripts/select2.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>*@
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        LoadGrid();
+        LoadManutabGrid();
+
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            Clear();
+            MaxID();
+        });
+
+
+        function MaxID() {
+            $("#txtAccessCodeID").val("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("MaxID", "AccessCode")',
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var message = $("#message");
+                    if (response) {
+                        $("#txtAccessCodeID").val(response);
+                    }
+                    else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Already Exists");
+                    }
+                }
+            });
+        }
+
+        $('#tblMenTab').on('click', '.TitleCheck', function () {
+            if ($(this).is(":checked")) {
+
+                $(this).closest('td').next('td').next('td').find(".chkAdd").prop('checked', true);
+                $(this).closest('td').next('td').next('td').next('td').find(".chkEdit").prop('checked', true);
+                $(this).closest('td').next('td').next('td').next('td').next('td').find(".chkDelete").prop('checked', true);
+                $(this).closest('td').next('td').next('td').next('td').next('td').next('td').find(".chkPrint").prop('checked', true);
+
+            } else {
+
+                $(this).closest('td').next('td').next('td').find(".chkAdd").prop('checked', false);
+                $(this).closest('td').next('td').next('td').next('td').find(".chkEdit").prop('checked', false);
+                $(this).closest('td').next('td').next('td').next('td').next('td').find(".chkDelete").prop('checked', false);
+                $(this).closest('td').next('td').next('td').next('td').next('td').next('td').find(".chkPrint").prop('checked', false);
+
+            }
+        });
+        $('.chkAll').click(function () {
+            if ($(this).is(":checked")) {
+                $('.TitleCheck').prop('checked', true);
+                $('.chkAdd').prop('checked', true);
+                $('.chkEdit').prop('checked', true);
+                $('.chkDelete').prop('checked', true);
+                $('.chkPrint').prop('checked', true);
+            } else {
+                $('.TitleCheck').prop('checked', false);
+                $('.chkAdd').prop('checked', false);
+                $('.chkEdit').prop('checked', false);
+                $('.chkDelete').prop('checked', false);
+                $('.chkPrint').prop('checked', false);
+            }
+        });
+
+        function Clear() {
+            $('#txtName').val("");
+            $("#message").html("");
+            LoadManutabGrid();
+
+        }
+        //eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p }('4 j(){k 9;9=$(\'#l\').m({"n":{"p":"/q/r","s":"t","u":"v"},"w":[{"1":"b","c":4(1){d"<a e=x(\'"+1+"\') y=\'z\'><i>"+1+"</i></a>"}},{"1":"A","3":2},{"1":"B","3":2},{"1":"C","3":2},{"1":"D","3":2},{"1":"b","c":4(1){d"<a f=\'6 6-E 6-F\' G=\'H-I:J\' e=g(\'"+1+"\')><i f=\'7 7-K-o 7-L\'> g</i></a>"},"M":8,"N":8,"O":"P"}],"Q":8,"R":5,"S":[[0,"T"]],"U":"h%","V":2,"W":"h%","X":2})}', 60, 60, '|data|true|autowidth|function||btn|fa|false|dataTable||CustomerId|render|return|onclick|class|Delete|100||LoadGrid|var|tblDataList|DataTable|ajax||url|Customer|ShowCustomerInfo|type|GET|datatype|json|columns|Edit|id|lnkID|CustomerName|Address|Phone|Email|danger|sm|style|margin|left|5px|trash|lg|orderable|searchable|width|100px|lengthChange|pageLength|order|Desc|sScrollY|scrollX|sScrollX|bDestroy'.split('|'), 0, {}))
+        $('#btnSubmit').click(function (event) {
+            event.preventDefault();
+
+            if ($("#txtName").val() == "") {
+                var message = $("#message");
+                message.css("color", "red");
+                message.html("Please Enter Access Code Name");
+                return;
+            }
+
+            var Model_Core_AccessCode2 = new Array();
+            $("#tblMenTab TBODY TR").each(function () {
+                var customer = {};
+                var row = $(this);
+                var Titlecheck = "N";
+                if (row.find(".TitleCheck").is(':checked')) {
+                    Titlecheck = "Y";
+                }
+                var chkAdd = "N";
+                if (row.find(".chkAdd").is(':checked')) {
+                    chkAdd = "Y";
+                }
+
+                var chkEdit = "N";
+                if (row.find(".chkEdit").is(':checked')) {
+                    chkEdit = "Y";
+                }
+                var chkDelete = "N";
+                if (row.find(".chkDelete").is(':checked')) {
+                    chkDelete = "Y";
+                }
+                var chkPrint = "N";
+                if (row.find(".chkPrint").is(':checked')) {
+                    chkPrint = "Y";
+                }
+
+                customer.AccessCodeID = $("#txtAccessCodeID").val();
+                customer.AccessCodeName = $('#txtName').val();
+                customer.TitleCheck = Titlecheck;
+                customer.title = row.find(".title").text();
+                customer.chkAdd = chkAdd;
+                customer.chkEdit = chkEdit;
+                customer.chkDelete = chkDelete;
+                customer.chkPrint = chkPrint;
+                customer.MenuId = row.find(".MenuId").text();
+                customer.ParentID = row.find(".ParentID").text();
+                //customer.OrderBy = row.find(".OrderBy").text();
+                customer.ControllerName = "MVC_HRM/" + row.find(".ControllerName").text();
+                //
+                customer.ControllerName = row.find(".ControllerName").text();
+                customer.ViewName = row.find(".ViewName").text();
+                customer.Icon = row.find(".Icon").text();
+                Model_Core_AccessCode2.push(customer);
+
+            });
+            Model_Core_AccessCode2 = JSON.stringify({ 'list': Model_Core_AccessCode2 });
+
+            $.ajax({
+
+                type: "POST",
+                contentType: 'application/json; charset=utf-8', //define a contentType of your request
+                url: '@Url.Action("InsertAccessCode", "AccessCode")',
+                data: Model_Core_AccessCode2,
+                success: function (data) {
+                    if (data.success == true) {
+                        Clear();
+                        MaxID();
+                        LoadGrid();
+                        var message = $("#message");
+                        message.css("color", "red");
+                        message.html(data.message);
+                    }
+                    else {
+                        var message = $("#message");
+                        message.css("color", "red");
+                        message.html("Error");
+                    }
+                },
+                dataType: "json",
+                traditional: true
+            });
+        });
+
+        $('#btnDelete').click(function (event) {
+            event.preventDefault();
+            var DeletedID = $("#txtAccessCodeID").val();
+            Delete(DeletedID);
+        });
+
+        // Start SelectPicker//
+
+        $("input:text,form").attr("autocomplete", "off");
+
+        function Delete(AccessCodeID) {
+
+            if (confirm('Are you Sure to  Delete Data ?')) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "AccessCode")',
+                    data: { AccessCodeID: AccessCodeID },
+                    success: function (data) {
+                        if (data.success == true) {
+                            Clear();
+                            LoadGrid();
+                            var message = $("#message");
+                            message.css("color", "red");
+                            message.html(data.message);
+
+                        }
+                        else {
+                        }
+                    }
+                });
+            }
+        }
+
+        $(document).on("click", "#lnkID2", function () {
+            var AccessCodeID = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "AccessCode")',
+                data: { AccessCodeID: AccessCodeID },
+                dataType: 'json',
+                success: function (data) {
+                    $('#txtAccessCodeID').val(data.AccessCodeID);
+                    $('#txtName').val(data.AccessCodeName);
+
+                }
+            })
+
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetSingleDataGrid", "AccessCode")',
+                data: { AccessCodeID: AccessCodeID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+
+
+                        for (var i = 0; i < data.length; i++) {
+                            var title = data[i]["title"];
+                            var TitleCheck = data[i]["TitleCheck"];
+                            var TabchkAdd = data[i]["chkAdd"];
+                            var TabchkEdit = data[i]["chkEdit"];
+                            var TabchkDelete = data[i]["chkDelete"];
+                            var TabchkPrint = data[i]["chkPrint"];
+                            var Icon = data[i]["Icon"];
+
+                            $("#tblMenTab TBODY TR").each(function () {
+                                var row = $(this);
+                                var TableTitle= row.find(".title").text();
+                                if (title == TableTitle)
+                                {
+                                    row.find(".Icon").text();
+
+                                    if (TitleCheck == "Y")
+                                    {
+                                        row.find(".TitleCheck").prop('checked',true);
+                                    }
+                                    else
+                                    {
+                                        row.find(".TitleCheck").prop('checked', false);
+
+                                    }
+
+                                    if (TabchkAdd == "Y") {
+                                        row.find(".chkAdd").prop('checked', true);
+                                    }
+                                    else {
+                                        row.find(".chkAdd").prop('checked', false);
+
+                                    }
+                                    if (TabchkEdit == "Y") {
+                                        row.find(".chkEdit").prop('checked', true);
+                                    }
+                                    else {
+                                        row.find(".chkEdit").prop('checked', false);
+                                    }
+                                    if (TabchkDelete == "Y") {
+                                        row.find(".chkDelete").prop('checked', true);
+                                    }
+                                    else {
+                                        row.find(".chkDelete").prop('checked', false);
+                                    }
+                                    if (TabchkPrint == "Y") {
+                                        row.find(".chkPrint").prop('checked', true);
+                                    }
+                                    else {
+                                        row.find(".chkPrint").prop('checked', false);
+                                    }
+
+                                }
+                                else
+                                {
+
+                                }
+                            })
+                        }
+
+                    }
+
+
+                },
+
+                error: function (response) {
+                    var message = $("#message");
+                    message.css("color", "red");
+                    message.html("error");
+                }
+            });
+
+        });
+
+
+        $('.selectpicker').select2({
+            language: {
+                noResults: function () {
+                    //return 'Not found <a class="add_new_item" href="javascript:void(0)">Add New</a>';
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+
+
+
+        $('#ddlEmployee').on('change', function () {
+
+            GetEmployeeInfo();
+        });
+
+        function GetEmployeeInfo() {
+            var EmployeeID = $("#ddlEmployee").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetEmployeeInfo", "UserAccess")',
+                data: { EmployeeID: EmployeeID },
+                dataType: 'json',
+                success: function (data) {
+                    $("#lblEmployeeName").text(data.EmployeeName);
+                    $("#lblDepartment").text(data.DepartmentCode);
+                    $("#lblDesignation").text(data.DesignationCode);
+                }
+            });
+        };
+        //  ClosseAttendence Type//
+
+
+    });
+
+
+    function LoadGrid() {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowInfo", "AccessCode")',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+            {
+                "data": "AccessCodeID", "render": function (data) {
+                    return "<a class=''  id='lnkID2'>" + data + "</a>"
+                }
+            },
+            { "data": "AccessCodeName", "autowidth": true },
+
+            ],
+            "lengthChange": false,
+            "pageLength": 5,
+            "order": [[0, "Desc"]],
+            "sScrollY": "100%",
+            "scrollX": true,
+            "sScrollX": "100%",
+            "bDestroy": true
+
+        });
+    }
+
+
+
+    function LoadManutabGrid() {
+        var dataTable;
+        dataTable = $('#tblMenTab').DataTable({
+            "ajax": {
+                "url": '@Url.Action("GetManuTabInfo", "AccessCode")',
+                "type": "GET",
+                "datatype": "json"
+            },
+
+            "columns": [
+                {
+                    "data": "TitleCheck", "render": function (data) {
+                        return "<input  class='TitleCheck'  type='checkbox'/>"
+                    }
+                },
+            {
+                "data": "title", "render": function (data) {
+                    return "<label class='title btn'  id='lnkID'><i>" + data + "</i></label>"
+                }
+            },
+             {
+                 "data": "chkAdd", "render": function (data) {
+                     return "<input class='chkAdd'  type='checkbox'/>"
+                 }
+             },
+              {
+                  "data": "chkEdit", "render": function (data) {
+                      return "<input class='chkEdit'  type='checkbox'/>"
+                  }
+              },
+               {
+                   "data": "chkDelete", "render": function (data) {
+                       return "<input class='chkDelete'  type='checkbox'/>"
+                   }
+               },
+                {
+                    "data": "chkPrint", "render": function (data) {
+                        return "<input class='chkPrint'  type='checkbox'/>"
+                    }
+                },
+                 {
+                     "data": "MenuId", "render": function (data) {
+                         return "<label class='MenuId'  ><i>" + data + "</i></label>"
+                     }
+                 },
+                {
+                    "data": "ParentID", "render": function (data) {
+                        return "<label class='ParentID'  ><i>" + data + "</i></label>"
+                    }
+                },
+           {
+               "data": "OrderBy", "render": function (data) {
+                   return "<label class='OrderBy'  ><i>" + data + "</i></label>"
+               }
+           },
+           {
+               "data": "ControllerName", "render": function (data) {
+                   return "<label class='ControllerName'  ><i>" + data + "</i></label>"
+               }
+           },
+           {
+               "data": "ViewName", "render": function (data) {
+                   return "<label class='ViewName'  ><i>" + data + "</i></label>"
+               }
+                },
+                {
+                    "data": "Icon", "render": function (data) {
+                        return "<label class='Icon'  ><i>" + data + "</i></label>"
+                    }
+                },
+
+            ],
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            "bDestroy": true
+
+        });
+    }
+
+
+
+</script>
+
+
+
+

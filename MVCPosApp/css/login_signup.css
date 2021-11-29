@@ -1,0 +1,154 @@
+body{
+
+
+    font-family: 'Source Sans Pro', sans-serif;
+  /*height: 100vh;*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#073f4e+0,aac5de+17,3a84c3+35,6199c7+48,419ad6+59,4bb8f0+71,3a8bc2+84,0e94a0+99 */
+background-image:url("../LoginImg/ar1.jpg");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  animation: NZ 40s infinite;
+  background-color: #fff;
+
+}
+
+@keyframes NZ {
+  0% {
+    background-size: 100%;
+  }
+  45% {
+    background-size: 130%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+
+  .loder_area {
+  margin: auto;
+  width: 82px;
+  /* border: 3px solid #73AD21; */
+  padding: 10px;
+  position: absolute;
+  left: 46%;
+  top: 33%;
+  z-index: 99;
+}
+.loder_box{
+width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.01);
+  z-index: 9999999;
+}
+
+#message{
+max-width: 60%;
+margin: 0 auto;
+position: fixed;
+z-index: 9999;
+display: none;
+left: 0;
+right: 0; 
+font-size: 13px;
+}
+.logo_small_screen{
+  display: none;
+}.logo_small_screen img{
+ width: 90px;
+}
+.right_area {
+  margin-right: 20px; 
+  padding-bottom: 18px;
+
+}  
+#login_form h3 {
+  margin-bottom: 33px;
+}
+.back_ground {
+  /*background: url('../img/left_image.jpg');*/
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+.right_ {
+  padding-top: 20px;
+  /*padding-bottom: 30px;*/
+}
+
+.back_ground.signup_background{
+  height: auto;
+}
+.login_signup_area {
+  margin: 108px auto 0 auto;
+  background: #fff;
+  border-radius: 5px;
+}
+.left_area {
+  background: rgba(255, 255, 255, .6);
+  border-radius: 5px 0 0 0;
+}
+.left_area img {
+  /*border-radius: 5px 0 0 0;*/
+  width: 90px;
+}
+.border_color_err{
+  border-color: red;
+}
+
+/*==========================
+responsive css
+===========================*/
+
+/* Desktop Screen*/
+@media only screen and (min-width:992px) and (max-width:1199px){
+ 
+}
+/*Tablet Screen*/
+@media only screen and (min-width:768px) and (max-width:991px) {
+ 
+}
+/*Small Mobile Screen*/
+@media only screen and (max-width:767px){
+  .back_ground{
+    display: none;
+   }
+   .right_area {
+  margin-left: 20px;
+  margin-bottom: 37px;
+}
+.logo_small_screen{
+  display: block;
+}
+.right_area h3{
+  display: none;
+} 
+}
+/* Large Mobile Screen and Here Responsive Menu */
+@media only screen and (min-width:480px) and (max-width:767px) {
+   .back_ground{
+    display: none;
+   }
+   .right_area {
+  margin-left: 20px;
+  margin-bottom: 37px;
+}
+.logo_small_screen{
+  display: block;
+}
+.right_area h3{
+  display: none;
+} 
+}

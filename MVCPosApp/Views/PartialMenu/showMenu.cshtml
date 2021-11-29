@@ -1,0 +1,36 @@
+﻿
+@{
+    if (Session["MenuList"] != null)
+    {
+        var UserMenuList = Session["MenuList"] as IEnumerable<BusinessLogic.Core_AccessCode2>;
+        foreach (var items in UserMenuList.Where(x => x.ParentID == "0"))
+        {
+            string action = items.ViewName;
+            string controller = items.ControllerName;
+            <li class="app-sidebar__heading"></li>
+            <li>
+                <a href="#">
+                    <i class="metismenu-icon @items.Icon"></i>
+                    @items.title
+                    <i class="metismenu-state-icon fa fa-angle-down caret-left"></i>
+                </a>
+                <ul>
+                    @foreach (var items2 in UserMenuList.Where(x => x.ParentID == items.MenuId).OrderBy(x => x.OrderBy))
+                    {
+                        <li>
+                            <a href="/@items2.ControllerName/@items2.ViewName">
+                                <i class="fa fa-angle-right"></i>
+                                @items2.title
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    }
+}
+
+
+
+
+

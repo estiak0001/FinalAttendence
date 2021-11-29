@@ -1,0 +1,578 @@
+﻿
+@{
+    ViewBag.Title = "View_Designation";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<!-- Estiak -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+<link rel="stylesheet" href="~/FrontEnd/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="~/FrontEnd/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/FrontEnd/dist/css/adminlte.min.css">
+<link href="~/FrontEnd/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+<!-- Estiak -->
+@*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="@Url.Content("~/css/FrmCss.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/jquery-ui.css")" rel="stylesheet" />*@
+
+
+<style>
+    .select2 {
+        width: 100% !important;
+    }
+
+    input[type=text] {
+        width: 100% !important;
+    }
+
+    .ui-timepicker-container {
+        width: 150px !important;
+    }
+
+    .ui-timepicker {
+        width: 150px !important;
+    }
+
+    .ui-timepicker-viewport {
+        width: 150px !important;
+    }
+
+    textarea {
+        width: 100% !important;
+    }
+
+    .dataTables_filter {
+        margin-left: -80px !important;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    .linkbutton1 {
+        border: 1px solid #2c7cb0;
+        font-size: 9px;
+        padding: 5px;
+        text-decoration: none;
+        height: 50px;
+        width: 60px;
+        padding-top: 13px;
+        background-color: #2c7cb0;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    #btnSubmit, #btnSubmit2, #btnClear, #btnDelete, #btnPrint {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 6, 3, 0.4), 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.5);
+        width: 100px;
+    }
+
+    .table-borderless td,
+    .table-borderless th {
+        border: 0;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 2px 10px;
+        vertical-align: middle;
+    }
+
+    #lnkID {
+        color: #007bff;
+    }
+
+    .table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+        background-color: #ffffff;
+        border-radius: 50px;
+    }
+
+    #tblDataList_info {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    #tblDataList_paginate {
+        font-size: 10px;
+        padding: 5px;
+    }
+    .dt-body-center {
+        text-align: center;
+    }
+    /*.content {
+        display: none;
+    }
+
+    .preload {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }*/
+    .inputName{
+        padding-top:10px;
+    }
+</style>
+
+
+
+<section class="content-header" style="padding:0px">
+    <div class="container-fluid">
+        <div class="callout callout-info" style="padding-top: 10px;">
+            <div class="row mb-2" style="height: 19px;">
+                <div class="col-md-12 row">
+                    <ul class="breadcrumb float-sm-right" id="mymenu">
+                        <li class="" style="margin-right: 5px; margin-left: 5px;"><a href='@Url.Action("View_Company", "Company")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Company </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Department", "Department")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Department </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_Designation", "Designation")' class=" btn btn-sm btn-outline-secondary active" style="text-decoration:none"> Designation </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("AddOrEdit", "AttendenceType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Att. Type </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_RosterScheduleEntry", "RosterScheduleEntry")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Roster</a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vw_Shift", "Shift")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Shift </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_CompanyWeekend", "CompanyWeekend")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("View_SpecialWeekend", "SpecialWeekend")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none">Special Weekend </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_Holiday", "Holiday")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Holiday </a></li>
+                        <li class="" style="margin-right: 5px;"><a href='@Url.Action("Vew_LeaveType", "LeaveType")' class=" btn btn-sm btn-outline-secondary" style="text-decoration:none"> Leave Type </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+@*<div class="preload">
+    <img style="height:400px" src="~/images/gifloading5.gif" />
+</div>*@
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card card-secondary" style="height: 580px;">
+                    <div class="" style=" background-color: white; color: black; padding: 10px; font-weight: 600;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Designation Information</h6>
+                            </div>
+                            @Html.Partial("_ActionButton")
+                        </div>
+                    </div>
+                    <div class="card-body shadow-lg bg-white rounded" style="padding:10px;">
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span id="message" cs></span>
+                                </div>
+                                <div class="col-lg-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="inputName">Designation Code</label>
+                                    <input type="text" id="txtDesignationCode" class="form-control" readonly="readonly"
+                                           value="@(ViewBag.MaxComID ?? String.Empty)">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="inputName">Designation Name</label>
+                                    <span class="RedText">&nbsp;</span>
+                                    <input type="text" id="txtDesignationName" onchange="CheckAvailability()" placeholder="Designation Name" class="checkDuplicate form-control" style="width:100%" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="inputName">Short Name</label>
+                                    <input type="text" id="txtDesignationShortName" class="form-control" placeholder="Short Name" style="width:100%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card card-secondary" style="height:580px">
+                    <div class="card-body shadow-lg bg-white rounded" style=" padding: 2px;">
+                        <table id="tblDataList" class="table table-sm" style="width:100%;">
+                            <thead>
+                                <tr style="">
+                                    <th style="text-align: center; padding-left: 18px"><input id="chkAll" name="chkAll" value="1" type="checkbox"></th>
+                                    <th style="width:20%; padding-left: 25px;">ID</th>
+                                    <th style="text-align:start; width:45%;">Designation Name</th>
+                                    <th style="text-align:start; width:20%;">Short Name</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/FrontEnd/plugins/jquery/jquery.min.js"></script>
+<script src="~/FrontEnd/plugins/umd/popper.min.js"></script>
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/FrontEnd/plugins/datatables/jquery.dataTables.min.js"></script>
+<link href="~/FrontEnd/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/FrontEnd/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/FrontEnd/plugins/select2/js/select2.min.js"></script>
+<script src="~/FrontEnd/jquery.timepicker.min.js" type="text/javascript"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"></script>
+
+
+<!-- Bootstrap 4 -->
+<script src="~/FrontEnd/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="~/FrontEnd/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="~/FrontEnd/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="~/FrontEnd/dist/js/demo.js"></script>
+
+
+<script type="text/javascript">
+
+    const Toast = Swal.mixin({
+
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 6000,
+
+    });
+
+    $(document).ready(function () {
+        var rows_selected = [];
+        LoadGrid(rows_selected);
+        $("#txtDesignationName").keyup(function () {
+            $("#message").html("");
+        });
+
+        $(document).ready(function () {
+            $("input:text,form").attr("autocomplete", "off");
+        });
+        $(document).on("click", "#lnkID", function () {
+            var DesignationCode = $(this).text();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("getSingleData", "Designation")',
+                data: { DesignationCode: DesignationCode },
+                dataType: 'json',
+                success: function (data) {
+                    $('#txtDesignationCode').val(data.DesignationCode);
+                    $('#txtDesignationName').val(data.DesignationName);
+                    $('#txtDesignationShortName').val(data.DesignationShortName);
+                }
+            })
+        });
+
+        //$(function () {
+        //    $(".preload").fadeOut(2000, function () {
+        //        $(".content").fadeIn(1000);
+        //    });
+        //});
+
+        function Clear() {
+            //Reading text box values using Jquery
+            $('#txtDesignationName').val("");
+            $('#txtDesignationShortName').val("");
+            MaxID();
+        }
+
+        function MaxID() {
+            $("#txtDesignationCode").val("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("MaxID", "Designation")',
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var message = $("#message");
+                    if (response) {
+                        $("#txtDesignationCode").val(response);
+                    }
+                    else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Already Exists");
+                    }
+                }
+            });
+        }
+
+
+        $('#btnSubmit').click(function (event) {
+            event.preventDefault();
+            //This prevents the default action
+            if ($("#txtDesignationName").val() == "") {
+                Toast.fire({
+                    icon: 'error',
+                    title: '  Designation Name is Required',
+                })
+                return;
+            }
+
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: '@Url.Action("View_Designation", "Designation")',
+                data: { //Passing data
+                    DesignationCode: $("#txtDesignationCode").val(), //Reading text box values using Jquery
+                    DesignationName: $("#txtDesignationName").val(),
+
+                    DesignationShortName: $("#txtDesignationShortName").val()
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        MaxID();
+                        Clear();
+                        LoadGrid(rows_selected);
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Data Save Successfully!'
+                        })
+                    }
+                    else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: data.message
+                        })
+                    }
+                }
+
+            });
+
+        });
+
+        $('#btnClear').click(function (event) {
+            event.preventDefault();
+            MaxID();
+            Clear();
+            $("#message").html("");
+        });
+        $('#btnDelete').click(function (event) {
+            if (confirm('Are you Sure to  Delete Data ?')) {
+                event.preventDefault();
+                if (rows_selected.length != 0) {
+                    DeleteMultiData();
+                }
+                else {
+                    var DeletedID = $("#txtDesignationCode").val();
+                    Delete(DeletedID);
+                }
+            }
+        });
+        //$('#btnDelete').click(function (event) {
+        //    if (confirm('Are you Sure to  Delete Data ?')) {
+        //        event.preventDefault();
+        //        if (rows_selected.length != 0) {
+        //            $.map(rows_selected, function (value, index) {
+        //                Delete(value.DesignationCode);
+        //            });
+        //        }
+        //        else {
+        //            var DeletedID = $("#txtDesignationCode").val();
+        //            Delete(DeletedID);
+        //        }
+        //    }
+        //});
+         function Delete(id) {
+            if (confirm('Are you Sure to  Delete Data ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "Designation")/' + id,
+
+                    success: function (data) {
+
+                        if (data.success == true) {
+                            MaxID();
+                            Clear();
+                            LoadGrid();
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message,
+                            })
+                        }
+                        else {
+
+                        }
+                    }
+                });
+            }
+        }
+        function DeleteMultiData() {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteMultiData", "Designation")',
+                    data: { //Passing data
+                        desgID: rows_selected,
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            MaxID();
+                            Clear();
+                            LoadGrid(rows_selected);
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message,
+                            })
+                        }
+                        else {
+                        }
+                    }
+                });
+        }
+
+        $('#tblDataList tbody').on('click', 'input[type="checkbox"]', function (e) {
+            var $row = $(this).closest('tr');
+            var data = $('#tblDataList').DataTable().row($row).data();
+            var rowId = data["DesignationCode"];
+            var ar = {};
+            ar["DesignationCode"] = rowId;
+            var index = rows_selected.findIndex(x => x.DesignationCode === rowId)
+            if (this.checked && index === -1) {
+                rows_selected.push(ar);
+            } else if (!this.checked && index !== -1) {
+                rows_selected.splice(index, 1);
+            }
+            if (this.checked) {
+                $row.addClass('selected');
+            } else {
+                $row.removeClass('selected');
+            }
+            console.log(rows_selected);
+            updateDataTableSelectAllCtrl();
+            e.stopPropagation();
+        });
+
+        $('#tblDataList thead input[name="chkAll"]').on('click', function (e) {
+            rows_selected = [];
+            if (this.checked) {
+                $('#tblDataList tbody input[type="checkbox"]:not(:checked)').trigger('click');
+            } else {
+                $('#tblDataList tbody input[type="checkbox"]:checked').trigger('click');
+            }
+            console.log(rows_selected);
+            e.stopPropagation();
+        });
+
+    });
+
+
+    function CheckAvailability() {
+        var DesignationName = $('#txtDesignationName').val();
+
+        var DesignationCode = $('#txtDesignationCode').val();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CheckUsername", "Designation")',
+            data: '{DesignationCode: "' + DesignationCode + '",DesignationName :"' + DesignationName + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var message = $("#message");
+                if (response) {
+                }
+                else {
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Already Exists',
+                    })
+                }
+            }
+        });
+    };
+    function updateDataTableSelectAllCtrl() {
+        var $table = $('#tblDataList').DataTable().table().node();
+        var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+        var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+        var chkbox_select_all = $('thead input[name="chkAll"]', $table).get(0);
+
+        if ($chkbox_checked.length === 0) {
+            chkbox_select_all.checked = false;
+
+        } else if ($chkbox_checked.length === $chkbox_all.length) {
+            chkbox_select_all.checked = true;
+        } else {
+            chkbox_select_all.checked = false;
+        }
+    };
+
+    function LoadGrid(rows_selected) {
+        var dataTable;
+        dataTable = $('#tblDataList').DataTable({
+            "ajax": {
+                "url": '@Url.Action("ShowInfo", "Designation")',
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+            { "data": "DesignationCode", defaultContent: '' },
+            {
+                "data": "DesignationCode", "render": function (data) {
+                    return "<a class='btn' id='lnkID'>" + data + "</a>"
+                }
+            },
+            { "data": "DesignationName", "autowidth": true },
+            { "data": "DesignationShortName", "autowidth": true },
+            ],
+            'columnDefs': [{
+                'targets': 0,
+                'searchable': false,
+                'orderable': false,
+                'width': '1%',
+                'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox">';
+                }
+            }],
+            'rowCallback': function (row, data, dataIndex) {
+                // Get row ID
+                var rowId = data[0];
+
+                // If row ID is in the list of selected row IDs
+                if ($.inArray(rowId, rows_selected) !== -1) {
+                    $(row).find('input[type="checkbox"]').prop('checked', true);
+                    $(row).addClass('selected');
+                }
+            },
+            "lengthChange": false,
+            "pageLength": 10,
+            "order": [[1, "Desc"]],
+
+            "bDestroy": true
+
+        });
+    }
+
+
+</script>
+
+
+
+
+
+
+
