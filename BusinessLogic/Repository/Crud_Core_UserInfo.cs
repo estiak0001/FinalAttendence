@@ -46,12 +46,14 @@ namespace BusinessLogic.Repository
         public string SaveInfo(Model_Core_UserInfo model, string LoginEmployeeID)
         {
             var context = new GCTL_ERP_DB_MVC_06_27Entities();
+            var EmployeeInfo = context.HRM_Employee.Where(e => e.EmployeeID == model.EmployeeID).FirstOrDefault();
             Core_UserInfo coreCom = new Core_UserInfo();
             coreCom.username = model.username;
             coreCom.AccessCode= model.AccessCode;
             coreCom.EmployeeID =model.EmployeeID;
             coreCom.Role =model.Role;
-
+            coreCom.FirstName = EmployeeInfo.FirstName;
+            coreCom.LastName = EmployeeInfo.LastName;
             string Userpassword = "";
             //Pxlib.(ref Userpassword, txtPassword.Text.Trim());
             Pxlib.PXEncode(ref Userpassword, model.password);
@@ -161,11 +163,15 @@ namespace BusinessLogic.Repository
         {
             var context = new GCTL_ERP_DB_MVC_06_27Entities();
             var result = context.Core_UserInfo.FirstOrDefault(x => x.EmployeeID == model.EmployeeID);
+
+            var EmployeeInfo = context.HRM_Employee.Where(e => e.EmployeeID == model.EmployeeID).FirstOrDefault();
             if (result != null)
             {               
                 result.username = model.username;
                 result.AccessCode = model.AccessCode;
                 result.Role = model.Role;
+                result.FirstName = EmployeeInfo.FirstName;
+                result.LastName = EmployeeInfo.LastName;
                 string Userpassword = "";                
                 Pxlib.PXEncode(ref Userpassword, model.password);
                 result.password = Userpassword;
